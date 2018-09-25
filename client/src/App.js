@@ -1,11 +1,13 @@
-import React from 'react';
-import Books from './pages/Books';
-import NavBar from './components/NavBar';
+
+import React from "react";
+import Nav from "./components/Nav";
+import Landing from "./components/Landing";
 
 const App = () => (
   <div>
-    <NavBar />
-    <Books />
+    <Nav />
+    <Landing/>
+
   </div>
 );
 
