@@ -25,16 +25,14 @@ const styles = theme => ({
   }
 });
 
-const signStyles = {
-  backgroundColor: '#44C2CE',
+const logStyles = {
   width: 440,
-  marginTop: 24
+  marginTop: 24,
+  backgroundColor: '#B21A2A'
 };
 
 class TextFields extends React.Component {
   state = {
-    firstName: '',
-    lastName: '',
     email: '',
     password: ''
   };
@@ -56,36 +54,9 @@ class TextFields extends React.Component {
         alignItems="center"
         spacing={24}>
         <Grid item>
-          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
+          <h1 style={{ textAlign: 'center' }}>Log-In</h1>
         </Grid>
         <form className={classes.container} noValidate autoComplete="off">
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify="center"
-            spacing={24}>
-            <Grid item>
-              <TextField
-                id="standard-first-name"
-                label="First Name"
-                className={classes.textField}
-                value={this.state.firstName}
-                onChange={this.handleChange('firstName')}
-                margin="normal"
-              />
-            </Grid>
-            <Grid item>
-              <TextField
-                id="standard-last-name"
-                label="Last Name"
-                className={classes.textField}
-                value={this.state.lastName}
-                onChange={this.handleChange('lastName')}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
           <Grid
             container
             direction="row"
@@ -133,11 +104,11 @@ class TextFields extends React.Component {
           spacing={24}>
           <Grid item>
             <Button
-              id="landingSignBtn"
-              style={signStyles}
+              id="landingLogBtn"
+              style={logStyles}
               variant="contained"
-              color="secondary">
-              Sign Up
+              color="primary">
+              Login
             </Button>
           </Grid>
         </Grid>
