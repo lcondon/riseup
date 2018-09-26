@@ -4,16 +4,19 @@ import Landing from './components/Landing';
 import SignUp from './components/SignUp';
 import './App.css';
 import Article from './components/Article';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const App = () => (
-  <div>
-    <NavBar />
-
-    {/* <SignUp /> */}
-
-    <Landing />
-    {/* <Article/> */}
-  </div>
+  <Router>
+    <div>
+      <NavBar />
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/home" component={Article} />
+      </Switch>
+    </div>
+  </Router>
 );
 
 export default App;
