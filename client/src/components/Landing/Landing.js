@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import Button from '@material-ui/core/Button';
 
 const logStyles = {
@@ -34,7 +34,9 @@ const Landing = () => (
                 </Button>
             </div>
         </div>
+
     </div>
-)
+  </div>
+);
 
 export default Landing;
