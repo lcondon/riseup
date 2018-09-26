@@ -1,13 +1,13 @@
-
-import React from "react";
-import Nav from "./components/Nav";
-import Landing from "./components/Landing";
+import React from 'react';
+import NavBar from './components/NavBar';
+import Landing from './components/Landing';
+import SignUp from './components/SignUp';
+import './App.css';
 
 const App = () => (
   <div>
-    <Nav />
-    <Landing/>
-
+    <NavBar />
+    <SignUp />
   </div>
 );
 
