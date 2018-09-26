@@ -1,12 +1,14 @@
 
 import React from "react";
-import Nav from "./components/Nav";
+import NavBar from "./components/NavBar";
 import Landing from "./components/Landing";
+import Article from "./components/Article";
 
 const App = () => (
   <div>
-    <Nav />
-    <Landing/>
+    <NavBar />
+    {/* <Landing/> */}
+    <Article/>
 
   </div>
 );
