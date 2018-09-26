@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
 
 const styles = theme => ({
   container: {
@@ -41,43 +42,63 @@ class TextFields extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
-        <TextField
-          id="standard-first-name"
-          label="First Name"
-          className={classes.textField}
-          value={this.state.firstName}
-          onChange={this.handleChange('firstName')}
-          margin="normal"
-        />
-        <TextField
-          id="standard-last-name"
-          label="Last Name"
-          className={classes.textField}
-          value={this.state.lastName}
-          onChange={this.handleChange('lastName')}
-          margin="normal"
-        />
-        <TextField
-          required
-          id="standard-email"
-          label="Email"
-          className={classes.textField}
-          value={this.state.email}
-          onChange={this.handleChange('email')}
-          margin="normal"
-        />
-        <TextField
-          id="standard-password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          value={this.state.password}
-          onChange={this.handleChange('password')}
-          margin="normal"
-        />
-      </form>
+      <Grid container direction="row" justify="center" spacing={24}>
+        <Grid item>
+          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
+        </Grid>
+        <form className={classes.container} noValidate autoComplete="off">
+          <Grid container direction="row" justify="center" spacing={24}>
+            <Grid item>
+              <TextField
+                id="standard-first-name"
+                label="First Name"
+                className={classes.textField}
+                value={this.state.firstName}
+                onChange={this.handleChange('firstName')}
+                margin="normal"
+              />
+            </Grid>
+            <Grid item>
+              <TextField
+                id="standard-last-name"
+                label="Last Name"
+                className={classes.textField}
+                value={this.state.lastName}
+                onChange={this.handleChange('lastName')}
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Grid container direction="row" justify="center" spacing={24}>
+            <Grid item>
+              <TextField
+                style={{ width: 440 }}
+                id="standard-email"
+                label="Email"
+                className={classes.textField}
+                value={this.state.email}
+                onChange={this.handleChange('email')}
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Grid container direction="row" justify="center" spacing={24}>
+            <Grid item>
+              <TextField
+                id="standard-password-input"
+                style={{ width: 440 }}
+                label="Password"
+                className={classes.textField}
+                type="password"
+                autoComplete="current-password"
+                value={this.state.password}
+                onChange={this.handleChange('password')}
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+        </form>
+      </Grid>
     );
   }
 }
