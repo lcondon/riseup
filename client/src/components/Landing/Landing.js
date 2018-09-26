@@ -62,22 +62,26 @@ const Landing = props => {
         </Grid>
         <Grid container justify="center" spacing={24}>
           <Grid item xs={10} sm={4}>
-            <Button
-              id="landingLogBtn"
-              style={logStyles}
-              variant="contained"
-              color="primary">
-              Login
-            </Button>
+            <a style={{ textDecoration: 'none' }} href="/login">
+              <Button
+                id="landingLogBtn"
+                style={logStyles}
+                variant="contained"
+                color="primary">
+                Login
+              </Button>
+            </a>
           </Grid>
           <Grid item xs={10} sm={4}>
-            <Button
-              id="landingSignBtn"
-              style={signStyles}
-              variant="contained"
-              color="secondary">
-              Sign Up
-            </Button>
+            <a style={{ textDecoration: 'none' }} href="/signup">
+              <Button
+                id="landingSignBtn"
+                style={signStyles}
+                variant="contained"
+                color="secondary">
+                Sign Up
+              </Button>
+            </a>
           </Grid>
         </Grid>
       </Grid>
