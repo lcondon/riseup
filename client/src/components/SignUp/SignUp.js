@@ -1,13 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-// import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-// import MenuItem from '@material-ui/core/MenuItem';
+import classNames from 'classnames';
+import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
+  root: {
+    overflow: 'hidden',
+    padding: `0 ${theme.spacing.unit * 3}px`
+  },
+  wrapper: {
+    maxWidth: 1000,
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  paper: {
+    margin: theme.spacing.unit * 2,
+    padding: theme.spacing.unit * 4
+  },
   container: {
     display: 'flex',
     flexWrap: 'wrap'
@@ -49,99 +64,101 @@ class TextFields extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Grid
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-        spacing={24}>
-        <Grid item>
-          <h1 style={{ textAlign: 'center' }}>Sign Up</h1>
-        </Grid>
-        <form className={classes.container} noValidate autoComplete="off">
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify="center"
-            spacing={24}>
-            <Grid item>
-              <TextField
-                id="standard-first-name"
-                label="First Name"
-                className={classes.textField}
-                value={this.state.firstName}
-                onChange={this.handleChange('firstName')}
-                margin="normal"
-              />
+      <div className={classes.root}>
+        <div className={classes.wrapper}>
+          <Paper className={classes.paper}>
+            <Grid container justify="center">
+              <Grid item xs={10}>
+                <h1 style={{ textAlign: 'center', marginTop: 0 }}>Sign Up</h1>
+                <Divider />
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                id="standard-last-name"
-                label="Last Name"
-                className={classes.textField}
-                value={this.state.lastName}
-                onChange={this.handleChange('lastName')}
-                margin="normal"
-              />
+            <form className={classes.container} noValidate autoComplete="off">
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justify="center"
+                spacing={24}>
+                <Grid item>
+                  <TextField
+                    id="standard-first-name"
+                    label="First Name"
+                    className={classes.textField}
+                    value={this.state.firstName}
+                    onChange={this.handleChange('firstName')}
+                    margin="normal"
+                  />
+                </Grid>
+                <Grid item>
+                  <TextField
+                    id="standard-last-name"
+                    label="Last Name"
+                    className={classes.textField}
+                    value={this.state.lastName}
+                    onChange={this.handleChange('lastName')}
+                    margin="normal"
+                  />
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                direction="row"
+                alignItems="center"
+                justify="center"
+                spacing={24}>
+                <Grid item>
+                  <TextField
+                    style={{ width: 440 }}
+                    id="standard-email"
+                    label="Email"
+                    className={classes.textField}
+                    value={this.state.email}
+                    onChange={this.handleChange('email')}
+                    margin="normal"
+                  />
+                </Grid>
+              </Grid>
+              <Grid
+                container
+                alignItems="center"
+                direction="row"
+                justify="center"
+                spacing={24}>
+                <Grid item>
+                  <TextField
+                    id="standard-password-input"
+                    style={{ width: 440 }}
+                    label="Password"
+                    className={classes.textField}
+                    type="password"
+                    autoComplete="current-password"
+                    value={this.state.password}
+                    onChange={this.handleChange('password')}
+                    margin="normal"
+                  />
+                </Grid>
+              </Grid>
+            </form>
+            <Grid
+              container
+              alignItems="center"
+              direction="row"
+              justify="center"
+              spacing={24}>
+              <Grid item>
+                <Button
+                  id="landingSignBtn"
+                  style={signStyles}
+                  variant="contained"
+                  color="secondary">
+                  Sign Up
+                </Button>
+              </Grid>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            direction="row"
-            alignItems="center"
-            justify="center"
-            spacing={24}>
-            <Grid item>
-              <TextField
-                style={{ width: 440 }}
-                id="standard-email"
-                label="Email"
-                className={classes.textField}
-                value={this.state.email}
-                onChange={this.handleChange('email')}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            alignItems="center"
-            direction="row"
-            justify="center"
-            spacing={24}>
-            <Grid item>
-              <TextField
-                id="standard-password-input"
-                style={{ width: 440 }}
-                label="Password"
-                className={classes.textField}
-                type="password"
-                autoComplete="current-password"
-                value={this.state.password}
-                onChange={this.handleChange('password')}
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-        </form>
-        <Grid
-          container
-          alignItems="center"
-          direction="row"
-          justify="center"
-          spacing={24}>
-          <Grid item>
-            <Button
-              id="landingSignBtn"
-              style={signStyles}
-              variant="contained"
-              color="secondary">
-              Sign Up
-            </Button>
-          </Grid>
-        </Grid>
-      </Grid>
+          </Paper>
+        </div>
+      </div>
     );
   }
 }
