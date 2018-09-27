@@ -1,96 +1,105 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import Switch from '@material-ui/core/Switch';
-import questions from './questions.json';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React, { Component } from "react";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import PropTypes from "prop-types";
+import Divider from "@material-ui/core/Divider";
+import Switch from "@material-ui/core/Switch";
 
 const styles = theme => ({
   root: {
-    ...theme.mixins.gutters(),
-    paddingTop: theme.spacing.unit * 2,
-    paddingBottom: theme.spacing.unit * 2
+    marginTop: "10px",
+    overflow: "hidden",
+    padding: `0 ${theme.spacing.unit * 3}px`
+  },
+  wrapper: {
+    maxWidth: 1000,
+    marginLeft: "auto",
+    marginRight: "auto"
+  },
+  paper: {
+    margin: theme.spacing.unit,
+    padding: theme.spacing.unit * 2
   }
 });
 
-const stylesD = {
-  width: '80%',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  marginTop: '3%'
-};
-
 class Survey extends Component {
   state = {
-    questions: questions,
-    answers: [],
-    checkedA: true,
-    checkedB: true
-  };
+    check1: false,
+    check2: false
+  }
 
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
+  handleSwitchToggle = event => {
+    const { value } = event.target;
 
+    this.setState({ [value]: !this.state[value] });
+  }
   render() {
     const { classes } = this.props;
+    const message = `Truncation should be conditionally applicable on this long line of text
+                                        as this is a much longer line than what the container can support. `;
+
     return (
-      <div>
-        <Grid
-          container
-          direction="row"
-          justify="space-around"
-          alignItems="center"
-          spacing={24}>
-          <Grid item>
-            <h1 style={{ textAlign: 'center' }}>Political Survey</h1>
-          </Grid>
-          <Grid
-            container
-            direction="row"
-            justify="space-around"
-            alignItems="center"
-            spacing={24}>
-            <List component="nav">
-              <ListItem>
-                <ListItemText primary="Is the death penalty jusitfiable?" />
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={this.state.checkedA}
-                      onChange={this.handleChange('checkedA')}
-                      value="checkedA"
-                    />
-                  }
-                  label={this.state.checkedA ? 'True' : 'False'}
-                />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary="Is the death penalty jusitfiable?" />
-                <FormControlLabel
-                  control={
-                    <Switch
-                      checked={this.state.checkedA}
-                      onChange={this.handleChange('checkedA')}
-                      value="checkedA"
-                    />
-                  }
-                  label={this.state.checkedA ? 'True' : 'False'}
-                />
-              </ListItem>
-            </List>
-          </Grid>
-        </Grid>
+      <div className={classes.root}>
+        <div className={classes.wrapper}>
+          <Paper className={classes.paper}>
+            <h1 style={{ textAlign: "center" }}>Initial Survey</h1>
+            <Divider />
+            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
+              <Grid item>
+                <Avatar>1</Avatar>
+              </Grid>
+              <Grid item xs>
+                <p>Planned Parenthood should continue to receive Federal Funding.</p>
+              </Grid>
+              <Grid item>
+                <p>
+                  {/* {String(this.state.check1)} */}
+                  Disagree
+                  <Switch
+                    checked={this.state.check1}
+                    onChange={this.handleSwitchToggle}
+                    value="check1"
+                  />
+                  Agree
+                </p>
+              </Grid>
+            </Grid>
+
+            <Divider />
+            <Grid alignItems="center" justify="space-between" direction="row" container wrap="nowrap" spacing={16}>
+            
+              <Grid item>
+                <Avatar>2</Avatar>
+              </Grid><Grid direction="row" alignItems="center" container>
+              <Grid item xs>
+                <p>The death penalty is justifiable in certain cases.</p>
+              </Grid>
+              
+              <Grid item xs={12} sm={4}>
+                <p>
+                  {/* {String(this.state.check1)} */}
+                  Disagree
+                  <Switch
+                    checked={this.state.check2}
+                    onChange={this.handleSwitchToggle}
+                    value="check2"
+                  />
+                  Agree
+                </p>
+              </Grid>
+              </Grid>
+            </Grid>
+          </Paper>
+        </div>
       </div>
     );
   }
 }
+
+Survey.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
 export default withStyles(styles)(Survey);
