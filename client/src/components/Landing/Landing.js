@@ -1,18 +1,18 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
+// import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary
-  }
-});
+// const styles = theme => ({
+//   root: {
+//     flexGrow: 1
+//   },
+//   paper: {
+//     padding: theme.spacing.unit * 2,
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary
+//   }
+// });
 
 const logStyles = {
   width: '100%',
@@ -27,13 +27,14 @@ const signStyles = {
 };
 
 const Landing = props => {
-  const { classes } = props;
+  // const { classes } = props;
   return (
     <div>
       <Grid container direction="row" justify="center" spacing={24}>
         <Grid container justify="center">
           <Grid item>
             <img
+              alt="logo"
               className="responsive-img"
               justify="center"
               src="../../images/riseUp.png"

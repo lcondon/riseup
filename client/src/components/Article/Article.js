@@ -8,11 +8,12 @@ import Divider from '@material-ui/core/Divider';
 
 const styles = theme => ({
   root: {
+    marginTop: '10px',
     overflow: "hidden",
     padding: `0 ${theme.spacing.unit * 3}px`
   },
   wrapper: {
-    maxWidth: 600,
+    maxWidth: 1000,
     marginLeft: "auto",
     marginRight: "auto"
   },
