@@ -1,6 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -8,6 +6,20 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#44C2CE',
+      contrastText: '#ffffff'
+    },
+    secondary: {
+      main: '#B21A2A',
+      contrastText: '#ffffff'
+    }
+  }
+});
 
 const styles = theme => ({
   root: {
@@ -37,14 +49,12 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  logStyles: {
+    width: 440,
+    marginTop: 24
   }
 });
-
-const logStyles = {
-  width: 440,
-  marginTop: 24,
-  backgroundColor: '#B21A2A'
-};
 
 class TextFields extends React.Component {
   state = {
@@ -62,41 +72,66 @@ class TextFields extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div className={classes.root}>
-        <div className={classes.wrapper}>
-          <Paper className={classes.paper}>
-            <Grid container justify="center">
-              <Grid item xs={10}>
-                <h1 style={{ textAlign: 'center', marginTop: 0 }}>Log-In</h1>
-                <Divider />
-              </Grid>
-            </Grid>
-
-            <Grid
-              container
-              direction="column"
-              justify="center"
-              alignItems="center"
-              spacing={8}>
-              <form className={classes.container} noValidate autoComplete="off">
-                <Grid
-                  container
-                  direction="row"
-                  alignItems="center"
-                  justify="center"
-                  spacing={24}>
-                  <Grid item>
-                    <TextField
-                      style={{ width: 440 }}
-                      id="standard-email"
-                      label="Email"
-                      className={classes.textField}
-                      value={this.state.email}
-                      onChange={this.handleChange('email')}
-                      margin="normal"
-                    />
-                  </Grid>
+      <MuiThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <div className={classes.wrapper}>
+            <Paper className={classes.paper}>
+              <Grid container justify="center">
+                <Grid item xs={10}>
+                  <h1 style={{ textAlign: 'center', marginTop: 0 }}>Log-In</h1>
+                  <Divider />
                 </Grid>
+              </Grid>
+
+              <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={8}>
+                <form
+                  className={classes.container}
+                  noValidate
+                  autoComplete="off">
+                  <Grid
+                    container
+                    direction="row"
+                    alignItems="center"
+                    justify="center"
+                    spacing={24}>
+                    <Grid item>
+                      <TextField
+                        style={{ width: 440 }}
+                        id="standard-email"
+                        label="Email"
+                        className={classes.textField}
+                        value={this.state.email}
+                        onChange={this.handleChange('email')}
+                        margin="normal"
+                      />
+                    </Grid>
+                  </Grid>
+                  <Grid
+                    container
+                    alignItems="center"
+                    direction="row"
+                    justify="center"
+                    spacing={8}>
+                    <Grid item>
+                      <TextField
+                        id="standard-password-input"
+                        style={{ width: 440 }}
+                        label="Password"
+                        className={classes.textField}
+                        type="password"
+                        autoComplete="current-password"
+                        value={this.state.password}
+                        onChange={this.handleChange('password')}
+                        margin="normal"
+                      />
+                    </Grid>
+                  </Grid>
+                </form>
                 <Grid
                   container
                   alignItems="center"
@@ -104,40 +139,20 @@ class TextFields extends React.Component {
                   justify="center"
                   spacing={8}>
                   <Grid item>
-                    <TextField
-                      id="standard-password-input"
-                      style={{ width: 440 }}
-                      label="Password"
-                      className={classes.textField}
-                      type="password"
-                      autoComplete="current-password"
-                      value={this.state.password}
-                      onChange={this.handleChange('password')}
-                      margin="normal"
-                    />
+                    <Button
+                      id="landingLogBtn"
+                      className={classes.logStyles}
+                      variant="contained"
+                      color="secondary">
+                      Login
+                    </Button>
                   </Grid>
                 </Grid>
-              </form>
-              <Grid
-                container
-                alignItems="center"
-                direction="row"
-                justify="center"
-                spacing={8}>
-                <Grid item>
-                  <Button
-                    id="landingLogBtn"
-                    style={logStyles}
-                    variant="contained"
-                    color="primary">
-                    Login
-                  </Button>
-                </Grid>
               </Grid>
-            </Grid>
-          </Paper>
+            </Paper>
+          </div>
         </div>
-      </div>
+      </MuiThemeProvider>
     );
   }
 }

@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
-import Avatar from "@material-ui/core/Avatar";
-import PropTypes from "prop-types";
-import Divider from "@material-ui/core/Divider";
-import Switch from "@material-ui/core/Switch";
+import React, { Component } from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
+import PropTypes from 'prop-types';
+import Divider from '@material-ui/core/Divider';
+import Switch from '@material-ui/core/Switch';
 
 const styles = theme => ({
   root: {
-    marginTop: "10px",
-    overflow: "hidden",
+    marginTop: '10px',
+    overflow: 'hidden',
     padding: `0 ${theme.spacing.unit * 3}px`
   },
   wrapper: {
     maxWidth: 1000,
-    marginLeft: "auto",
-    marginRight: "auto"
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   paper: {
     margin: theme.spacing.unit,
@@ -61,7 +61,7 @@ class Survey extends Component {
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <Paper className={classes.paper}>
-            <h1 style={{ textAlign: "center" }}>Initial Survey</h1>
+            <h1 style={{ textAlign: 'center' }}>Initial Survey</h1>
             <Divider />
             <Grid alignItems="center" container wrap="nowrap" spacing={16}>
               <Grid item>
