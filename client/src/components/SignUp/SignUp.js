@@ -11,11 +11,11 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#44C2CE',
+      main: '#B21A2A',
       contrastText: '#ffffff'
     },
     secondary: {
-      main: '#B21A2A',
+      main: '#44C2CE',
       contrastText: '#ffffff'
     }
   }
@@ -163,7 +163,7 @@ class TextFields extends React.Component {
                     id="landingSignBtn"
                     style={signStyles}
                     variant="contained"
-                    color="primary">
+                    color="secondary">
                     Sign Up
                   </Button>
                 </Grid>

@@ -286,8 +286,13 @@ class Survey extends Component {
             <Paper className={classes.paper}>
               <h1 style={{ textAlign: 'center' }}>Initial Survey</h1>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                justify="center"
+                container
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>1</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -296,7 +301,7 @@ class Survey extends Component {
                     Funding.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -316,14 +321,19 @@ class Survey extends Component {
               </Grid>
 
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>2</Avatar>
                 </Grid>
                 <Grid item xs>
                   <p>The death penalty is justifiable in certain cases.</p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -343,14 +353,19 @@ class Survey extends Component {
 >>>>>>> 009742b89d65b3e1419b7d82637322d52993b55c
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>3</Avatar>
                 </Grid>
                 <Grid item xs>
                   <p>Health insurance should be a right, not a privilege.</p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -369,8 +384,13 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>4</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -380,7 +400,7 @@ class Survey extends Component {
                     charirites and individuals.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -399,8 +419,13 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>5</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -409,7 +434,7 @@ class Survey extends Component {
                     programs have to be cut.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -428,8 +453,13 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>6</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -438,7 +468,7 @@ class Survey extends Component {
                     warming.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -457,8 +487,13 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>7</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -467,7 +502,7 @@ class Survey extends Component {
                     public morality.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -486,14 +521,23 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>8</Avatar>
                 </Grid>
                 <Grid item xs>
-                  <p>Marriage is between one man and one woman.</p>
+                  <p>
+                    Marriage is a sacred bond, that should only be between one
+                    man and one woman. The government should not recognize gay
+                    marriage.
+                  </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -512,8 +556,13 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>9</Avatar>
                 </Grid>
                 <Grid item xs>
@@ -522,7 +571,7 @@ class Survey extends Component {
                     protect our citizens.
                   </p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
@@ -541,14 +590,19 @@ class Survey extends Component {
                 </Grid>
               </Grid>
               <Divider />
-              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-                <Grid item>
+              <Grid
+                alignItems="center"
+                container
+                justify="center"
+                wrap="wrap"
+                spacing={16}>
+                <Grid item xs={2} sm={1}>
                   <Avatar>10</Avatar>
                 </Grid>
                 <Grid item xs>
                   <p>Government should increase gun control regulations.</p>
                 </Grid>
-                <Grid item>
+                <Grid item xs={16}>
                   <p>
                     {/* {String(this.state.check1)} */}
                     Disagree
