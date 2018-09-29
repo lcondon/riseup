@@ -1,6 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
-import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
