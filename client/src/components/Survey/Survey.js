@@ -63,8 +63,8 @@ class Survey extends Component {
           <Paper className={classes.paper}>
             <h1 style={{ textAlign: 'center' }}>Initial Survey</h1>
             <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
+            <Grid alignItems="center" justify="center" container wrap="wrap" spacing={16}>
+              <Grid item xs={2} sm={1}>
                 <Avatar>1</Avatar>
               </Grid>
               <Grid item xs>
@@ -72,7 +72,7 @@ class Survey extends Component {
                   Planned Parenthood should continue to receive Federal Funding.
                 </p>
               </Grid>
-              <Grid item>
+              <Grid item xs={16}>
                 <p>
                   {/* {String(this.state.check1)} */}
                   Disagree
@@ -92,14 +92,14 @@ class Survey extends Component {
             </Grid>
 
             <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
+            <Grid alignItems="center"  justify="center"  container wrap="wrap" spacing={16}>
+              <Grid item xs={2} sm={1}>
                 <Avatar>2</Avatar>
               </Grid>
               <Grid item xs>
                 <p>The death penalty is justifiable in certain cases.</p>
               </Grid>
-              <Grid item>
+              <Grid item xs={16}>
                 <p>
                   {/* {String(this.state.check1)} */}
                   Disagree
