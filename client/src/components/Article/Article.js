@@ -5,11 +5,13 @@ import { withStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   root: {
     marginTop: '10px',
-    overflow: "hidden",
+    overflow: 'hidden',
     padding: `0 ${theme.spacing.unit * 3}px`
   },
   wrapper: {
@@ -20,6 +22,10 @@ const styles = theme => ({
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4
+  },
+  button: {
+    backgroundColor: '#B21A2A',
+    marginLeft: 10
   }
 });
 
@@ -50,6 +56,26 @@ function Article(props) {
               <p>{message}</p>
             </Grid>
           </Grid>
+        </Paper>
+        <Paper className={classes.paper}>
+          <TextField
+            id="outlined-full-width"
+            style={{ margin: 8 }}
+            label="Comment"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+          <Button
+            className={classes.button}
+            id="submitCommentBtn"
+            variant="contained"
+            color="primary">
+            Submit
+          </Button>
         </Paper>
       </div>
     </div>

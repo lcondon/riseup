@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-// import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -46,6 +46,7 @@ class Landing extends React.Component {
                 className="responsive-img"
                 justify="center"
                 src="../../images/riseUp.png"
+                alt="Logo"
               />
             </Grid>
           </Grid>
