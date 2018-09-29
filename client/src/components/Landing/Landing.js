@@ -51,7 +51,6 @@ const styles = theme => ({
 
 const logStyles = {
   width: '100%',
-  marginLeft: '5px',
   marginRight: '5px',
   marginTop: 0,
   marginBottom: 0
@@ -60,7 +59,6 @@ const logStyles = {
 const signStyles = {
   width: '100%',
   marginLeft: '5px',
-  marginRight: '5px',
   marginTop: 0,
   marginBottom: 0
 };
