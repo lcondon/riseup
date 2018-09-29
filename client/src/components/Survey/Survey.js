@@ -150,9 +150,7 @@ class Survey extends Component {
               </Grid>
               <Grid item xs>
                 <p>
-                  The government has no responsibility to provide a social
-                  safety net; helping the poor should be left up to private
-                  charirites and individuals.
+                  The government should provide a social safety net for the poor.
                 </p>
               </Grid>
               <Grid item>
@@ -180,7 +178,7 @@ class Survey extends Component {
               </Grid>
               <Grid item xs>
                 <p>
-                  Government budgets should always be cut regardless of which
+                  Government budgets should always be balanced regardless of which
                   programs have to be cut.
                 </p>
               </Grid>
@@ -238,7 +236,7 @@ class Survey extends Component {
               </Grid>
               <Grid item xs>
                 <p>
-                  Censorship of the media is sometimes necessary to protect
+                  Censorship of the media is sometimes necessary for matters of national security and to protect
                   public morality.
                 </p>
               </Grid>
@@ -341,6 +339,8 @@ class Survey extends Component {
                 </p>
               </Grid>
             </Grid>
+            <Divider/>
+
           </Paper>
         </div>
       </div>
