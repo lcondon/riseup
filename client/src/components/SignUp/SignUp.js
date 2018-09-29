@@ -49,13 +49,12 @@ const styles = theme => ({
   },
   menu: {
     width: 200
+  },
+  signStyles: {
+    width: '100%',
+    marginTop: 24
   }
 });
-
-const signStyles = {
-  width: 440,
-  marginTop: 24
-};
 
 class TextFields extends React.Component {
   state = {
@@ -92,8 +91,9 @@ class TextFields extends React.Component {
                   alignItems="center"
                   justify="center"
                   spacing={24}>
-                  <Grid item>
+                  <Grid item xs={6}>
                     <TextField
+                      style={{ width: '100%' }}
                       id="standard-first-name"
                       label="First Name"
                       className={classes.textField}
@@ -102,8 +102,9 @@ class TextFields extends React.Component {
                       margin="normal"
                     />
                   </Grid>
-                  <Grid item>
+                  <Grid item xs={6}>
                     <TextField
+                      style={{ width: '100%' }}
                       id="standard-last-name"
                       label="Last Name"
                       className={classes.textField}
@@ -119,9 +120,9 @@ class TextFields extends React.Component {
                   alignItems="center"
                   justify="center"
                   spacing={24}>
-                  <Grid item>
+                  <Grid item xs={12}>
                     <TextField
-                      style={{ width: 440 }}
+                      style={{ width: '100%' }}
                       id="standard-email"
                       label="Email"
                       className={classes.textField}
@@ -137,10 +138,10 @@ class TextFields extends React.Component {
                   direction="row"
                   justify="center"
                   spacing={24}>
-                  <Grid item>
+                  <Grid item xs={12}>
                     <TextField
                       id="standard-password-input"
-                      style={{ width: 440 }}
+                      style={{ width: '100%' }}
                       label="Password"
                       className={classes.textField}
                       type="password"
@@ -157,11 +158,12 @@ class TextFields extends React.Component {
                 alignItems="center"
                 direction="row"
                 justify="center"
-                spacing={24}>
-                <Grid item>
+                spacing={8}>
+                <Grid item xs={4}>
                   <Button
+                    style={{ width: '100%' }}
                     id="landingSignBtn"
-                    style={signStyles}
+                    className={classes.signStyles}
                     variant="contained"
                     color="secondary">
                     Sign Up
