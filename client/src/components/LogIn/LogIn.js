@@ -51,7 +51,7 @@ const styles = theme => ({
     width: 200
   },
   logStyles: {
-    width: 440,
+    width: '100%',
     marginTop: 24
   }
 });
@@ -99,9 +99,9 @@ class TextFields extends React.Component {
                     alignItems="center"
                     justify="center"
                     spacing={24}>
-                    <Grid item>
+                    <Grid item xs={12}>
                       <TextField
-                        style={{ width: 440 }}
+                        style={{ width: '100%' }}
                         id="standard-email"
                         label="Email"
                         className={classes.textField}
@@ -117,10 +117,10 @@ class TextFields extends React.Component {
                     direction="row"
                     justify="center"
                     spacing={8}>
-                    <Grid item>
+                    <Grid item xs={12}>
                       <TextField
                         id="standard-password-input"
-                        style={{ width: 440 }}
+                        style={{ width: '100%' }}
                         label="Password"
                         className={classes.textField}
                         type="password"
@@ -138,8 +138,9 @@ class TextFields extends React.Component {
                   direction="row"
                   justify="center"
                   spacing={8}>
-                  <Grid item>
+                  <Grid item xs={4}>
                     <Button
+                      style={{ width: '100%' }}
                       id="landingLogBtn"
                       className={classes.logStyles}
                       variant="contained"
