@@ -26,7 +26,8 @@ const styles = theme => ({
   root: {
     marginTop: '10px',
     overflow: 'hidden',
-    padding: `0 ${theme.spacing.unit * 3}px`
+    padding: `0 ${theme.spacing.unit * 3}px`,
+    marginBottom: '15px'
   },
   wrapper: {
     maxWidth: 1000,
