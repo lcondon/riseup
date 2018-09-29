@@ -5,6 +5,22 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
+import { withWidth } from '@material-ui/core';
+import compose from 'recompose/compose';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#44C2CE',
+      contrastText: '#ffffff'
+    },
+    secondary: {
+      main: '#B21A2A',
+      contrastText: '#ffffff'
+    }
+  }
+});
 
 const styles = theme => ({
   root: {
@@ -19,93 +35,112 @@ const styles = theme => ({
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4
+  },
+  img: {
+    [theme.breakpoints.up('xs')]: {
+      width: 300
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: 500
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '100%'
+    }
   }
 });
 
 const logStyles = {
   width: '100%',
-  margin: '5px',
-  backgroundColor: '#B21A2A'
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: 0,
+  marginBottom: 0
 };
 
 const signStyles = {
   width: '100%',
-  margin: '5px',
-  backgroundColor: '#44C2CE'
+  marginLeft: '5px',
+  marginRight: '5px',
+  marginTop: 0,
+  marginBottom: 0
 };
 
 class Landing extends React.Component {
   render() {
     const { classes } = this.props;
+    const { width } = this.props;
     return (
       <div>
-        <Grid container direction="row" justify="center" spacing={24}>
-          <Grid container justify="center">
-            <Grid item>
-              <img
-                className="responsive-img"
-                justify="center"
-                src="../../images/riseUp.png"
-                alt="Logo"
-              />
+        <MuiThemeProvider theme={theme}>
+          <Grid container direction="row" justify="center" spacing={24}>
+            <Grid container justify="center">
+              <Grid item>
+                <img
+                  className={classes.img}
+                  justify="center"
+                  src="../../images/riseUp.png"
+                  alt="Logo"
+                />
+              </Grid>
             </Grid>
-          </Grid>
-          <div className={classes.root}>
-            <div className={classes.wrapper}>
-              <Paper className={classes.paper}>
-                <Grid container justify="center">
-                  <Grid item xs={10}>
-                    <h1 style={{ textAlign: 'center' }}>riseUP</h1>
-                    <Divider />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Ut libero metus, posuere quis odio sed, molestie ornare
-                      urna. Curabitur pulvinar vulputate augue ac blandit. Nulla
-                      dictum eu neque ac consectetur. Sed ut nisl ut lacus
-                      tincidunt bibendum eu ut velit. Donec eu leo ligula.
-                      Nullam posuere lobortis laoreet. Morbi maximus ultricies
-                      lorem, quis maximus ligula tincidunt in. Pellentesque
-                      habitant morbi tristique senectus et netus et malesuada
-                      fames ac turpis egestas. Maecenas condimentum, lacus nec
-                      egestas scelerisque, massa ligula ultrices mi, ac
-                      ullamcorper ante nisi at leo. Integer condimentum metus
-                      odio, vitae maximus nulla lobortis a. Quisque iaculis et
-                      nunc id pretium. Curabitur facilisis iaculis dapibus.
-                      Pellentesque dignissim velit ac lectus euismod, eu
-                      placerat est ultrices. Etiam ut mi feugiat, cursus.
-                    </p>
-                  </Grid>
-                  <Grid container justify="center" spacing={24}>
-                    <Grid item xs={10} sm={5}>
-                      <a style={{ textDecoration: 'none' }} href="/login">
-                        <Button
-                          id="landingLogBtn"
-                          style={logStyles}
-                          variant="contained"
-                          color="primary">
-                          Login
-                        </Button>
-                      </a>
+            <div className={classes.root}>
+              <div className={classes.wrapper}>
+                <Paper className={classes.paper}>
+                  <Grid container justify="center">
+                    <Grid item xs={10}>
+                      <h1 style={{ textAlign: 'center' }}>riseUP</h1>
+                      <Divider />
                     </Grid>
-                    <Grid item xs={10} sm={5}>
-                      <a style={{ textDecoration: 'none' }} href="/signup">
-                        <Button
-                          id="landingSignBtn"
-                          style={signStyles}
-                          variant="contained"
-                          color="secondary">
-                          Sign Up
-                        </Button>
-                      </a>
+                    <Grid item xs={10}>
+                      <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Ut libero metus, posuere quis odio sed, molestie ornare
+                        urna. Curabitur pulvinar vulputate augue ac blandit.
+                        Nulla dictum eu neque ac consectetur. Sed ut nisl ut
+                        lacus tincidunt bibendum eu ut velit. Donec eu leo
+                        ligula. Nullam posuere lobortis laoreet. Morbi maximus
+                        ultricies lorem, quis maximus ligula tincidunt in.
+                        Pellentesque habitant morbi tristique senectus et netus
+                        et malesuada fames ac turpis egestas. Maecenas
+                        condimentum, lacus nec egestas scelerisque, massa ligula
+                        ultrices mi, ac ullamcorper ante nisi at leo. Integer
+                        condimentum metus odio, vitae maximus nulla lobortis a.
+                        Quisque iaculis et nunc id pretium. Curabitur facilisis
+                        iaculis dapibus. Pellentesque dignissim velit ac lectus
+                        euismod, eu placerat est ultrices. Etiam ut mi feugiat,
+                        cursus.
+                      </p>
+                    </Grid>
+                    <Grid container justify="center" spacing={8}>
+                      <Grid item xs={10} sm={5}>
+                        <a style={{ textDecoration: 'none' }} href="/login">
+                          <Button
+                            id="landingLogBtn"
+                            style={logStyles}
+                            variant="contained"
+                            color="secondary">
+                            Login
+                          </Button>
+                        </a>
+                      </Grid>
+                      <Grid item xs={10} sm={5}>
+                        <a style={{ textDecoration: 'none' }} href="/signup">
+                          <Button
+                            id="landingSignBtn"
+                            style={signStyles}
+                            variant="contained"
+                            color="primary">
+                            Sign Up
+                          </Button>
+                        </a>
+                      </Grid>
                     </Grid>
                   </Grid>
-                </Grid>
-              </Paper>
+                </Paper>
+              </div>
             </div>
-          </div>
-        </Grid>
+          </Grid>
+        </MuiThemeProvider>
       </div>
     );
   }
@@ -115,4 +150,7 @@ Landing.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Landing);
+export default compose(
+  withStyles(styles),
+  withWidth()
+)(Landing);
