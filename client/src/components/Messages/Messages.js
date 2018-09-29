@@ -40,7 +40,6 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   },
   button: {
-    backgroundColor: '#44C2CE',
     marginLeft: 10
   },
   textField: {
@@ -95,7 +94,7 @@ class Messages extends React.Component {
                           className={classes.button}
                           id="submitCommentBtn"
                           variant="contained"
-                          color="primary">
+                          color="secondary">
                           Send
                         </Button>
                       </Grid>
