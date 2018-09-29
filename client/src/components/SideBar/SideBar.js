@@ -1,6 +1,5 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
@@ -15,22 +14,21 @@ class SideBar extends React.Component {
     return (
       <div>
         {/* {this.state.messages.map(message => (
-          <ListItem>
+          <ListItem button component="a" href="/login">
             <ListItemAvatar />
             <ListItemText primary={message.name} />
           </ListItem>
         ))} */}
-        <ListItem>
+        <ListItem button>
           <Avatar>W</Avatar>
           <ListItemText primary="Message" />
         </ListItem>
         <Divider />
-        <ListItem button component="a" href="/login">
-          <ListItemIcon>
-            <PersonIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sign Out" />
+        <ListItem button>
+          <Avatar>M</Avatar>
+          <ListItemText primary="Message 2" />
         </ListItem>
+        <Divider />
       </div>
     );
   }

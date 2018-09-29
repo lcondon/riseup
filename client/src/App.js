@@ -8,6 +8,8 @@ import Survey from './components/Survey';
 import Messages from './components/Messages';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const App = () => (
   <Router>
