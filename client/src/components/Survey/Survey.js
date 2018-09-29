@@ -112,171 +112,32 @@ class Survey extends Component {
                   </p>
                 </Grid>
               </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>2</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>The death penalty is justifiable in certain cases.</p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check2}
-                    onChange={this.handleSwitchToggle}
-                    value="check2"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>3</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>Health insurance should be a right, not a privilege.</p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check3}
-                    onChange={this.handleSwitchToggle}
-                    value="check3"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>4</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>
-                  The government should provide a social safety net for the poor.
-                </p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check4}
-                    onChange={this.handleSwitchToggle}
-                    value="check4"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>5</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>
-                  Government budgets should always be balanced regardless of which
-                  programs have to be cut.
-                </p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check5}
-                    onChange={this.handleSwitchToggle}
-                    value="check5"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>6</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>
-                  The government is not responsible for preventing global
-                  warming.
-                </p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check6}
-                    onChange={this.handleSwitchToggle}
-                    value="check6"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
-              </Grid>
-            </Grid>
-            <Divider />
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>7</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>
-                  Censorship of the media is sometimes necessary for matters of national security and to protect
-                  public morality.
-                </p>
-              </Grid>
-              <Grid item>
-                <p>
-                  {/* {String(this.state.check1)} */}
-                  Disagree
-                  <Switch
-                    checked={this.state.check7}
-                    onChange={this.handleSwitchToggle}
-                    value="check7"
-                    classes={{
-                      switchBase: classes.colorSwitchBase,
-                      checked: classes.colorChecked,
-                      bar: classes.colorBar,
-                    }}
-                  />
-                  Agree
-                </p>
+
+              <Divider />
+              <Grid alignItems="center" container wrap="nowrap" spacing={16}>
+                <Grid item>
+                  <Avatar>2</Avatar>
+                </Grid>
+                <Grid item xs>
+                  <p>The death penalty is justifiable in certain cases.</p>
+                </Grid>
+                <Grid item>
+                  <p>
+                    {/* {String(this.state.check1)} */}
+                    Disagree
+                    <Switch
+                      checked={this.state.check2}
+                      onChange={this.handleSwitchToggle}
+                      value="check2"
+                      classes={{
+                        switchBase: classes.colorSwitchBase,
+                        checked: classes.colorChecked,
+                        bar: classes.colorBar
+                      }}
+                    />
+                    Agree
+                  </p>
+                </Grid>
               </Grid>
               <Divider />
               <Grid alignItems="center" container wrap="nowrap" spacing={16}>
@@ -514,7 +375,6 @@ class Survey extends Component {
               </Grid>
             </Paper>
           </div>
-
         </div>
       </MuiThemeProvider>
     );
