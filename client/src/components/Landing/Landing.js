@@ -32,6 +32,12 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: '100%'
     }
+  },
+  title: {
+    'font-family': 'Rubik',
+    color: '#01163D',
+    'font-size': 100,
+    margin: 0
   }
 });
 
@@ -69,7 +75,11 @@ class Landing extends React.Component {
               <Paper className={classes.paper}>
                 <Grid container justify="center">
                   <Grid item xs={10}>
-                    <h1 style={{ textAlign: 'center' }}>riseUP</h1>
+                    <h1
+                      style={{ textAlign: 'center' }}
+                      className={classes.title}>
+                      riseUP
+                    </h1>
                     <Divider />
                   </Grid>
                   <Grid item xs={10}>
