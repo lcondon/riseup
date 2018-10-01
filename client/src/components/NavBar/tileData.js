@@ -14,7 +14,7 @@ export const mailFolderListItems = (
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
-      <ListItemText primary="Home" />
+      <ListItemText primary="About Us" />
     </ListItem>
     <ListItem button component="a" href="/article">
       <ListItemIcon>

@@ -75,10 +75,10 @@ class TextFields extends React.Component {
                 direction="row"
                 alignItems="center"
                 justify="center"
-                spacing={24}>
-                <Grid item xs={6}>
+                spacing={12}>
+                <Grid item xs={6} sm={4}>
                   <TextField
-                    style={{ width: '100%' }}
+                    style={{ width: '95%' }}
                     id="standard-first-name"
                     label="First Name"
                     className={classes.textField}
@@ -87,7 +87,7 @@ class TextFields extends React.Component {
                     margin="normal"
                   />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={6} sm={4}>
                   <TextField
                     style={{ width: '100%' }}
                     id="standard-last-name"
@@ -104,8 +104,8 @@ class TextFields extends React.Component {
                 direction="row"
                 alignItems="center"
                 justify="center"
-                spacing={24}>
-                <Grid item xs={12}>
+                spacing={12}>
+                <Grid item xs={12} sm={8}>
                   <TextField
                     style={{ width: '100%' }}
                     id="standard-email"
@@ -122,8 +122,8 @@ class TextFields extends React.Component {
                 alignItems="center"
                 direction="row"
                 justify="center"
-                spacing={24}>
-                <Grid item xs={12}>
+                spacing={12}>
+                <Grid item xs={12} sm={8}>
                   <TextField
                     id="standard-password-input"
                     style={{ width: '100%' }}
