@@ -8,21 +8,6 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withWidth } from '@material-ui/core';
-import compose from 'recompose/compose';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: '#44C2CE',
-      contrastText: '#ffffff'
-    },
-    secondary: {
-      main: '#B21A2A',
-      contrastText: '#ffffff'
-    }
-  }
-});
 
 const styles = theme => ({
   root: {
@@ -51,52 +36,50 @@ function Article(props) {
                     as this is a much longer line than what the container can support. `;
 
   return (
-    <MuiThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <div className={classes.wrapper}>
-          <Paper className={classes.paper}>
-            <h1 style={{ textAlign: 'center' }}>Article of the Day:</h1>
-            <h2 style={{ textAlign: 'center' }}>Article Title</h2>
-            <Divider />
-            <p>
-              Truncation should be conditionally applicable on this long line of
-              text as this is a much longer line than what the container can
-              support.
-            </p>
-          </Paper>
-          <Paper className={classes.paper}>
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar>W</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p>{message}</p>
-              </Grid>
+    <div className={classes.root}>
+      <div className={classes.wrapper}>
+        <Paper className={classes.paper}>
+          <h1 style={{ textAlign: 'center' }}>Article of the Day:</h1>
+          <h2 style={{ textAlign: 'center' }}>Article Title</h2>
+          <Divider />
+          <p>
+            Truncation should be conditionally applicable on this long line of
+            text as this is a much longer line than what the container can
+            support.
+          </p>
+        </Paper>
+        <Paper className={classes.paper}>
+          <Grid alignItems="center" container wrap="nowrap" spacing={16}>
+            <Grid item>
+              <Avatar>W</Avatar>
             </Grid>
-          </Paper>
-          <Paper className={classes.paper}>
-            <TextField
-              id="outlined-full-width"
-              style={{ margin: 8 }}
-              label="Comment"
-              fullWidth
-              margin="normal"
-              variant="outlined"
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            <Button
-              className={classes.button}
-              id="submitCommentBtn"
-              variant="contained"
-              color="secondary">
-              Submit
-            </Button>
-          </Paper>
-        </div>
+            <Grid item xs>
+              <p>{message}</p>
+            </Grid>
+          </Grid>
+        </Paper>
+        <Paper className={classes.paper}>
+          <TextField
+            id="outlined-full-width"
+            style={{ margin: 8 }}
+            label="Comment"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+          <Button
+            className={classes.button}
+            id="submitCommentBtn"
+            variant="contained"
+            color="secondary">
+            Submit
+          </Button>
+        </Paper>
       </div>
-    </MuiThemeProvider>
+    </div>
   );
 }
 
@@ -104,7 +87,4 @@ Article.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  withWidth()
-)(Article);
+export default withStyles(styles)(Article);

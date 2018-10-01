@@ -78,7 +78,7 @@ class MenuAppBar extends React.Component {
             {sideList}
           </div>
         </Drawer>
-        <AppBar position="static" style={backgroundStyle}>
+        <AppBar position="static" style={backgroundStyle} color="primary">
           <Toolbar>
             <IconButton
               className={classes.menuButton}
