@@ -8,7 +8,8 @@ const db = require('../models');
 // router.use('/api', apiRoutes);
 
 router.get('/logme', function(req, res) {
-  db.User.find({}).then(function(results) {
+  console.log(req.user);
+  db.User.find({ email: req.user.email }).then(function(results) {
     res.json(results);
   });
 });
