@@ -1,31 +1,20 @@
 const path = require('path');
 const router = require('express').Router();
 // const apiRoutes = require('./api');
-const passport = require('passport');
+const passport = require('../passport');
 const db = require('../models');
 
 // API Routes
 // router.use('/api', apiRoutes);
 
-router.get('/login', function(req, res) {
-  db.User.find({ firstName: 'Lola' }).then(function(results) {
-    res.json(results);
-  });
-});
-
 router.get('/logme', function(req, res) {
-  db.User.create({
-    firstName: 'Lola',
-    lastName: 'Owen',
-    email: 'lola@owen.com',
-    password: 'iloverun'
-  }).then(function(results) {
+  db.User.find({}).then(function(results) {
     res.json(results);
   });
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-  console.log(req.body);
+  console.log(req.user);
   if (req.isAuthenticated()) {
     res.json('yes');
   } else {

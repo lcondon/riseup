@@ -10,17 +10,9 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // import { withStyles } from '@material-ui/core/styles';
 // import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import queryString from 'query-string';
+// import queryString from 'query-string';
 
 class App extends React.Component {
-  componentWillMount() {
-    var query = queryString.parse(this.props.location.search);
-    if (query.token) {
-      window.localStorage.setItem('jwt', query.token);
-      this.props.history.push('/');
-    }
-  }
-
   render() {
     return (
       <Router>

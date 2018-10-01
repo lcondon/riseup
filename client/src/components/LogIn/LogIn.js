@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import axios from 'axios';
 
 const theme = createMuiTheme({
   palette: {
@@ -68,6 +69,19 @@ class TextFields extends React.Component {
     });
   };
 
+  handleSubmit = event => {
+    event.preventDefault();
+
+    axios
+      .post('/login', {
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response);
+      });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -104,6 +118,7 @@ class TextFields extends React.Component {
                         style={{ width: '100%' }}
                         id="standard-email"
                         label="Email"
+                        name="email"
                         className={classes.textField}
                         value={this.state.email}
                         onChange={this.handleChange('email')}
@@ -122,6 +137,7 @@ class TextFields extends React.Component {
                         id="standard-password-input"
                         style={{ width: '100%' }}
                         label="Password"
+                        name="password"
                         className={classes.textField}
                         type="password"
                         autoComplete="current-password"
@@ -142,6 +158,7 @@ class TextFields extends React.Component {
                     <Button
                       style={{ width: '100%' }}
                       id="landingLogBtn"
+                      onClick={this.handleSubmit}
                       className={classes.logStyles}
                       variant="contained"
                       color="secondary">

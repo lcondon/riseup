@@ -7,7 +7,8 @@ const strategy = new LocalStrategy(
     passwordField: 'password'
   },
   function(email, password, done) {
-    db.User.find({ email: email }).then(function(user, err) {
+    db.User.findOne({ email: email }).then(function(user, err) {
+      console.log(user);
       if (!user) {
         return done(null, false, { message: 'Incorrect username.' });
       }

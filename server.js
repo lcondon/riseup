@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
@@ -20,11 +19,10 @@ const app = express();
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
+app.use(cookieparser());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
-app.use(cookieparser());
 app.use(
   session({
     secret: 'keyboard cat',
@@ -42,8 +40,11 @@ app.use(
 );
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3001');
+  res.setHeader('Access-Control-Allow-Origin', 'http://0.0.0.0:3000');
   res.setHeader(
     'Access-Control-Allow-Methods',
     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
@@ -57,14 +58,7 @@ app.use(function(req, res, next) {
 });
 app.set('trust proxy', '127.0.0.1');
 
-app.use(passport.initialize());
-app.use(passport.session());
-
 app.use(userRouter);
-
-db.User.find({}).then(function(results) {
-  console.log(results);
-});
 
 app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
