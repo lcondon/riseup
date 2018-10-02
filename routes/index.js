@@ -23,6 +23,19 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
   }
 });
 
+router.get('/isloggedin', function(req, res) {
+  if (req.isAuthenticated()) {
+    res.json(req.user);
+  } else {
+    res.json('Not Logged In');
+  }
+});
+
+router.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
 // router.post(
 //   '/login',
 //   function(req, res, next) {
