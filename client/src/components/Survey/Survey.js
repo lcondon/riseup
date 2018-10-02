@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
+import API from '../../utils/API';
 
 const styles = theme => ({
   root: {
@@ -60,6 +62,26 @@ class Survey extends Component {
 
     this.setState({ [value]: !this.state[value] });
   };
+
+  componentDidMount = () => {};
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    API.isLoggedIn()
+      .then(response => {
+        console.log(response.data);
+
+        API.updateUser(response.data._id, this.state)
+        .then(results => {
+          console.log(results);
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
   render() {
     const { classes } = this.props;
 
@@ -404,6 +426,7 @@ class Survey extends Component {
             <Divider />
             <Grid container justify="flex-end">
               <Button
+                onClick={this.handleSubmit}
                 className={classes.button}
                 id="submitCommentBtn"
                 variant="contained"

@@ -6,6 +6,10 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
+import { withWidth } from '@material-ui/core';
+import compose from 'recompose/compose';
+import axios from 'axios';
+import API from '../../utils/API';
 
 const styles = theme => ({
   root: {
@@ -22,13 +26,28 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   },
   container: {
-    display: 'flex',
+    // display: 'flex',
     flexWrap: 'wrap'
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+    marginLeft: 0,
+    marginRight: 0,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '50%'
+    }
+  },
+  textField2: {
+    marginLeft: 5,
+    marginRight: 5,
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: '50%'
+    }
   },
   dense: {
     marginTop: 19
@@ -52,6 +71,25 @@ class TextFields extends React.Component {
     lastName: '',
     email: '',
     password: ''
+  };
+
+  signUp = event => {
+    event.preventDefault();
+    API.createUser({
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      password: this.state.password
+    })
+      .then(response => {
+        console.log(response);
+        if (response.data.redirect) {
+          window.location.href = '/survey';
+        } else {
+          console.log('no go');
+        }
+      })
+      .catch(err => console.log(err));
   };
 
   handleChange = name => event => {
@@ -78,72 +116,47 @@ class TextFields extends React.Component {
               </Grid>
             </Grid>
             <form className={classes.container} noValidate autoComplete="off">
-              <Grid
-                container
-                direction="row"
-                alignItems="center"
-                justify="center"
-                spacing={12}>
-                <Grid item xs={6} sm={4}>
-                  <TextField
-                    style={{ width: '95%' }}
-                    id="standard-first-name"
-                    label="First Name"
-                    className={classes.textField}
-                    value={this.state.firstName}
-                    onChange={this.handleChange('firstName')}
-                    margin="normal"
-                  />
-                </Grid>
-                <Grid item xs={6} sm={4}>
-                  <TextField
-                    style={{ width: '100%' }}
-                    id="standard-last-name"
-                    label="Last Name"
-                    className={classes.textField}
-                    value={this.state.lastName}
-                    onChange={this.handleChange('lastName')}
-                    margin="normal"
-                  />
-                </Grid>
+              <Grid container justify="center" spacing={16}>
+                <TextField
+                  id="standard-first-name"
+                  label="First Name"
+                  className={classes.textField2}
+                  value={this.state.firstName}
+                  onChange={this.handleChange('firstName')}
+                  margin="normal"
+                />
               </Grid>
-              <Grid
-                container
-                direction="row"
-                alignItems="center"
-                justify="center"
-                spacing={12}>
-                <Grid item xs={12} sm={8}>
-                  <TextField
-                    style={{ width: '100%' }}
-                    id="standard-email"
-                    label="Email"
-                    className={classes.textField}
-                    value={this.state.email}
-                    onChange={this.handleChange('email')}
-                    margin="normal"
-                  />
-                </Grid>
+              <Grid container justify="center" spacing={16}>
+                <TextField
+                  id="standard-last-name"
+                  label="Last Name"
+                  className={classes.textField2}
+                  value={this.state.lastName}
+                  onChange={this.handleChange('lastName')}
+                  margin="normal"
+                />
               </Grid>
-              <Grid
-                container
-                alignItems="center"
-                direction="row"
-                justify="center"
-                spacing={12}>
-                <Grid item xs={12} sm={8}>
-                  <TextField
-                    id="standard-password-input"
-                    style={{ width: '100%' }}
-                    label="Password"
-                    className={classes.textField}
-                    type="password"
-                    autoComplete="current-password"
-                    value={this.state.password}
-                    onChange={this.handleChange('password')}
-                    margin="normal"
-                  />
-                </Grid>
+              <Grid container justify="center" spacing={16}>
+                <TextField
+                  id="standard-email"
+                  label="Email"
+                  className={classes.textField}
+                  value={this.state.email}
+                  onChange={this.handleChange('email')}
+                  margin="normal"
+                />
+              </Grid>
+              <Grid container justify="center" spacing={16}>
+                <TextField
+                  id="standard-password-input"
+                  label="Password"
+                  className={classes.textField}
+                  type="password"
+                  autoComplete="current-password"
+                  value={this.state.password}
+                  onChange={this.handleChange('password')}
+                  margin="normal"
+                />
               </Grid>
             </form>
             <Grid
@@ -152,8 +165,9 @@ class TextFields extends React.Component {
               direction="row"
               justify="center"
               spacing={8}>
-              <Grid item xs={4}>
+              <Grid item xs={8} sm={3}>
                 <Button
+                  onClick={this.signUp}
                   style={{ width: '100%' }}
                   id="landingSignBtn"
                   className={classes.signStyles}
@@ -174,4 +188,7 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TextFields);
+export default compose(
+  withStyles(styles),
+  withWidth()
+)(TextFields);

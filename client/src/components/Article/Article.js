@@ -30,6 +30,10 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#01163D'
+  },
+  subtitle: {
+    'font-family': 'Rubik',
+    color: '#389EA8'
   }
 });
 
@@ -46,7 +50,7 @@ function Article(props) {
           <h1 style={{ textAlign: 'center' }} className={classes.title}>
             Article of the Day:
           </h1>
-          <h2 style={{ textAlign: 'center' }} className={classes.title}>
+          <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
             Article Title
           </h2>
           <Divider />
