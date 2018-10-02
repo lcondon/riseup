@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { withWidth } from '@material-ui/core';
+// import { withWidth } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -26,12 +26,16 @@ const styles = theme => ({
   },
   button: {
     marginLeft: 10
+  },
+  title: {
+    'font-family': 'Rubik',
+    color: '#01163D'
   }
 });
 
 function Article(props) {
   const { classes } = props;
-  const { width } = props;
+  // const { width } = props;
   const message = `Truncation should be conditionally applicable on this long line of text
                     as this is a much longer line than what the container can support. `;
 
@@ -39,8 +43,12 @@ function Article(props) {
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <Paper className={classes.paper}>
-          <h1 style={{ textAlign: 'center' }}>Article of the Day:</h1>
-          <h2 style={{ textAlign: 'center' }}>Article Title</h2>
+          <h1 style={{ textAlign: 'center' }} className={classes.title}>
+            Article of the Day:
+          </h1>
+          <h2 style={{ textAlign: 'center' }} className={classes.title}>
+            Article Title
+          </h2>
           <Divider />
           <p>
             Truncation should be conditionally applicable on this long line of

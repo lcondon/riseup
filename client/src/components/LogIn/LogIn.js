@@ -41,6 +41,10 @@ const styles = theme => ({
   logStyles: {
     width: '100%',
     marginTop: 24
+  },
+  title: {
+    'font-family': 'Rubik',
+    color: '#01163D'
   }
 });
 
@@ -87,7 +91,11 @@ class TextFields extends React.Component {
           <Paper className={classes.paper}>
             <Grid container justify="center">
               <Grid item xs={10}>
-                <h1 style={{ textAlign: 'center', marginTop: 0 }}>Log-In</h1>
+                <h1
+                  style={{ textAlign: 'center', marginTop: 0 }}
+                  className={classes.title}>
+                  Log-In
+                </h1>
                 <Divider />
               </Grid>
             </Grid>

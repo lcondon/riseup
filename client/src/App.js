@@ -17,11 +17,11 @@ import {
 import { withTheme } from '@material-ui/core/styles';
 import axios from 'axios';
 // import queryString from 'query-string';
-import compose from 'recompose/compose';
+// import compose from 'recompose/compose';
 import {
   MuiThemeProvider,
   createMuiTheme,
-  withStyles
+  // withStyles
 } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
