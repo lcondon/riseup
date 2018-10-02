@@ -10,7 +10,23 @@ import Hidden from '@material-ui/core/Hidden';
 import withWidth from '@material-ui/core/withWidth';
 import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
-import socketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
+
+var Socket = window['MozWebSocket'] || window['WebSocket'];
+
+if (Socket) {
+  let socket = io.connect('http://localhost:3001');
+  // var ws = new Socket('ws://localhost:3001/');
+  socket.onopen = () => {
+    console.log('onopen');
+  };
+  socket.emit('news', { hello: 'world' });
+  // ws.onerror = function() { console.log('onerror attached to websocket object.'); };
+  // ws.onclose = function() { console.log('onclose'); };
+  socket.onmessage = function(evt) {
+    console.log('onmessage: ' + evt.data);
+  };
+}
 
 const styles = theme => ({
   root: {
@@ -42,15 +58,22 @@ const styles = theme => ({
 });
 
 class Messages extends React.Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    // this.state = {
-    //   endpoint: "http://127.0.0.1:4001"
-    // }
+  //   // this.state = {
+  //   //   endpoint: "http://127.0.0.1:4001"
+  //   // }
 
-    this.socket = window.io();
-  }
+  //   // this.socket = window.io();
+  // }
+
+  // componentDidMount() {
+  //   socket.on('news', function(data) {
+  //     console.log(data);
+  //     socket.emit('my other event', { my: 'data' });
+  //   });
+  // }
 
   send = () => {
     this.socket.emit('change color', 'red');
@@ -59,9 +82,9 @@ class Messages extends React.Component {
   render() {
     const { classes } = this.props;
     // const socket = socketIOClient(this.state.endpoint)
-    this.socket.on('change color', color => {
-      document.body.style.backgroundColor = color;
-    });
+    // this.socket.on('change color', color => {
+    //   document.body.style.backgroundColor = color;
+    // });
 
     return (
       <div className={classes.root}>
