@@ -38,6 +38,7 @@ class App extends React.Component {
     loggedIn: false,
     user: {}
   };
+
   componentDidMount() {
     console.log(this.state.user);
 

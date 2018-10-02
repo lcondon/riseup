@@ -22,7 +22,7 @@ const styles = theme => ({
   },
   paper: {
     margin: theme.spacing.unit * 2,
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing.unit * 2
   },
   table: {
     minWidth: 700
@@ -30,6 +30,10 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#B21A2A'
+  },
+  button: {
+    marginLeft: 10
+    // width: 150
   }
 });
 
@@ -78,6 +82,30 @@ class Profile extends React.Component {
                   <TableCell>Password</TableCell>
                   <TableCell>{this.props.user.password}</TableCell>
                   <TableCell />
+                </TableRow>
+                <TableRow style={{ height: '60px' }}>
+                  <TableCell style={{ borderBottom: 'none' }} />
+                  <TableCell style={{ borderBottom: 'none' }} />
+                  <TableCell
+                    style={{
+                      paddingRight: 0,
+                      borderBottom: 'none'
+                    }}>
+                    <Button
+                      className={classes.button}
+                      id="deleteBtn"
+                      variant="contained"
+                      color="primary">
+                      Delete Account
+                    </Button>
+                    <Button
+                      className={classes.button}
+                      id="logOutBtn"
+                      variant="contained"
+                      color="secondary">
+                      Log Out
+                    </Button>
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>

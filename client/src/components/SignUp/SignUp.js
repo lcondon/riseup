@@ -84,7 +84,9 @@ class TextFields extends React.Component {
       .then(response => {
         console.log(response);
         if (response.data.redirect) {
-          window.location.href = '/survey';
+          API.logInUser(this.state.email, this.state.password).then(results => {
+            window.location.href = '/survey';
+          });
         } else {
           console.log('no go');
         }
