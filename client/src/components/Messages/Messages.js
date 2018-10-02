@@ -54,6 +54,10 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#01163D'
+  },
+  subtitle: {
+    'font-family': 'Rubik',
+    color: '#389EA8'
   }
 });
 
@@ -94,7 +98,7 @@ class Messages extends React.Component {
               Messages
             </h1>
             <Divider />
-            <h2 style={{ textAlign: 'center' }} className={classes.title}>
+            <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
               Maybe a quote to discuss
             </h2>
             <Grid container justify="center">

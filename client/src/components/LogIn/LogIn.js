@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
+import API from '../../utils/API';
 
 const styles = theme => ({
   root: {
@@ -27,9 +28,9 @@ const styles = theme => ({
     flexWrap: 'wrap'
   },
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
+    marginLeft: 5,
+    marginRight: 5,
+    width: '100%'
   },
   dense: {
     marginTop: 19
@@ -44,6 +45,9 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#01163D'
+  },
+  form: {
+    margin: 0
   }
 });
 
@@ -61,24 +65,24 @@ class TextFields extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-
-    // axios
-    //   .post('/login', {
-    //     email: this.state.email,
-    //     password: this.state.password
-    //   })
-    //   .then(response => {
-    //     console.log(response);
-    //   })
-    //   .catch(err => console.log(err));
-
-    axios
-      .get('/logme')
+    API.logInUser(this.state.email, this.state.password)
       .then(response => {
         console.log(response);
-        console.log('hi mom');
+        if (response.status === 200) {
+          window.location.href = '/article';
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
+
+    // axios
+    //   .get('/logme')
+    //   .then(response => {
+    //     console.log(response);
+    //     console.log('hi mom');
+    //   })
+    //   .catch(err => console.log(err));
   };
 
   render() {
@@ -98,53 +102,38 @@ class TextFields extends React.Component {
                 <Divider />
               </Grid>
             </Grid>
-
             <Grid
               container
-              direction="column"
-              justify="center"
+              direction="row"
               alignItems="center"
-              spacing={8}>
+              justify="center"
+              spacing={16}>
               <form className={classes.container} noValidate autoComplete="off">
-                <Grid
-                  container
-                  direction="row"
-                  alignItems="center"
-                  justify="center"
-                  spacing={24}>
-                  <Grid item xs={12}>
-                    <TextField
-                      style={{ width: '100%' }}
-                      id="standard-email"
-                      label="Email"
-                      name="email"
-                      className={classes.textField}
-                      value={this.state.email}
-                      onChange={this.handleChange('email')}
-                      margin="normal"
-                    />
-                  </Grid>
+                <Grid container justify="center" spacing={16}>
+                  <TextField
+                    style={{ width: '100%' }}
+                    id="standard-email"
+                    label="Email"
+                    name="email"
+                    className={classes.textField}
+                    value={this.state.email}
+                    onChange={this.handleChange('email')}
+                    margin="normal"
+                  />
                 </Grid>
-                <Grid
-                  container
-                  alignItems="center"
-                  direction="row"
-                  justify="center"
-                  spacing={8}>
-                  <Grid item xs={12}>
-                    <TextField
-                      id="standard-password-input"
-                      style={{ width: '100%' }}
-                      label="Password"
-                      name="password"
-                      className={classes.textField}
-                      type="password"
-                      autoComplete="current-password"
-                      value={this.state.password}
-                      onChange={this.handleChange('password')}
-                      margin="normal"
-                    />
-                  </Grid>
+                <Grid container justify="center" spacing={16}>
+                  <TextField
+                    id="standard-password-input"
+                    style={{ width: '100%' }}
+                    label="Password"
+                    name="password"
+                    className={classes.textField}
+                    type="password"
+                    autoComplete="current-password"
+                    value={this.state.password}
+                    onChange={this.handleChange('password')}
+                    margin="normal"
+                  />
                 </Grid>
               </form>
               <Grid
@@ -153,7 +142,7 @@ class TextFields extends React.Component {
                 direction="row"
                 justify="center"
                 spacing={8}>
-                <Grid item xs={4}>
+                <Grid item xs={8} sm={2}>
                   <Button
                     style={{ width: '100%' }}
                     id="landingLogBtn"

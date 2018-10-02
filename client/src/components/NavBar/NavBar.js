@@ -13,8 +13,12 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 // import Divider from '@material-ui/core/Divider';
 import { mailFolderListItems } from '../NavBar/tileData';
+import { withWidth } from '@material-ui/core';
+import compose from 'recompose/compose';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const styles = {
+const styles = theme => ({
   root: {
     flexGrow: 1
   },
@@ -24,8 +28,23 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  navbar: {
+    padding: 0,
+    margin: 0,
+    [theme.breakpoints.down('sm')]: {
+      width: '103%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '100%'
+    }
+  },
+  link: {
+    'text-decoration': 'none',
+    'font-family': 'Rubik',
+    color: '#01163D'
   }
-};
+});
 
 const backgroundStyle = {
   backgroundColor: '#01163D'
@@ -33,7 +52,7 @@ const backgroundStyle = {
 
 class MenuAppBar extends React.Component {
   state = {
-    auth: true,
+    loggedIn: false,
     anchorEl: null,
     left: false
   };
@@ -56,9 +75,16 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleSignOut = () => {
+    axios.post('/api/users/logout').then(results => {
+      this.setState({ loggedIn: false });
+      window.location.href = '/';
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     const sideList = (
@@ -78,7 +104,11 @@ class MenuAppBar extends React.Component {
             {sideList}
           </div>
         </Drawer>
-        <AppBar position="static" style={backgroundStyle} color="primary">
+        <AppBar
+          position="static"
+          style={backgroundStyle}
+          color="primary"
+          className={classes.navbar}>
           <Toolbar>
             <IconButton
               className={classes.menuButton}
@@ -92,7 +122,7 @@ class MenuAppBar extends React.Component {
               color="inherit"
               className={classes.grow}
             />
-            {auth && (
+            {this.props.loggedIn ? (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -114,8 +144,41 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}>
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <div>
+                <IconButton
+                  aria-owns={open ? 'menu-appbar' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit">
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={open}
+                  onClose={this.handleClose}>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to="/login" className={classes.link}>
+                      Log In
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to="/signup" className={classes.link}>
+                      Sign Up
+                    </Link>
+                  </MenuItem>
                 </Menu>
               </div>
             )}
@@ -130,4 +193,7 @@ MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(MenuAppBar);
+export default compose(
+  withStyles(styles),
+  withWidth()
+)(MenuAppBar);

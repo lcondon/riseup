@@ -29,11 +29,11 @@ export const mailFolderListItems = (
       <ListItemText primary="Messages" />
     </ListItem>
     <Divider />
-    <ListItem button component="a" href="/login">
+    <ListItem button component="a" href="/profile">
       <ListItemIcon>
         <PersonIcon />
       </ListItemIcon>
-      <ListItemText primary="Sign Out" />
+      <ListItemText primary="Your Account" />
     </ListItem>
   </div>
 );
