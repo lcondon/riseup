@@ -7,8 +7,15 @@ import Article from './components/Article';
 import Survey from './components/Survey';
 import Messages from './components/Messages';
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  withRouter
+} from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';
+import axios from 'axios';
 // import queryString from 'query-string';
 // import compose from 'recompose/compose';
 import {
@@ -31,19 +38,41 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
+  state = {
+    loggedIn: false,
+    id: '',
+    name: '',
+    email: ''
+  };
+
+  componentDidMount() {
+    axios.get('/isloggedin').then(response => {
+      console.log(response);
+      if (response.data._id) {
+        this.setState({
+          id: response.data._id,
+          name: `${response.data.firstName} ${response.data.lastName}`,
+          email: response.data.email,
+          loggedIn: true
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <Router>
         <div>
           <MuiThemeProvider theme={theme}>
-            <NavBar />
+            <NavBar loggedIn={this.state.loggedIn} />
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={LogIn} />
               <Route exact path="/article" component={Article} />
               <Route exact path="/survey" component={Survey} />
-              <Route exact path="/messages" component={Messages} />
+              <Route path="/messages" component={Messages} />
+              {/* <PrivateRoute path="/profile" component={Profile} /> */}
             </Switch>
           </MuiThemeProvider>
         </div>

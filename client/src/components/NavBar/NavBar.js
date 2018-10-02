@@ -13,6 +13,8 @@ import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 // import Divider from '@material-ui/core/Divider';
 import { mailFolderListItems } from '../NavBar/tileData';
+import { Redirect, Link } from 'react-router-dom';
+import axios from 'axios';
 
 const styles = {
   root: {
@@ -24,6 +26,10 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  link: {
+    'text-decoration': 'none',
+    color: 'black'
   }
 };
 
@@ -33,7 +39,6 @@ const backgroundStyle = {
 
 class MenuAppBar extends React.Component {
   state = {
-    auth: true,
     anchorEl: null,
     left: false
   };
@@ -56,9 +61,19 @@ class MenuAppBar extends React.Component {
     this.setState({ anchorEl: null });
   };
 
+  handleSignOut = () => {
+    axios.get('/logout').then(results => {
+      <Redirect
+        to={{
+          pathname: '/'
+        }}
+      />;
+    });
+  };
+
   render() {
     const { classes } = this.props;
-    const { auth, anchorEl } = this.state;
+    const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
     const sideList = (
@@ -92,7 +107,7 @@ class MenuAppBar extends React.Component {
               color="inherit"
               className={classes.grow}
             />
-            {auth && (
+            {this.props.loggedIn ? (
               <div>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
@@ -114,8 +129,46 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}>
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to="/profile" className={classes.link}>
+                      My Account
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
+                </Menu>
+              </div>
+            ) : (
+              <div>
+                <IconButton
+                  aria-owns={open ? 'menu-appbar' : null}
+                  aria-haspopup="true"
+                  onClick={this.handleMenu}
+                  color="inherit">
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={open}
+                  onClose={this.handleClose}>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to="/login" className={classes.link}>
+                      Log In
+                    </Link>
+                  </MenuItem>
+                  <MenuItem onClick={this.handleClose}>
+                    <Link to="/signup" className={classes.link}>
+                      Sign Up
+                    </Link>
+                  </MenuItem>
                 </Menu>
               </div>
             )}
