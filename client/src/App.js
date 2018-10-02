@@ -10,11 +10,11 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';
 // import queryString from 'query-string';
-import compose from 'recompose/compose';
+// import compose from 'recompose/compose';
 import {
   MuiThemeProvider,
   createMuiTheme,
-  withStyles
+  // withStyles
 } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({

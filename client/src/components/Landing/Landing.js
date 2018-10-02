@@ -56,7 +56,7 @@ const signStyles = {
 class Landing extends React.Component {
   render() {
     const { classes } = this.props;
-    const { width } = this.props;
+    // const { width } = this.props;
     return (
       <div>
         <Grid container direction="row" justify="center" spacing={24}>

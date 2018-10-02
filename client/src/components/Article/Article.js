@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { withWidth } from '@material-ui/core';
+// import { withWidth } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -31,7 +31,7 @@ const styles = theme => ({
 
 function Article(props) {
   const { classes } = props;
-  const { width } = props;
+  // const { width } = props;
   const message = `Truncation should be conditionally applicable on this long line of text
                     as this is a much longer line than what the container can support. `;
 

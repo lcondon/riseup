@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import PersonIcon from '@material-ui/icons/Person';
+// import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import { Avatar } from '@material-ui/core';
 
