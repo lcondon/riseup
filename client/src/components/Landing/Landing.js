@@ -36,8 +36,16 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#01163D',
-    'font-size': 100,
-    margin: 0
+    margin: 0,
+    [theme.breakpoints.up('xs')]: {
+      'font-size': 60
+    },
+    [theme.breakpoints.up('sm')]: {
+      'font-size': 80
+    },
+    [theme.breakpoints.up('md')]: {
+      'font-size': 100
+    }
   }
 });
 

@@ -26,6 +26,10 @@ const styles = theme => ({
   },
   button: {
     marginLeft: 10
+  },
+  title: {
+    'font-family': 'Rubik',
+    color: '#01163D'
   }
 });
 
@@ -39,8 +43,12 @@ function Article(props) {
     <div className={classes.root}>
       <div className={classes.wrapper}>
         <Paper className={classes.paper}>
-          <h1 style={{ textAlign: 'center' }}>Article of the Day:</h1>
-          <h2 style={{ textAlign: 'center' }}>Article Title</h2>
+          <h1 style={{ textAlign: 'center' }} className={classes.title}>
+            Article of the Day:
+          </h1>
+          <h2 style={{ textAlign: 'center' }} className={classes.title}>
+            Article Title
+          </h2>
           <Divider />
           <p>
             Truncation should be conditionally applicable on this long line of
