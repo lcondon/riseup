@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios';
-import { Redirect } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -51,8 +50,7 @@ const styles = theme => ({
 class TextFields extends React.Component {
   state = {
     email: '',
-    password: '',
-    redirect: false
+    password: ''
   };
 
   handleChange = name => event => {
@@ -64,25 +62,26 @@ class TextFields extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
+    // axios
+    //   .post('/login', {
+    //     email: this.state.email,
+    //     password: this.state.password
+    //   })
+    //   .then(response => {
+    //     console.log(response);
+    //   })
+    //   .catch(err => console.log(err));
+
     axios
-      .post('/login', {
-        email: this.state.email,
-        password: this.state.password
-      })
+      .get('/logme')
       .then(response => {
         console.log(response);
-        this.setState({ redirect: true });
+        console.log('hi mom');
       })
       .catch(err => console.log(err));
   };
 
   render() {
-    const { redirect } = this.state;
-
-    if (redirect === true) {
-      return <Redirect to="/article" />;
-    }
-
     const { classes } = this.props;
 
     return (
