@@ -6,7 +6,6 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-import axios from 'axios';
 import API from '../../utils/API';
 
 const styles = theme => ({

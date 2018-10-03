@@ -61,6 +61,35 @@ function Article(props) {
           </p>
         </Paper>
         <Paper className={classes.paper}>
+          <Grid container direction="row" spacing={24} alignItems="center">
+            <Grid item xs={12} sm={10}>
+              <TextField
+                id="standard-multiline-flexible"
+                multiline
+                rowsMax="4"
+                style={{ margin: 8 }}
+                label="Comment"
+                fullWidth
+                margin="normal"
+                // variant="outlined"
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+            </Grid>
+            <Grid item sm={2} xs={12}>
+              <Button
+                className={classes.button}
+                id="submitCommentBtn"
+                variant="outlined"
+                // size="large"
+                color="secondary">
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
+        </Paper>
+        <Paper className={classes.paper}>
           <Grid alignItems="center" container wrap="nowrap" spacing={16}>
             <Grid item>
               <Avatar>W</Avatar>
@@ -69,26 +98,6 @@ function Article(props) {
               <p>{message}</p>
             </Grid>
           </Grid>
-        </Paper>
-        <Paper className={classes.paper}>
-          <TextField
-            id="outlined-full-width"
-            style={{ margin: 8 }}
-            label="Comment"
-            fullWidth
-            margin="normal"
-            variant="outlined"
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
-          <Button
-            className={classes.button}
-            id="submitCommentBtn"
-            variant="contained"
-            color="secondary">
-            Submit
-          </Button>
         </Paper>
       </div>
     </div>

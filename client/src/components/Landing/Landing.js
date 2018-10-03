@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
   root: {
@@ -46,6 +47,11 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       'font-size': 100
     }
+  },
+  link: {
+    'text-decoration': 'none',
+    'font-family': 'Rubik',
+    color: '#01163D'
   }
 });
 
@@ -90,7 +96,7 @@ class Landing extends React.Component {
                     </h1>
                     <Divider />
                   </Grid>
-                  <Grid item xs={10}>
+                  <Grid item xs={12} sm={10}>
                     <p>
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                       Ut libero metus, posuere quis odio sed, molestie ornare
@@ -110,8 +116,8 @@ class Landing extends React.Component {
                     </p>
                   </Grid>
                   <Grid container justify="center" spacing={8}>
-                    <Grid item xs={10} sm={5}>
-                      <a style={{ textDecoration: 'none' }} href="/login">
+                    <Grid item xs={12} sm={5}>
+                      <Link to="/login" className={classes.link}>
                         <Button
                           id="landingLogBtn"
                           style={logStyles}
@@ -119,10 +125,10 @@ class Landing extends React.Component {
                           color="secondary">
                           Login
                         </Button>
-                      </a>
+                      </Link>
                     </Grid>
-                    <Grid item xs={10} sm={5}>
-                      <a style={{ textDecoration: 'none' }} href="/signup">
+                    <Grid item xs={12} sm={5}>
+                      <Link to="/signup" className={classes.link}>
                         <Button
                           id="landingSignBtn"
                           style={signStyles}
@@ -130,7 +136,7 @@ class Landing extends React.Component {
                           color="primary">
                           Sign Up
                         </Button>
-                      </a>
+                      </Link>
                     </Grid>
                   </Grid>
                 </Grid>

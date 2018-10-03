@@ -62,6 +62,9 @@ const styles = theme => ({
 });
 
 class Messages extends React.Component {
+  state = {
+    messages: ['hello world']
+  };
   // constructor() {
   //   super();
 
@@ -118,42 +121,46 @@ class Messages extends React.Component {
                 <SideBar />
               </Grid>
               <Hidden smDown>
-                <Grid item xs={8}>
+                <Grid
+                  item
+                  xs={8}
+                  spacing={24}
+                  container
+                  alignItems="stretch"
+                  direction="column"
+                  justify="flex-end">
+                  <Grid item>
+                    <div className="messages">{this.state.messages}</div>
+                  </Grid>
                   <Grid
                     container
-                    alignItems="stretch"
                     spacing={24}
-                    direction="column"
+                    direction="row"
+                    alignItems="center"
                     justify="space-between">
-                    <Grid item>
-                      <div className="messages">
-                        {/* {this.state.pastMessages.map(message =>{
-                      return (
-                        <div>{message.message}</div>
-                      )
-                    })} */}
-                      </div>
-                    </Grid>
-                    <Grid item>
+                    <Grid item xs={10}>
                       <TextField
-                        id="outlined-full-width"
+                        id="standard-multiline-flexible"
+                        multiline
+                        rowsMax="4"
                         style={{ margin: 10 }}
+                        fullWidth
+                        margin="normal"
                         label="Message"
                         // value = {this.state.message}
                         // onChange = {ev=> this.setState({message: ev.target.value})}
-                        multiline
-                        rows="4"
                         className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
                         InputLabelProps={{
                           shrink: true
                         }}
                       />
+                    </Grid>
+                    <Grid item xs={2}>
                       <Button
                         className={classes.button}
                         id="submitCommentBtn"
-                        variant="contained"
+                        variant="outlined"
+                        size="medium"
                         color="secondary"
                         onClick={() => this.send()}>
                         Send

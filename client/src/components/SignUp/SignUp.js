@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
-import axios from 'axios';
 import API from '../../utils/API';
 
 const styles = theme => ({
@@ -84,7 +83,9 @@ class TextFields extends React.Component {
       .then(response => {
         console.log(response);
         if (response.data.redirect) {
-          window.location.href = '/survey';
+          API.logInUser(this.state.email, this.state.password).then(results => {
+            window.location.href = '/survey';
+          });
         } else {
           console.log('no go');
         }
