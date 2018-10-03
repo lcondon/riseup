@@ -7,18 +7,12 @@ import Article from './components/Article';
 import Survey from './components/Survey';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
+import NotFound from './components/NotFound';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';
-import axios from 'axios';
 import API from './utils/API';
-// import queryString from 'query-string';
-// import compose from 'recompose/compose';
-import {
-  MuiThemeProvider,
-  createMuiTheme
-  // withStyles
-} from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
@@ -71,6 +65,7 @@ class App extends React.Component {
               <Route exact path="/profile">
                 <Profile user={this.state.user} />
               </Route>
+              <Route component={NotFound} />
             </Switch>
           </MuiThemeProvider>
         </div>

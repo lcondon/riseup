@@ -12,7 +12,7 @@ import Menu from '@material-ui/core/Menu';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 // import Divider from '@material-ui/core/Divider';
-import { mailFolderListItems } from '../NavBar/tileData';
+import { mailFolderListItems, userFolderListItems } from '../NavBar/tileData';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
 import { Link } from 'react-router-dom';
@@ -20,7 +20,8 @@ import axios from 'axios';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    marginBottom: 60
   },
   grow: {
     flexGrow: 1
@@ -33,10 +34,8 @@ const styles = theme => ({
     padding: 0,
     margin: 0,
     [theme.breakpoints.down('sm')]: {
-      width: '103%'
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '100%'
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
   link: {
@@ -78,7 +77,7 @@ class MenuAppBar extends React.Component {
   handleSignOut = () => {
     axios.post('/api/users/logout').then(results => {
       this.setState({ loggedIn: false });
-      window.location.href = '/';
+      window.location.reload(true);
     });
   };
 
@@ -86,12 +85,18 @@ class MenuAppBar extends React.Component {
     const { classes } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
-
-    const sideList = (
-      <div className={classes.list}>
-        <List>{mailFolderListItems}</List>
-      </div>
-    );
+    let sideList;
+    this.props.loggedIn
+      ? (sideList = (
+          <div className={classes.list}>
+            <List>{userFolderListItems}</List>
+          </div>
+        ))
+      : (sideList = (
+          <div className={classes.list}>
+            <List>{mailFolderListItems}</List>
+          </div>
+        ));
 
     return (
       <div className={classes.root}>
@@ -105,7 +110,8 @@ class MenuAppBar extends React.Component {
           </div>
         </Drawer>
         <AppBar
-          position="static"
+          justify="center"
+          position="fixed"
           style={backgroundStyle}
           color="primary"
           className={classes.navbar}>

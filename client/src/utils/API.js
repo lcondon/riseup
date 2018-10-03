@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
   // Gets all books
   createUser: function(userData) {
-    return axios.post('/api/users/signup', userData);
+    return axios.post('/api/users', userData);
   },
   // Gets the book with the given id
   isLoggedIn: function() {
@@ -22,6 +22,10 @@ export default {
       email: email,
       password: password
     });
+  },
+
+  deleteUser: function(id) {
+    return axios.delete('/api/users', { data: { id: id } });
   },
   // Saves a book to the database
   saveBook: function(bookData) {

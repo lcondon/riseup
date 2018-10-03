@@ -22,6 +22,23 @@ export const mailFolderListItems = (
       </ListItemIcon>
       <ListItemText primary="Article of the Day" />
     </ListItem>
+  </div>
+);
+
+export const userFolderListItems = (
+  <div>
+    <ListItem button component="a" href="/">
+      <ListItemIcon>
+        <HomeIcon />
+      </ListItemIcon>
+      <ListItemText primary="About Us" />
+    </ListItem>
+    <ListItem button component="a" href="/article">
+      <ListItemIcon>
+        <ReceiptIcon />
+      </ListItemIcon>
+      <ListItemText primary="Article of the Day" />
+    </ListItem>
     <ListItem button component="a" href="/messages">
       <ListItemIcon>
         <MailIcon />

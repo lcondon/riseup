@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
-import axios from 'axios';
 import API from '../../utils/API';
 
 const styles = theme => ({

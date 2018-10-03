@@ -7,7 +7,6 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
 import API from '../../utils/API';
 
 const styles = theme => ({
@@ -72,9 +71,9 @@ class Survey extends Component {
       .then(response => {
         console.log(response.data);
 
-        API.updateUser(response.data._id, this.state)
-        .then(results => {
+        API.updateUser(response.data._id, this.state).then(results => {
           console.log(results);
+          window.location.href = '/messages';
         });
       })
       .catch(err => {
