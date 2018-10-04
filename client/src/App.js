@@ -63,7 +63,8 @@ class App extends React.Component {
               </Route>
               <Route exact path="/messages">
                 <Messages user={this.state.user} />
-              </Route>{" "}
+              </Route>
+
               <Route exact path="/profile">
                 <Profile user={this.state.user} />
               </Route>

@@ -1,3 +1,4 @@
+
 import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -14,19 +15,7 @@ import io from "socket.io-client";
 
 var Socket = window["MozWebSocket"] || window["WebSocket"];
 
-// if (Socket) {
-//   let socket = io.connect("http://localhost:3001");
-//   // var ws = new Socket('ws://localhost:3001/');
-//   socket.onopen = () => {
-//     console.log("onopen");
-//   };
-//   socket.emit("news", { hello: "world" });
-//   // ws.onerror = function() { console.log('onerror attached to websocket object.'); };
-//   // ws.onclose = function() { console.log('onclose'); };
-//   socket.onmessage = function(evt) {
-//     console.log("onmessage: " + evt.data);
-//   };
-// }
+
 
 const styles = theme => ({
   root: {
@@ -62,6 +51,7 @@ const styles = theme => ({
 });
 
 class Messages extends React.Component {
+
 
   
 
@@ -99,16 +89,7 @@ class Messages extends React.Component {
     }
   }
 
-  // componentDidMount() {
-  //   socket.on('news', function(data) {
-  //     console.log(data);
-  //     socket.emit('my other event', { my: 'data' });
-  //   });
-  // }
 
-  // send = () => {
-  //   this.socket.emit('change color', 'red');
-  // };
 
   render() {
     const { classes } = this.props;
@@ -186,6 +167,7 @@ class Messages extends React.Component {
                           this.setState({ message: ev.target.value })
                         }
                         label="Message"
+
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
