@@ -12,10 +12,11 @@ import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
 import io from 'socket.io-client';
 
-var Socket = window['MozWebSocket'] || window['WebSocket'];
+const Socket = window['MozWebSocket'] || window['WebSocket'];
+let socket;
 
 if (Socket) {
-  let socket = io.connect('http://localhost:3001');
+  socket = io.connect('http://localhost:3001');
   // var ws = new Socket('ws://localhost:3001/');
   socket.onopen = () => {
     console.log('onopen');
@@ -62,8 +63,18 @@ const styles = theme => ({
 });
 
 class Messages extends React.Component {
-  state = {
-    messages: ['hello world']
+  constructor() {
+    super();
+    this.state = {
+      message: '',
+      socket: '',
+      user: {}
+    };
+    this.sendSocket = this.sendSocket.bind(this);
+  }
+
+  sendSocket = () => {
+    socket.emit('change color', 'red');
   };
   // constructor() {
   //   super();
@@ -75,16 +86,9 @@ class Messages extends React.Component {
   //   // this.socket = window.io();
   // }
 
-  // componentDidMount() {
-  //   socket.on('news', function(data) {
-  //     console.log(data);
-  //     socket.emit('my other event', { my: 'data' });
-  //   });
-  // }
-
-  send = () => {
-    this.socket.emit('change color', 'red');
-  };
+  componentDidMount() {
+    this.setState({ user: this.props.user });
+  }
 
   render() {
     const { classes } = this.props;
@@ -147,8 +151,10 @@ class Messages extends React.Component {
                         fullWidth
                         margin="normal"
                         label="Message"
-                        // value = {this.state.message}
-                        // onChange = {ev=> this.setState({message: ev.target.value})}
+                        value={this.state.message}
+                        onChange={ev =>
+                          this.setState({ message: ev.target.value })
+                        }
                         className={classes.textField}
                         InputLabelProps={{
                           shrink: true
