@@ -77,7 +77,7 @@ class MenuAppBar extends React.Component {
   handleSignOut = () => {
     axios.post('/api/users/logout').then(results => {
       this.setState({ loggedIn: false });
-      if (window.location.pathname == '/') {
+      if (window.location.pathname === '/') {
         window.location.reload(true);
       } else {
         window.location.href = '/';
