@@ -22,10 +22,12 @@ const server = http.Server(app);
 const io = socket(server);
 
 io.on('connection', function(socket) {
-  socket.emit('news', { hello: 'world' });
-  // socket.on('my other event', function(data) {
-  //   console.log(data);
-  // });
+  console.log(socket.id);
+
+  socket.on('SEND_MESSAGE', function(data){
+    io.emit('RECEIVE_MESSAGE', data);
+    console.log(data)
+})
 });
 
 app.use(function(req, res, next) {
