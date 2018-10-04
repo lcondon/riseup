@@ -73,16 +73,16 @@ class Profile extends React.Component {
     });
   };
 
-  componentDidMount() {
-    API.isLoggedIn().then(response => {
-      console.log(response);
-      if (response.data._id) {
-        this.setState({
-          user: response.data
-        });
-      }
-    });
-  }
+  // componentDidMount() {
+  //   API.isLoggedIn().then(response => {
+  //     console.log(response);
+  //     if (response.data._id) {
+  //       this.setState({
+  //         user: response.data
+  //       });
+  //     }
+  //   });
+  // }
 
   render() {
     const { classes } = this.props;

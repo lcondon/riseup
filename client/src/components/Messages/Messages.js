@@ -12,8 +12,7 @@ import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
 import io from 'socket.io-client';
 import * as Scroll from 'react-scroll';
-
-var Socket = window['MozWebSocket'] || window['WebSocket'];
+import uuidv4 from 'uuid/v4';
 
 const styles = theme => ({
   root: {
@@ -58,6 +57,7 @@ const styles = theme => ({
 
 let Element = Scroll.Element;
 var scroller = Scroll.scroller;
+var scroll = Scroll.animateScroll;
 
 class Messages extends React.Component {
   constructor(props) {
@@ -100,6 +100,7 @@ class Messages extends React.Component {
   }
 
   scrollToBottom() {
+    scroll.scrollToBottom();
     scroller.scrollTo('test1', {
       duration: 1500,
       smooth: true,
@@ -152,17 +153,16 @@ class Messages extends React.Component {
                   direction="column"
                   justify="flex-end">
                   <Grid item>
-                    <div
-                      className="messages"
-                      id="messageContainer"
-                      className={classes.messages}>
+                    <div id="messageContainer" className={classes.messages}>
                       {this.state.pastMessages.map(message => {
                         return (
-                          <div className={classes.singleUserMessage}>
+                          <div
+                            className={classes.singleUserMessage}
+                            key={uuidv4()}>
                             <strong> {message.user} </strong>: {message.message}
                           </div>
                         );
-                      })}{' '}
+                      })}
                       <Element name="test1" className="element">
                         <div ref="bottom" />
                       </Element>
