@@ -47,6 +47,14 @@ const styles = theme => ({
   subtitle: {
     "font-family": "Rubik",
     color: "#389EA8"
+  },
+  singleUserMessage:{
+    marginBottom: 10
+  },
+  messages:{
+    overflowY: "scroll",
+    height: "fit-content",
+    maxHeight: 300
   }
 });
 
@@ -137,12 +145,13 @@ class Messages extends React.Component {
                   justify="flex-end"
                 >
                   <Grid item>
-                    <div className="messages">
+                    <div className="messages" className={classes.messages}>
                       {this.state.pastMessages.map(message => {
                         return (
-                          <div>
+                          <div className={classes.singleUserMessage}>
                            <strong> {message.user} </strong>: {message.message}
                           </div>
+                          
                         );
                       })}
                     </div>
