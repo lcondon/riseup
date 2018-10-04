@@ -61,7 +61,9 @@ class App extends React.Component {
               <Route exact path="/survey">
                 <Survey user={this.state.user} />
               </Route>
-              <Route exact path="/messages" component={Messages} />
+              <Route exact path="/messages">
+                <Messages user={this.state.user} />
+              </Route>
               <Route exact path="/profile">
                 <Profile user={this.state.user} />
               </Route>
