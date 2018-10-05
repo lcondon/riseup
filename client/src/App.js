@@ -8,6 +8,7 @@ import Survey from './components/Survey';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
+import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';

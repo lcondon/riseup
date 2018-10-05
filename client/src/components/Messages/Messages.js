@@ -18,21 +18,23 @@ import uuidv4 from 'uuid/v4';
 
 const styles = theme => ({
   root: {
-    marginTop: '5%',
+    marginTop: '10px',
     overflow: 'hidden',
     maxWidth: 1000,
     marginRight: 'auto',
     marginLeft: 'auto',
-    [theme.breakpoints.down('md')]: {
-      paddingTop: `${theme.spacing.unit}px`
+    [theme.breakpoints.down('xs')]: {
+      marginTop: 0,
+      paddingTop: 0
     }
   },
   messagePaper: {
     margin: theme.spacing.unit * 2,
     padding: 0,
     height: 475,
-    [theme.breakpoints.down('md')]: {
-      height: `85vh`
+    [theme.breakpoints.down('xs')]: {
+      height: `calc(100vh - 50px)`,
+      margin: 0
     }
   },
   paper: {
@@ -40,13 +42,12 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   },
   button: {
-    marginLeft: 10,
     fontFamily: 'Montserrat'
   },
   textField: {
     // marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit,
-    width: '98%',
+    width: '100%',
     fontFamily: 'Montserrat',
     flexBasis: 200
   },
@@ -107,6 +108,7 @@ class Messages extends React.Component {
 
     this.sendMessage = ev => {
       ev.preventDefault();
+      scroll.scrollToBottom();
       this.socket.emit('SEND_MESSAGE', {
         user: this.props.user.firstName,
         message: this.state.message
@@ -124,7 +126,6 @@ class Messages extends React.Component {
   }
 
   scrollToBottom() {
-    scroll.scrollToBottom();
     scroller.scrollTo('test1', {
       duration: 1500,
       smooth: true,
@@ -143,7 +144,7 @@ class Messages extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Hidden smDown>
+        <Hidden xsDown>
           <Paper className={classes.paper}>
             <h1 style={{ textAlign: 'center' }} className={classes.title}>
               Messages
@@ -170,20 +171,18 @@ class Messages extends React.Component {
             spacing={16}
             style={{ height: 'inherit' }}
             direction="row">
-            <Grid item sm={4} xs={3} className={classes.sideBar}>
+            <Grid item xs={3} className={classes.sideBar}>
               <SideBar class={classes.sideBar} />
             </Grid>
-
             <Grid
               item
               xs={9}
-              sm={8}
-              spacing={24}
+              spacing={8}
               container
-              alignItems="stretch"
-              direction="column"
-              justify="flex-end">
-              <Grid item>
+              alignItems="flex-end"
+              direction="row"
+              justify="center">
+              <Grid item style={{ paddingBottom: 0 }} xs={12}>
                 <div id="messageContainer" className={classes.messages}>
                   {this.state.pastMessages.map(message => {
                     return (
@@ -197,43 +196,38 @@ class Messages extends React.Component {
                   </Element>
                 </div>
               </Grid>
-              <Grid
-                container
-                spacing={8}
-                direction="row"
-                alignItems="center"
-                justify="space-between">
-                <Grid item xs={12}>
-                  <TextField
-                    id="outlined-simple-end-adornment"
-                    multiline
-                    rowsMax="4"
-                    style={{ margin: 10 }}
-                    margin="normal"
-                    value={this.state.message}
-                    variant="outlined"
-                    onChange={ev => this.setState({ message: ev.target.value })}
-                    label="Message"
-                    className={classes.textField}
-                    InputLabelProps={{
-                      disabled: true
-                    }}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end">
-                          <Button
-                            className={classes.button}
-                            id="submitCommentBtn"
-                            size="medium"
-                            color="secondary"
-                            onClick={ev => this.sendMessage(ev)}>
-                            <SendIcon />
-                          </Button>
-                        </InputAdornment>
-                      )
-                    }}
-                  />
-                </Grid>
+
+              <Grid item style={{ paddingTop: 0 }} xs={12}>
+                <TextField
+                  id="outlined-simple-end-adornment"
+                  multiline
+                  rows="4"
+                  // style={{ margin: 10 }}
+                  margin="none"
+                  value={this.state.message}
+                  variant="outlined"
+                  onChange={ev => this.setState({ message: ev.target.value })}
+                  label="Message"
+                  className={classes.textField}
+                  InputLabelProps={{
+                    disabled: true,
+                    variant: 'outlined'
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Button
+                          className={classes.button}
+                          id="submitCommentBtn"
+                          size="medium"
+                          color="secondary"
+                          onClick={ev => this.sendMessage(ev)}>
+                          <SendIcon />
+                        </Button>
+                      </InputAdornment>
+                    )
+                  }}
+                />
               </Grid>
             </Grid>
           </Grid>
