@@ -8,6 +8,7 @@ import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
 import { Link } from 'react-router-dom';
+import anime from 'animejs';
 
 const styles = theme => ({
   root: {
@@ -68,6 +69,15 @@ const signStyles = {
 };
 
 class Landing extends React.Component {
+  componentDidMount() {
+    anime({
+      targets: '#logoDiv img',
+      easing: 'easeInOutSine',
+      scale: [1, 1.1, '-=.5', 1],
+      duration: 2000
+    });
+  }
+
   render() {
     const { classes } = this.props;
     // const { width } = this.props;
@@ -75,7 +85,7 @@ class Landing extends React.Component {
       <div>
         <Grid container direction="row" justify="center" spacing={24}>
           <Grid container justify="center">
-            <Grid item>
+            <Grid item id="logoDiv">
               <img
                 className={classes.img}
                 justify="center"

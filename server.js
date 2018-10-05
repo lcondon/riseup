@@ -14,7 +14,7 @@ const logger = require('morgan');
 
 const PORT = process.env.PORT || 3001;
 
-const userRouter = require('./routes/index');
+const router = require('./routes');
 
 const app = express();
 
@@ -24,10 +24,10 @@ const io = socket(server);
 io.on('connection', function(socket) {
   console.log(socket.id);
 
-  socket.on('SEND_MESSAGE', function(data){
+  socket.on('SEND_MESSAGE', function(data) {
     io.emit('RECEIVE_MESSAGE', data);
-    console.log(data)
-})
+    console.log(data);
+  });
 });
 
 app.use(function(req, res, next) {
@@ -67,8 +67,7 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(userRouter);
-app.get('/api/test', (req, res) => res.json({}));
+app.use(router);
 
 server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
