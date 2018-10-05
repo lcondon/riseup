@@ -8,12 +8,22 @@ import Divider from '@material-ui/core/Divider';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 // import { withWidth } from '@material-ui/core';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import SendIcon from '@material-ui/icons/CallMade';
+// import io from 'socket.io-client';
+// import * as Scroll from 'react-scroll';
+// import uuidv4 from 'uuid/v4';
 
 const styles = theme => ({
   root: {
     marginTop: '10px',
     overflow: 'hidden',
-    padding: `0 ${theme.spacing.unit * 3}px`
+    [theme.breakpoints.down('md')]: {
+      paddingTop: `${theme.spacing.unit}px`
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: `0 ${theme.spacing.unit * 3}px`
+    }
   },
   wrapper: {
     maxWidth: 1000,
@@ -25,7 +35,8 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   },
   button: {
-    marginLeft: 10
+    marginLeft: 10,
+    fontFamily: 'Montserrat'
   },
   title: {
     'font-family': 'Rubik',
@@ -34,74 +45,98 @@ const styles = theme => ({
   subtitle: {
     'font-family': 'Rubik',
     color: '#389EA8'
+  },
+  body: {
+    fontFamily: 'Montserrat'
+  },
+  textField: {
+    // marginLeft: theme.spacing.unit * 2,
+    marginRight: theme.spacing.unit,
+    width: '98%',
+    fontFamily: 'Montserrat',
+    flexBasis: 200
   }
 });
 
-function Article(props) {
-  const { classes } = props;
-  // const { width } = props;
-  const message = `Truncation should be conditionally applicable on this long line of text
+class Article extends React.Component {
+  state = {
+    comment: ''
+  };
+
+  postComment = event => {};
+
+  render() {
+    const { classes } = this.props;
+    // const { width } = props;
+    const message = `Truncation should be conditionally applicable on this long line of text
                     as this is a much longer line than what the container can support. `;
 
-  return (
-    <div className={classes.root}>
-      <div className={classes.wrapper}>
-        <Paper className={classes.paper}>
-          <h1 style={{ textAlign: 'center' }} className={classes.title}>
-            Article of the Day:
-          </h1>
-          <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
-            Article Title
-          </h2>
-          <Divider />
-          <p>
-            Truncation should be conditionally applicable on this long line of
-            text as this is a much longer line than what the container can
-            support.
-          </p>
-        </Paper>
-        <Paper className={classes.paper}>
-          <Grid container direction="row" spacing={24} alignItems="center">
-            <Grid item xs={12} sm={10}>
-              <TextField
-                id="standard-multiline-flexible"
-                multiline
-                rowsMax="4"
-                style={{ margin: 8 }}
-                label="Comment"
-                fullWidth
-                margin="normal"
-                // variant="outlined"
-                InputLabelProps={{
-                  shrink: true
-                }}
-              />
+    return (
+      <div className={classes.root}>
+        <div className={classes.wrapper}>
+          <Paper className={classes.paper}>
+            <h1 style={{ textAlign: 'center' }} className={classes.title}>
+              Article of the Day:
+            </h1>
+            <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
+              Article Title
+            </h2>
+            <Divider />
+            <p className={classes.body}>
+              Truncation should be conditionally applicable on this long line of
+              text as this is a much longer line than what the container can
+              support.
+            </p>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Grid container direction="row" spacing={24} alignItems="center">
+              <Grid item xs={12}>
+                <TextField
+                  id="outlined-simple-end-adornment"
+                  multiline
+                  rowsMax="4"
+                  style={{ margin: 10 }}
+                  margin="normal"
+                  value={this.state.comment}
+                  variant="outlined"
+                  label="Comment"
+                  onChange={ev => this.setState({ comment: ev.target.value })}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    disabled: true
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <Button
+                          className={classes.button}
+                          id="submitCommentBtn"
+                          size="medium"
+                          color="secondary"
+                          onClick={ev => this.postComment(ev)}>
+                          <SendIcon />
+                        </Button>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
             </Grid>
-            <Grid item sm={2} xs={12}>
-              <Button
-                className={classes.button}
-                id="submitCommentBtn"
-                variant="outlined"
-                // size="large"
-                color="secondary">
-                Submit
-              </Button>
+          </Paper>
+          <Paper className={classes.paper}>
+            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
+              <Grid item>
+                <Avatar className={classes.body}>W</Avatar>
+              </Grid>
+              <Grid item xs>
+                <p className={classes.body}>{message}</p>
+              </Grid>
             </Grid>
-          </Grid>
-        </Paper>
-        <Paper className={classes.paper}>
-          <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-            <Grid item>
-              <Avatar>W</Avatar>
-            </Grid>
-            <Grid item xs>
-              <p>{message}</p>
-            </Grid>
-          </Grid>
-        </Paper>
+          </Paper>
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 Article.propTypes = {

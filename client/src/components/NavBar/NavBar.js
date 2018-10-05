@@ -28,7 +28,8 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 20,
+    fontFamily: 'Montserrat'
   },
   navbar: {
     padding: 0,
@@ -40,8 +41,14 @@ const styles = theme => ({
   },
   link: {
     'text-decoration': 'none',
-    'font-family': 'Rubik',
-    color: '#01163D'
+    color: '#01163D',
+    fontFamily: 'Montserrat'
+  },
+  list: {
+    fontFamily: 'Montserrat'
+  },
+  button: {
+    fontFamily: 'Montserrat'
   }
 });
 
@@ -93,12 +100,12 @@ class MenuAppBar extends React.Component {
     this.props.loggedIn
       ? (sideList = (
           <div className={classes.list}>
-            <List>{userFolderListItems}</List>
+            <List className={classes.list}>{userFolderListItems}</List>
           </div>
         ))
       : (sideList = (
           <div className={classes.list}>
-            <List>{mailFolderListItems}</List>
+            <List className={classes.list}>{mailFolderListItems}</List>
           </div>
         ));
 
@@ -154,7 +161,11 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}>
-                  <MenuItem onClick={this.handleSignOut}>Sign Out</MenuItem>
+                  <MenuItem
+                    onClick={this.handleSignOut}
+                    className={classes.button}>
+                    Sign Out
+                  </MenuItem>
                 </Menu>
               </div>
             ) : (
@@ -179,12 +190,16 @@ class MenuAppBar extends React.Component {
                   }}
                   open={open}
                   onClose={this.handleClose}>
-                  <MenuItem onClick={this.handleClose}>
+                  <MenuItem
+                    onClick={this.handleClose}
+                    className={classes.button}>
                     <Link to="/login" className={classes.link}>
                       Log In
                     </Link>
                   </MenuItem>
-                  <MenuItem onClick={this.handleClose}>
+                  <MenuItem
+                    onClick={this.handleClose}
+                    className={classes.button}>
                     <Link to="/signup" className={classes.link}>
                       Sign Up
                     </Link>

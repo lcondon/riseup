@@ -6,3 +6,15 @@ html,
   background-size: cover;
   justify-content: center;
 }
+
+input,
+label,
+textarea,
+span {
+  font-family: 'Montserrat' !important;
+}
+
+#alert-dialog-slide-title {
+  font-family: 'Montserrat' !important;
+  color: '#01163D' !important;
+}

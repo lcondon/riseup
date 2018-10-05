@@ -17,10 +17,14 @@ import compose from 'recompose/compose';
 
 const styles = theme => ({
   root: {
+    display: 'table',
     marginTop: '10px',
-    overflow: 'hidden',
-    padding: `0 ${theme.spacing.unit * 3}px`,
-    overflowX: 'auto'
+    overflowX: 'auto',
+    padding: theme.spacing.unit * 2,
+    maxWidth: 800,
+    width: '90%',
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   wrapper: {
     maxWidth: 1000,
@@ -30,14 +34,11 @@ const styles = theme => ({
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4,
-    [theme.breakpoints.down('sm')]: {
-      marginRight: 10,
-      marginLeft: 10
-    }
+    marginRight: 'auto',
+    marginLeft: 'auto'
   },
   table: {
-    maxWidth: 800,
-    justify: 'center'
+    maxWidth: 800
   },
   title: {
     'font-family': 'Rubik',
@@ -46,9 +47,13 @@ const styles = theme => ({
       width: '100%'
     }
   },
+  body: {
+    fontFamily: 'Montserrat'
+  },
   button: {
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
+    fontFamily: 'Montserrat'
   },
   buttonCell: {
     paddingTop: 10
@@ -62,10 +67,6 @@ const styles = theme => ({
 });
 
 class Profile extends React.Component {
-  state = {
-    user: {}
-  };
-
   handleDelete = id => {
     API.deleteUser(id).then(results => {
       console.log(results);
@@ -87,83 +88,77 @@ class Profile extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div className={classes.root}>
-        <div className={classes.wrapper}>
-          <Paper className={classes.paper}>
-            <Grid container direction="row" justify="center" spacing={8}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell className={classes.headerCell}>
-                      <h1 style={{ margin: 0 }} className={classes.title}>
-                        Your Account
-                      </h1>
-                    </TableCell>
-                    <TableCell />
-                    <Hidden xsDown>
-                      <TableCell />
-                    </Hidden>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell>
-                      {`${this.props.user.firstName} ${
-                        this.props.user.lastName
-                      }`}
-                    </TableCell>
-                    <Hidden xsDown>
-                      <TableCell />
-                    </Hidden>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Email</TableCell>
-                    <TableCell>{this.props.user.email}</TableCell>
-                    <Hidden xsDown>
-                      <TableCell />
-                    </Hidden>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>Password</TableCell>
-                    <TableCell>{this.props.user.password}</TableCell>
-                    <Hidden xsDown>
-                      <TableCell />
-                    </Hidden>
-                  </TableRow>
-                  <TableRow variant="footer">
-                    <Hidden xsDown>
-                      <TableCell style={{ borderBottom: 'none' }} />
-                      <TableCell style={{ borderBottom: 'none' }} />
-                    </Hidden>
-                    <TableCell
-                      className={classes.buttonCell}
-                      style={{
-                        borderBottom: 'none'
-                      }}>
-                      <AlertDialog
-                        title="Are you sure?"
-                        body="You will lose all your messages when you delete your account."
-                        secondButton={
-                          <Button
-                            onClick={() => {
-                              this.handleDelete(this.props.user._id);
-                            }}
-                            className={classes.button}
-                            id="deleteBtn"
-                            color="primary">
-                            Delete
-                          </Button>
-                        }
-                      />{' '}
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </Grid>
-          </Paper>
-        </div>
-      </div>
+      <Grid container justify="center">
+        <Paper className={classes.root}>
+          <Table styles="root" className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.headerCell}>
+                  <h1 style={{ margin: 0 }} className={classes.title}>
+                    Your Account
+                  </h1>
+                </TableCell>
+                <TableCell />
+                <Hidden xsDown>
+                  <TableCell />
+                </Hidden>
+              </TableRow>
+            </TableHead>
+            <TableBody className={classes.body}>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell>
+                  {`${this.props.user.firstName} ${this.props.user.lastName}`}
+                </TableCell>
+                <Hidden xsDown>
+                  <TableCell />
+                </Hidden>
+              </TableRow>
+              <TableRow>
+                <TableCell>Email</TableCell>
+                <TableCell>{this.props.user.email}</TableCell>
+                <Hidden xsDown>
+                  <TableCell />
+                </Hidden>
+              </TableRow>
+              <TableRow>
+                <TableCell>Password</TableCell>
+                <TableCell>{this.props.user.password}</TableCell>
+                <Hidden xsDown>
+                  <TableCell />
+                </Hidden>
+              </TableRow>
+              <TableRow variant="footer">
+                <Hidden xsDown>
+                  <TableCell style={{ borderBottom: 'none' }} />
+                  <TableCell style={{ borderBottom: 'none' }} />
+                </Hidden>
+                <TableCell
+                  className={classes.buttonCell}
+                  style={{
+                    borderBottom: 'none'
+                  }}>
+                  <AlertDialog
+                    title="Are you sure?"
+                    body="You will lose all your messages when you delete your account."
+                    secondButton={
+                      <Button
+                        onClick={() => {
+                          this.handleDelete(this.props.user._id);
+                        }}
+                        className={classes.button}
+                        id="deleteBtn"
+                        color="primary">
+                        Delete
+                      </Button>
+                    }
+                  />{' '}
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </Paper>
+      </Grid>
     );
   }
 }

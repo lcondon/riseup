@@ -16,7 +16,7 @@ const styles = theme => ({
     padding: `0 ${theme.spacing.unit * 3}px`
   },
   wrapper: {
-    maxWidth: 1000,
+    maxWidth: 700,
     marginLeft: 'auto',
     marginRight: 'auto'
   },
@@ -56,7 +56,8 @@ const styles = theme => ({
   },
   signStyles: {
     width: '100%',
-    marginTop: 24
+    marginTop: 24,
+    fontFamily: 'Montserrat'
   },
   title: {
     'font-family': 'Rubik',

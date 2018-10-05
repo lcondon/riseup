@@ -36,7 +36,15 @@ const styles = theme => ({
   },
   button: {
     margin: 10,
-    width: 150
+    width: 150,
+    fontFamily: 'Montserrat'
+  },
+  title: {
+    'font-family': 'Rubik',
+    color: '#B21A2A'
+  },
+  text: {
+    fontFamily: 'Montserrat'
   },
   colorBar: {},
   colorChecked: {}
@@ -88,7 +96,9 @@ class Survey extends Component {
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <Paper className={classes.paper}>
-            <h1 style={{ textAlign: 'center' }}>Initial Survey</h1>
+            <h1 style={{ textAlign: 'center' }} className={classes.title}>
+              Initial Survey
+            </h1>
             <Divider />
             <Grid
               alignItems="center"
@@ -100,12 +110,12 @@ class Survey extends Component {
                 <Avatar>1</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   Planned Parenthood should continue to receive Federal Funding.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -134,10 +144,12 @@ class Survey extends Component {
                 <Avatar>2</Avatar>
               </Grid>
               <Grid item xs>
-                <p>The death penalty is justifiable in certain cases.</p>
+                <p className={classes.text}>
+                  The death penalty is justifiable in certain cases.
+                </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -165,10 +177,12 @@ class Survey extends Component {
                 <Avatar>3</Avatar>
               </Grid>
               <Grid item xs>
-                <p>Health insurance should be a right, not a privilege.</p>
+                <p className={classes.text}>
+                  Health insurance should be a right, not a privilege.
+                </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -196,14 +210,14 @@ class Survey extends Component {
                 <Avatar>4</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   The government has no responsibility to provide a social
                   safety net; helping the poor should be left up to private
                   charirites and individuals.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -231,13 +245,13 @@ class Survey extends Component {
                 <Avatar>5</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   Government budgets should always be cut regardless of which
                   programs have to be cut.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -265,13 +279,13 @@ class Survey extends Component {
                 <Avatar>6</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   The government is not responsible for preventing global
                   warming.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -299,13 +313,13 @@ class Survey extends Component {
                 <Avatar>7</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   Censorship of the media is sometimes necessary to protect
                   public morality.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -333,14 +347,14 @@ class Survey extends Component {
                 <Avatar>8</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   Marriage is a sacred bond, that should only be between one man
                   and one woman. The government should not recognize gay
                   marriage.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -368,13 +382,13 @@ class Survey extends Component {
                 <Avatar>9</Avatar>
               </Grid>
               <Grid item xs>
-                <p>
+                <p className={classes.text}>
                   Strict immigration restrictions should be put in place to
                   protect our citizens.
                 </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
@@ -402,10 +416,12 @@ class Survey extends Component {
                 <Avatar>10</Avatar>
               </Grid>
               <Grid item xs>
-                <p>Government should increase gun control regulations.</p>
+                <p className={classes.text}>
+                  Government should increase gun control regulations.
+                </p>
               </Grid>
               <Grid item xs={16}>
-                <p>
+                <p className={classes.text}>
                   {/* {String(this.state.check1)} */}
                   Disagree
                   <Switch
