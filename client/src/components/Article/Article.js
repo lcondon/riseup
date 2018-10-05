@@ -18,9 +18,6 @@ const styles = theme => ({
   root: {
     marginTop: '10px',
     overflow: 'hidden',
-    [theme.breakpoints.down('md')]: {
-      paddingTop: `${theme.spacing.unit}px`
-    },
     [theme.breakpoints.up('md')]: {
       padding: `0 ${theme.spacing.unit * 3}px`
     }
@@ -33,6 +30,10 @@ const styles = theme => ({
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4
+  },
+  paperComment: {
+    margin: theme.spacing.unit * 2,
+    padding: theme.spacing.unit
   },
   button: {
     marginLeft: 10,
@@ -51,8 +52,8 @@ const styles = theme => ({
   },
   textField: {
     // marginLeft: theme.spacing.unit * 2,
-    marginRight: theme.spacing.unit,
-    width: '98%',
+    // marginRight: theme.spacing.unit,
+    width: '100%',
     fontFamily: 'Montserrat',
     flexBasis: 200
   }
@@ -88,14 +89,17 @@ class Article extends React.Component {
               support.
             </p>
           </Paper>
-          <Paper className={classes.paper}>
-            <Grid container direction="row" spacing={24} alignItems="center">
+          <Paper className={classes.paperComment}>
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center">
               <Grid item xs={12}>
                 <TextField
                   id="outlined-simple-end-adornment"
                   multiline
                   rowsMax="4"
-                  style={{ margin: 10 }}
                   margin="normal"
                   value={this.state.comment}
                   variant="outlined"
@@ -103,7 +107,8 @@ class Article extends React.Component {
                   onChange={ev => this.setState({ comment: ev.target.value })}
                   className={classes.textField}
                   InputLabelProps={{
-                    disabled: true
+                    disabled: true,
+                    variant: 'outlined'
                   }}
                   InputProps={{
                     endAdornment: (
