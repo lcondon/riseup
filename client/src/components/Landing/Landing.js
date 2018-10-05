@@ -12,8 +12,12 @@ import anime from 'animejs';
 
 const styles = theme => ({
   root: {
+    marginTop: '10px',
     overflow: 'hidden',
-    padding: `0 ${theme.spacing.unit * 3}px`
+    // padding: `0 ${theme.spacing.unit * 3}px`,
+    [theme.breakpoints.up('md')]: {
+      padding: `0 ${theme.spacing.unit * 3}px`
+    }
   },
   wrapper: {
     maxWidth: 1000,
@@ -53,19 +57,24 @@ const styles = theme => ({
     'text-decoration': 'none',
     'font-family': 'Rubik',
     color: '#01163D'
+  },
+  body: {
+    fontFamily: 'Montserrat'
   }
 });
 
 const logStyles = {
   width: '100%',
   marginTop: 0,
-  marginBottom: 0
+  marginBottom: 0,
+  fontFamily: 'Montserrat'
 };
 
 const signStyles = {
   width: '100%',
   marginTop: 0,
-  marginBottom: 0
+  marginBottom: 0,
+  fontFamily: 'Montserrat'
 };
 
 class Landing extends React.Component {
@@ -94,66 +103,64 @@ class Landing extends React.Component {
               />
             </Grid>
           </Grid>
-          <div className={classes.root}>
-            <div className={classes.wrapper}>
-              <Paper className={classes.paper}>
-                <Grid container justify="center">
-                  <Grid item xs={10}>
-                    <h1
-                      style={{ textAlign: 'center' }}
-                      className={classes.title}>
-                      riseUP
-                    </h1>
-                    <Divider />
+        </Grid>
+        <div className={classes.root}>
+          <div className={classes.wrapper}>
+            <Paper className={classes.paper}>
+              <Grid container justify="center">
+                <Grid item xs={10}>
+                  <h1 style={{ textAlign: 'center' }} className={classes.title}>
+                    riseUP
+                  </h1>
+                  <Divider />
+                </Grid>
+                <Grid item xs={12} sm={10}>
+                  <p className={classes.body}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+                    libero metus, posuere quis odio sed, molestie ornare urna.
+                    Curabitur pulvinar vulputate augue ac blandit. Nulla dictum
+                    eu neque ac consectetur. Sed ut nisl ut lacus tincidunt
+                    bibendum eu ut velit. Donec eu leo ligula. Nullam posuere
+                    lobortis laoreet. Morbi maximus ultricies lorem, quis
+                    maximus ligula tincidunt in. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis
+                    egestas. Maecenas condimentum, lacus nec egestas
+                    scelerisque, massa ligula ultrices mi, ac ullamcorper ante
+                    nisi at leo. Integer condimentum metus odio, vitae maximus
+                    nulla lobortis a. Quisque iaculis et nunc id pretium.
+                    Curabitur facilisis iaculis dapibus. Pellentesque dignissim
+                    velit ac lectus euismod, eu placerat est ultrices. Etiam ut
+                    mi feugiat, cursus.
+                  </p>
+                </Grid>
+                <Grid container justify="center" spacing={8}>
+                  <Grid item xs={12} sm={5}>
+                    <Link to="/login" className={classes.link}>
+                      <Button
+                        id="landingLogBtn"
+                        style={logStyles}
+                        variant="contained"
+                        color="secondary">
+                        Login
+                      </Button>
+                    </Link>
                   </Grid>
-                  <Grid item xs={12} sm={10}>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Ut libero metus, posuere quis odio sed, molestie ornare
-                      urna. Curabitur pulvinar vulputate augue ac blandit. Nulla
-                      dictum eu neque ac consectetur. Sed ut nisl ut lacus
-                      tincidunt bibendum eu ut velit. Donec eu leo ligula.
-                      Nullam posuere lobortis laoreet. Morbi maximus ultricies
-                      lorem, quis maximus ligula tincidunt in. Pellentesque
-                      habitant morbi tristique senectus et netus et malesuada
-                      fames ac turpis egestas. Maecenas condimentum, lacus nec
-                      egestas scelerisque, massa ligula ultrices mi, ac
-                      ullamcorper ante nisi at leo. Integer condimentum metus
-                      odio, vitae maximus nulla lobortis a. Quisque iaculis et
-                      nunc id pretium. Curabitur facilisis iaculis dapibus.
-                      Pellentesque dignissim velit ac lectus euismod, eu
-                      placerat est ultrices. Etiam ut mi feugiat, cursus.
-                    </p>
-                  </Grid>
-                  <Grid container justify="center" spacing={8}>
-                    <Grid item xs={12} sm={5}>
-                      <Link to="/login" className={classes.link}>
-                        <Button
-                          id="landingLogBtn"
-                          style={logStyles}
-                          variant="contained"
-                          color="secondary">
-                          Login
-                        </Button>
-                      </Link>
-                    </Grid>
-                    <Grid item xs={12} sm={5}>
-                      <Link to="/signup" className={classes.link}>
-                        <Button
-                          id="landingSignBtn"
-                          style={signStyles}
-                          variant="contained"
-                          color="primary">
-                          Sign Up
-                        </Button>
-                      </Link>
-                    </Grid>
+                  <Grid item xs={12} sm={5}>
+                    <Link to="/signup" className={classes.link}>
+                      <Button
+                        id="landingSignBtn"
+                        style={signStyles}
+                        variant="contained"
+                        color="primary">
+                        Sign Up
+                      </Button>
+                    </Link>
                   </Grid>
                 </Grid>
-              </Paper>
-            </div>
+              </Grid>
+            </Paper>
           </div>
-        </Grid>
+        </div>
       </div>
     );
   }

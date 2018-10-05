@@ -38,7 +38,7 @@ router.route('/isloggedin').get(function(req, res) {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
-    res.json('not');
+    res.send('Not logged in');
   }
 });
 

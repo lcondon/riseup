@@ -22,6 +22,9 @@ const styles = theme => ({
   title: {
     'font-family': 'Rubik',
     color: '#01163D'
+  },
+  body: {
+    fontFamily: 'Montserrat'
   }
 });
 
@@ -40,7 +43,9 @@ function NotFound(props) {
               <Divider />
             </Grid>
             <Grid item xs={12} sm={10}>
-              <p>Sorry, we couldn't find what you are looking for!</p>
+              <p className={classes.body}>
+                Sorry, we couldn't find what you are looking for!
+              </p>
             </Grid>
           </Grid>
         </Paper>

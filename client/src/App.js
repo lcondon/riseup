@@ -1,28 +1,28 @@
-import React from "react";
-import NavBar from "./components/NavBar";
-import Landing from "./components/Landing";
-import SignUp from "./components/SignUp";
-import LogIn from "./components/LogIn";
-import Article from "./components/Article";
-import Survey from "./components/Survey";
-import Messages from "./components/Messages";
-import Profile from "./components/Profile";
-import NotFound from "./components/NotFound";
-import "./App.css";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { withTheme } from "@material-ui/core/styles";
-import API from "./utils/API";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import React from 'react';
+import NavBar from './components/NavBar';
+import Landing from './components/Landing';
+import SignUp from './components/SignUp';
+import LogIn from './components/LogIn';
+import Article from './components/Article';
+import Survey from './components/Survey';
+import Messages from './components/Messages';
+import Profile from './components/Profile';
+import NotFound from './components/NotFound';
+import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { withTheme } from '@material-ui/core/styles';
+import API from './utils/API';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: "#44C2CE",
-      contrastText: "#ffffff"
+      main: '#44C2CE',
+      contrastText: '#ffffff'
     },
     secondary: {
-      main: "#B21A2A",
-      contrastText: "#ffffff"
+      main: '#B21A2A',
+      contrastText: '#ffffff'
     }
   }
 });
@@ -58,16 +58,19 @@ class App extends React.Component {
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={LogIn} />
               <Route exact path="/article" component={Article} />
-              <Route exact path="/survey">
-                <Survey user={this.state.user} />
-              </Route>
-              <Route exact path="/messages">
-                <Messages user={this.state.user} />
-              </Route>
-
-              <Route exact path="/profile">
-                <Profile user={this.state.user} />
-              </Route>
+              <Route
+                exact
+                path="/survey/"
+                render={props => <Survey {...props} user={this.state.user} />}
+              />
+              <Route
+                path="/messages/:id?"
+                render={props => <Messages {...props} user={this.state.user} />}
+              />
+              <Route
+                path="/profile"
+                render={props => <Profile {...props} user={this.state.user} />}
+              />
               <Route component={NotFound} />
             </Switch>
           </MuiThemeProvider>
