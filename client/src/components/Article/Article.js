@@ -1,31 +1,32 @@
-import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-import Avatar from '@material-ui/core/Avatar';
-import PropTypes from 'prop-types';
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+import Avatar from "@material-ui/core/Avatar";
+import PropTypes from "prop-types";
+import Divider from "@material-ui/core/Divider";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 // import { withWidth } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import SendIcon from '@material-ui/icons/CallMade';
-// import io from 'socket.io-client';
+import InputAdornment from "@material-ui/core/InputAdornment";
+import SendIcon from "@material-ui/icons/CallMade";
+import io from "socket.io-client";
+import moment from "moment";
 // import * as Scroll from 'react-scroll';
 // import uuidv4 from 'uuid/v4';
 
 const styles = theme => ({
   root: {
-    marginTop: '10px',
-    overflow: 'hidden',
-    [theme.breakpoints.up('md')]: {
+    marginTop: "10px",
+    overflow: "hidden",
+    [theme.breakpoints.up("md")]: {
       padding: `0 ${theme.spacing.unit * 3}px`
     }
   },
   wrapper: {
     maxWidth: 1000,
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   paper: {
     margin: theme.spacing.unit * 2,
@@ -37,49 +38,79 @@ const styles = theme => ({
   },
   button: {
     marginLeft: 10,
-    fontFamily: 'Montserrat'
+    fontFamily: "Montserrat"
   },
   title: {
-    'font-family': 'Rubik',
-    color: '#01163D'
+    "font-family": "Rubik",
+    color: "#01163D"
   },
   subtitle: {
-    'font-family': 'Rubik',
-    color: '#389EA8'
+    "font-family": "Rubik",
+    color: "#389EA8"
   },
   body: {
-    fontFamily: 'Montserrat'
+    fontFamily: "Montserrat"
   },
   textField: {
     // marginLeft: theme.spacing.unit * 2,
     // marginRight: theme.spacing.unit,
-    width: '100%',
-    fontFamily: 'Montserrat',
+    width: "100%",
+    fontFamily: "Montserrat",
     flexBasis: 200
+  },
+  commentAuthor:{
+    fontFamily: "Rubik",
+    fontSize: 14,
+    fontStyle: "italic"
   }
 });
 
 class Article extends React.Component {
-  state = {
-    comment: ''
-  };
+  constructor(props) {
+    super(props);
 
-  postComment = event => {};
+    this.state = {
+      user: {},
+      comment: "",
+      pastComments: []
+    };
+
+    this.socket = io("http://localhost:3001");
+
+    this.socket.on("RECEIVE_COMMENT", function(data) {
+      addComment(data);
+    });
+
+    const addComment = data => {
+      console.log(data);
+      this.setState({ pastComments: [data, ...this.state.pastComments] });
+      console.log(this.state.pastComments);
+    };
+
+    this.postComment = ev => {
+      ev.preventDefault();
+      this.socket.emit("SEND_COMMENT", {
+        user: this.props.user.firstName +" "+ this.props.user.lastName,
+        userInitial: this.props.user.firstName.charAt(0),
+        comment: this.state.comment,
+        time: moment().format("dddd, MMMM Do YYYY, h:mm a")
+      });
+      this.setState({ comment: "" });
+    };
+  }
 
   render() {
     const { classes } = this.props;
     // const { width } = props;
-    const message = `Truncation should be conditionally applicable on this long line of text
-                    as this is a much longer line than what the container can support. `;
 
     return (
       <div className={classes.root}>
         <div className={classes.wrapper}>
           <Paper className={classes.paper}>
-            <h1 style={{ textAlign: 'center' }} className={classes.title}>
+            <h1 style={{ textAlign: "center" }} className={classes.title}>
               Article of the Day:
             </h1>
-            <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
+            <h2 style={{ textAlign: "center" }} className={classes.subtitle}>
               Article Title
             </h2>
             <Divider />
@@ -94,7 +125,8 @@ class Article extends React.Component {
               container
               direction="row"
               justify="center"
-              alignItems="center">
+              alignItems="center"
+            >
               <Grid item xs={12}>
                 <TextField
                   id="outlined-simple-end-adornment"
@@ -108,7 +140,7 @@ class Article extends React.Component {
                   className={classes.textField}
                   InputLabelProps={{
                     disabled: true,
-                    variant: 'outlined'
+                    variant: "outlined"
                   }}
                   InputProps={{
                     endAdornment: (
@@ -118,7 +150,8 @@ class Article extends React.Component {
                           id="submitCommentBtn"
                           size="medium"
                           color="secondary"
-                          onClick={ev => this.postComment(ev)}>
+                          onClick={ev => this.postComment(ev)}
+                        >
                           <SendIcon />
                         </Button>
                       </InputAdornment>
@@ -128,16 +161,28 @@ class Article extends React.Component {
               </Grid>
             </Grid>
           </Paper>
-          <Paper className={classes.paper}>
-            <Grid alignItems="center" container wrap="nowrap" spacing={16}>
-              <Grid item>
-                <Avatar className={classes.body}>W</Avatar>
-              </Grid>
-              <Grid item xs>
-                <p className={classes.body}>{message}</p>
-              </Grid>
-            </Grid>
-          </Paper>
+          <div className="articleComments">
+            {this.state.pastComments.map(comment => {
+              return (
+                <Paper className={classes.paper}>
+                  <Grid
+                    alignItems="center"
+                    container
+                    wrap="nowrap"
+                    spacing={16}
+                  >
+                    <Grid item>
+                      <Avatar className={classes.body}>{comment.userInitial}</Avatar>
+                    </Grid>
+                    <Grid item xs>
+                      <p className={classes.body}>{comment.comment}</p>
+                      <p className = {classes.commentAuthor}>{comment.user} at {comment.time}</p>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
