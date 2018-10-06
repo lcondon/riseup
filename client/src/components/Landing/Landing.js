@@ -1,90 +1,94 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import { withStyles } from '@material-ui/core/styles';
-import PropTypes from 'prop-types';
-import Divider from '@material-ui/core/Divider';
-import { withWidth } from '@material-ui/core';
-import compose from 'recompose/compose';
-import { Link } from 'react-router-dom';
-import anime from 'animejs';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import Divider from "@material-ui/core/Divider";
+import { withWidth } from "@material-ui/core";
+import compose from "recompose/compose";
+import { Link } from "react-router-dom";
+import anime from "animejs";
 
 const styles = theme => ({
   root: {
-    marginTop: '10px',
-    overflow: 'hidden',
+    marginTop: "10px",
+    overflow: "hidden",
     // padding: `0 ${theme.spacing.unit * 3}px`,
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up("md")]: {
       padding: `0 ${theme.spacing.unit * 3}px`
     }
   },
   wrapper: {
     maxWidth: 1000,
-    marginLeft: 'auto',
-    marginRight: 'auto'
+    marginLeft: "auto",
+    marginRight: "auto"
   },
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4
   },
   img: {
-    [theme.breakpoints.up('xs')]: {
+    [theme.breakpoints.up("xs")]: {
       width: 300
     },
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up("sm")]: {
       width: 500
     },
-    [theme.breakpoints.up('md')]: {
-      width: '100%'
+    [theme.breakpoints.up("md")]: {
+      width: "80%"
     }
   },
   title: {
-    'font-family': 'Rubik',
-    color: '#01163D',
+    "font-family": "Rubik",
+    color: "#01163D",
     margin: 0,
-    [theme.breakpoints.up('xs')]: {
-      'font-size': 60
+    [theme.breakpoints.up("xs")]: {
+      "font-size": 60
     },
-    [theme.breakpoints.up('sm')]: {
-      'font-size': 80
+    [theme.breakpoints.up("sm")]: {
+      "font-size": 80
     },
-    [theme.breakpoints.up('md')]: {
-      'font-size': 100
+    [theme.breakpoints.up("md")]: {
+      "font-size": 100
     }
   },
   link: {
-    'text-decoration': 'none',
-    'font-family': 'Rubik',
-    color: '#01163D'
+    "text-decoration": "none",
+    "font-family": "Rubik",
+    color: "#01163D"
   },
   body: {
-    fontFamily: 'Montserrat'
+    fontFamily: "Montserrat"
+  },
+  imageSpace: {
+    height: 400
   }
 });
 
 const logStyles = {
-  width: '100%',
+  width: "100%",
   marginTop: 0,
   marginBottom: 0,
-  fontFamily: 'Montserrat'
+  fontFamily: "Montserrat"
 };
 
 const signStyles = {
-  width: '100%',
+  width: "100%",
   marginTop: 0,
   marginBottom: 0,
-  fontFamily: 'Montserrat'
+  fontFamily: "Montserrat"
 };
 
 class Landing extends React.Component {
   componentDidMount() {
     anime({
-      targets: '#logoDiv img',
-      easing: 'easeInOutSine',
-      scale: [1, 1.1, '-=.5', 1],
-      duration: 2000
+      targets: "#logoDiv img",
+      rotate: '2turn',
+      duration: 2500,
+      easing: 'easeOutSine'
     });
+    anime.speed = .75;
   }
 
   render() {
@@ -92,24 +96,22 @@ class Landing extends React.Component {
     // const { width } = this.props;
     return (
       <div>
-        <Grid container direction="row" justify="center" spacing={24}>
-          <Grid container justify="center">
-            <Grid item id="logoDiv">
-              <img
-                className={classes.img}
-                justify="center"
-                src="../../images/riseUp.png"
-                alt="Logo"
-              />
-            </Grid>
-          </Grid>
-        </Grid>
         <div className={classes.root}>
           <div className={classes.wrapper}>
+          <Grid container justify="center">
+              <Grid item id="logoDiv">
+                <img
+                  className={classes.img}
+                  justify="center"
+                  src="../../images/riseUp.png"
+                  alt="Logo"
+                />
+              </Grid>
+            </Grid>
             <Paper className={classes.paper}>
               <Grid container justify="center">
                 <Grid item xs={10}>
-                  <h1 style={{ textAlign: 'center' }} className={classes.title}>
+                  <h1 style={{ textAlign: "center" }} className={classes.title}>
                     riseUP
                   </h1>
                   <Divider />
@@ -140,7 +142,8 @@ class Landing extends React.Component {
                         id="landingLogBtn"
                         style={logStyles}
                         variant="contained"
-                        color="secondary">
+                        color="secondary"
+                      >
                         Login
                       </Button>
                     </Link>
@@ -151,7 +154,8 @@ class Landing extends React.Component {
                         id="landingSignBtn"
                         style={signStyles}
                         variant="contained"
-                        color="primary">
+                        color="primary"
+                      >
                         Sign Up
                       </Button>
                     </Link>
