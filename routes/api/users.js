@@ -4,7 +4,7 @@ const db = require('../../models');
 
 router
   .route('/')
-  .post(function(req, res) {
+  .post((req, res) => {
     db.User.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -12,14 +12,19 @@ router
       password: req.body.password,
       responses: []
     }).then(function(results) {
-      res.json({ redirect: '/login' });
+      console.log(results);
+      res.json(results);
     });
   })
   .put(function(req, res) {
     console.log(req.body);
-    db.User.findByIdAndUpdate(req.body.user, {
-      responses: req.body.responses
-    }).then(function(results) {
+    db.User.findByIdAndUpdate(
+      req.body.user,
+      {
+        responses: req.body.responses
+      },
+      { new: true }
+    ).then(function(results) {
       console.log(results);
       res.json(results);
     });
@@ -34,7 +39,7 @@ router
     });
   });
 
-router.route('/isloggedin').get(function(req, res) {
+router.route('/loggedin').get(function(req, res) {
   if (req.isAuthenticated()) {
     res.json(req.user);
   } else {
@@ -45,7 +50,7 @@ router.route('/isloggedin').get(function(req, res) {
 router.route('/login').post(passport.authenticate('local'), function(req, res) {
   console.log(req.user);
   if (req.isAuthenticated()) {
-    res.json({ redirect: '/article' });
+    res.json(req.user);
   } else {
     res.json({ redirect: '/login' });
   }

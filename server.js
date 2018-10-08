@@ -36,11 +36,12 @@ io.on('connection', function(socket) {
 });
 
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   );
+  res.header('Access-Control-Allow-Credentials', true);
   //  res.io = skt;
   next();
 });
@@ -72,8 +73,10 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(router);
+app.use('/', router);
 
-server.listen(PORT, function() {
+server.listen(80);
+
+app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });

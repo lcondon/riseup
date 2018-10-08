@@ -8,6 +8,17 @@ import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import API from '../../utils/API';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUser';
+import compose from 'recompose/compose';
+
+const mapStateToProps = state => {
+  return { user: state.user.info };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -75,18 +86,11 @@ class Survey extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    API.isLoggedIn()
-      .then(response => {
-        console.log(response.data);
-
-        API.updateUser(response.data._id, this.state).then(results => {
-          console.log(results);
-          window.location.href = '/messages';
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    API.updateUser(this.props.user._id, this.state).then(results => {
+      console.log(results);
+      this.props.addUser(results.data);
+      window.location.href = '/messages';
+    });
   };
 
   render() {
@@ -460,4 +464,10 @@ Survey.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Survey);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Survey);

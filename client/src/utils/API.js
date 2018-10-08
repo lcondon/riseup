@@ -1,4 +1,6 @@
 import axios from 'axios';
+import request from 'request';
+import moment from 'moment';
 
 export default {
   // Gets all books
@@ -6,8 +8,8 @@ export default {
     return axios.post('/api/users', userData);
   },
   // Gets the book with the given id
-  isLoggedIn: function() {
-    return axios.get('/api/users/isloggedin');
+  getUser: function() {
+    return axios.get('/api/users/loggedin');
   },
   // Deletes the book with the given id
   updateUser: function(id, responses) {
@@ -32,7 +34,29 @@ export default {
     return axios.post('/api/books', bookData);
   },
 
-  getArticle: function() {
-    return axios.get('/api/articles/daily');
+  getArticle: function(cb) {
+    request.get(
+      {
+        url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
+        qs: {
+          'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
+          q: 'politics'
+        }
+      },
+      function(err, response, body) {
+        body = JSON.parse(body);
+        console.log(body);
+        let article = {
+          title: body.response.docs[0].headline.main,
+          snippet: body.response.docs[0].snippet,
+          url: body.response.docs[0].web_url,
+          image: `http://nytimes.com/${
+            body.response.docs[0].multimedia[17].url
+          }`,
+          posted: moment()
+        };
+        cb(article);
+      }
+    );
   }
 };

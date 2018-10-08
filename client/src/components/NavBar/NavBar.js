@@ -14,9 +14,21 @@ import List from '@material-ui/core/List';
 // import Divider from '@material-ui/core/Divider';
 import { mailFolderListItems, userFolderListItems } from '../NavBar/tileData';
 import { withWidth } from '@material-ui/core';
-import compose from 'recompose/compose';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { dropUser } from '../../actions/dropUser';
+import { addUser } from '../../actions/addUser';
+import compose from 'recompose/compose';
+
+const mapStateToProps = state => {
+  return { user: state.user.info, loggedIn: state.user.loggedIn };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user)),
+  dropUser: user => dispatch(dropUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -58,7 +70,6 @@ const backgroundStyle = {
 
 class MenuAppBar extends React.Component {
   state = {
-    loggedIn: false,
     anchorEl: null,
     left: false
   };
@@ -82,13 +93,14 @@ class MenuAppBar extends React.Component {
   };
 
   handleSignOut = () => {
+    console.log(this.props.user);
+    this.props.dropUser(true);
     axios.post('/api/users/logout').then(results => {
-      this.setState({ loggedIn: false });
-      if (window.location.pathname === '/') {
-        window.location.reload(true);
-      } else {
-        window.location.href = '/';
-      }
+      // if (window.location.pathname === '/') {
+      // window.location.reload(true);
+      // } else {
+      window.location.href = '/';
+      // }
     });
   };
 
@@ -220,5 +232,9 @@ MenuAppBar.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth()
+  withWidth(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(MenuAppBar);

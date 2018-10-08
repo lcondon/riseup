@@ -11,9 +11,19 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withWidth } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-import API from '../../utils/API';
 import AlertDialog from '../Alert';
 import compose from 'recompose/compose';
+import { connect } from 'react-redux';
+import { dropUser } from '../../actions/dropUser';
+import API from '../../utils/API';
+
+const mapStateToProps = state => {
+  return { user: state.user.info, loggedIn: state.user.loggedIn };
+};
+
+const mapDispatchToProps = dispatch => ({
+  dropUser: user => dispatch(dropUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -67,23 +77,24 @@ const styles = theme => ({
 });
 
 class Profile extends React.Component {
+  state = {
+    user: {}
+  };
+
   handleDelete = id => {
+    this.props.dropUser(true);
+    console.log(this.props.user);
     API.deleteUser(id).then(results => {
       console.log(results);
       window.location.href = '/';
     });
   };
 
-  // componentDidMount() {
-  //   API.isLoggedIn().then(response => {
-  //     console.log(response);
-  //     if (response.data._id) {
-  //       this.setState({
-  //         user: response.data
-  //       });
-  //     }
-  //   });
-  // }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.loggedIn) {
+      return { user: nextProps.user };
+    } else return null;
+  }
 
   render() {
     const { classes } = this.props;
@@ -108,7 +119,7 @@ class Profile extends React.Component {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell>
-                  {`${this.props.user.firstName} ${this.props.user.lastName}`}
+                  {this.state.user.firstName} {this.state.user.lastName}
                 </TableCell>
                 <Hidden xsDown>
                   <TableCell />
@@ -116,14 +127,14 @@ class Profile extends React.Component {
               </TableRow>
               <TableRow>
                 <TableCell>Email</TableCell>
-                <TableCell>{this.props.user.email}</TableCell>
+                <TableCell>{this.state.user.email}</TableCell>
                 <Hidden xsDown>
                   <TableCell />
                 </Hidden>
               </TableRow>
               <TableRow>
                 <TableCell>Password</TableCell>
-                <TableCell>{this.props.user.password}</TableCell>
+                <TableCell>{this.state.user.password}</TableCell>
                 <Hidden xsDown>
                   <TableCell />
                 </Hidden>
@@ -169,5 +180,9 @@ Profile.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth()
+  withWidth(),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(Profile);

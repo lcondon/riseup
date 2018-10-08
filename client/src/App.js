@@ -8,12 +8,17 @@ import Survey from './components/Survey';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
-import ErrorBoundary from './components/ErrorBoundary';
+// import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';
-import API from './utils/API';
+import { connect } from 'react-redux';
+import compose from 'recompose/compose';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const mapStateToProps = state => {
+  return { user: state.user.info, loggedIn: state.user.loggedIn };
+};
 
 const theme = createMuiTheme({
   palette: {
@@ -29,49 +34,31 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-  state = {
-    loggedIn: false,
-    user: {}
-  };
+  // componentDidMount() {
+  //   console.log(this.props);
 
-  componentDidMount() {
-    console.log(this.state.user);
-
-    API.isLoggedIn().then(response => {
-      console.log(response);
-      if (response.data._id) {
-        this.setState({
-          user: response.data,
-          loggedIn: true
-        });
-      }
-    });
-  }
+  //   API.getUser().then(response => {
+  //     console.log(response);
+  //     if (response.data._id) {
+  //       this.setState({ loggedIn: true });
+  //     }
+  //   });
+  // }
 
   render() {
     return (
       <Router>
         <div>
           <MuiThemeProvider theme={theme}>
-            <NavBar loggedIn={this.state.loggedIn} />
+            <NavBar />
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route exact path="/signup" component={SignUp} />
               <Route exact path="/login" component={LogIn} />
-    <Route exact path="/article" render={props => <Article {...props} user={this.state.user} /> } />
-              <Route
-                exact
-                path="/survey/"
-                render={props => <Survey {...props} user={this.state.user} />}
-              />
-              <Route
-                path="/messages/:id?"
-                render={props => <Messages {...props} user={this.state.user} />}
-              />
-              <Route
-                path="/profile"
-                render={props => <Profile {...props} user={this.state.user} />}
-              />
+              <Route exact path="/article" component={Article} />
+              <Route exact path="/survey/" component={Survey} />
+              <Route path="/messages/:id?" component={Messages} />
+              <Route exact path="/profile" component={Profile} />
               <Route component={NotFound} />
             </Switch>
           </MuiThemeProvider>
@@ -81,4 +68,7 @@ class App extends React.Component {
   }
 }
 
-export default withTheme()(App);
+export default compose(
+  withTheme(),
+  connect(mapStateToProps)
+)(App);
