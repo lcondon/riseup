@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-// import { withWidth } from '@material-ui/core';
 import API from '../../utils/API';
 
 const styles = theme => ({
@@ -49,23 +48,14 @@ const styles = theme => ({
   }
 });
 
-class ArticleBody extends Component {
+class ArticleBody extends React.Component {
   state = {
     article: {}
   };
+
   componentDidMount() {
-    API.getArticle().then(result => {
-      console.log(result.data.response.docs[0].multimedia[0].url);
-      console.log(result.data.response.docs[0]);
-      let article = {
-        title: result.data.response.docs[0].headline.main,
-        snippet: result.data.response.docs[0].snippet,
-        url: result.data.response.docs[0].web_url,
-        image: `http://nytimes.com/${
-          result.data.response.docs[0].multimedia[17].url
-        }`
-      };
-      this.setState({ article: article });
+    API.getArticle(result => {
+      this.setState({ article: result });
     });
   }
 

@@ -15,6 +15,11 @@ import Divider from '@material-ui/core/Divider';
 import io from 'socket.io-client';
 import * as Scroll from 'react-scroll';
 import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
+
+const mapStateToProps = state => {
+  return { user: state.user.info, loggedIn: state.user.loggedIn };
+};
 
 const styles = theme => ({
   root: {
@@ -66,7 +71,8 @@ const styles = theme => ({
     fontFamily: 'Montserrat'
   },
   sideBar: {
-    overflowY: 'scroll'
+    overflowY: 'scroll',
+    overflowX: 'hidden'
   },
   singleUserMessage: {
     marginBottom: 10,
@@ -94,7 +100,7 @@ class Messages extends React.Component {
       pastMessages: []
     };
 
-    this.socket = io('http://localhost:3001');
+    this.socket = io('http://localhost');
 
     this.socket.on('RECEIVE_MESSAGE', function(data) {
       // console.log(data)
@@ -243,5 +249,9 @@ Messages.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth()
+  withWidth(),
+  connect(
+    mapStateToProps,
+    null
+  )
 )(Messages);

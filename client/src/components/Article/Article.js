@@ -10,10 +10,22 @@ import Button from '@material-ui/core/Button';
 // import { withWidth } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SendIcon from '@material-ui/icons/CallMade';
+// import API from '../../utils/API';
 import io from 'socket.io-client';
 import moment from 'moment';
 // import * as Scroll from 'react-scroll';
-// import uuidv4 from 'uuid/v4';
+import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUser';
+import compose from 'recompose/compose';
+
+const mapStateToProps = state => {
+  return { user: state.user.info, loggedIn: state.user.loggedIn };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -82,7 +94,7 @@ class Article extends React.Component {
       pastComments: []
     };
 
-    this.socket = io('http://localhost:3001');
+    this.socket = io('http://localhost');
 
     this.socket.on('RECEIVE_COMMENT', function(data) {
       addComment(data);
@@ -156,7 +168,7 @@ class Article extends React.Component {
           <div className="articleComments">
             {this.state.pastComments.map(comment => {
               return (
-                <Paper className={classes.paper}>
+                <Paper className={classes.paper} key={uuidv4()}>
                   <Grid
                     alignItems="center"
                     container
@@ -188,4 +200,10 @@ Article.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Article);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(Article);

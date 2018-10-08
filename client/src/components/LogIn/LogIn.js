@@ -7,6 +7,17 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import API from '../../utils/API';
+import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUser';
+import compose from 'recompose/compose';
+
+const mapStateToProps = state => {
+  return { user: state.user, article: state.article };
+};
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -64,11 +75,13 @@ class TextFields extends React.Component {
   };
 
   handleSubmit = event => {
+    console.log(this.props.user);
     event.preventDefault();
     API.logInUser(this.state.email, this.state.password)
       .then(response => {
         console.log(response);
         if (response.status === 200) {
+          this.props.addUser(response.data);
           window.location.href = '/article';
         }
       })
@@ -166,4 +179,10 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TextFields);
+export default compose(
+  withStyles(styles),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
+)(TextFields);
