@@ -29,34 +29,31 @@ export default {
   deleteUser: function(id) {
     return axios.delete('/api/users', { data: { id: id } });
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post('/api/books', bookData);
-  },
 
   getArticle: function(cb) {
-    request.get(
-      {
-        url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-        qs: {
-          'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
-          q: 'politics'
-        }
-      },
-      function(err, response, body) {
-        body = JSON.parse(body);
-        console.log(body);
-        let article = {
-          title: body.response.docs[0].headline.main,
-          snippet: body.response.docs[0].snippet,
-          url: body.response.docs[0].web_url,
-          image: `http://nytimes.com/${
-            body.response.docs[0].multimedia[17].url
-          }`,
-          posted: moment()
-        };
-        cb(article);
-      }
-    );
+    return axios.get('/api/articles');
+    // request.get(
+    //   {
+    //     url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
+    //     qs: {
+    //       'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
+    //       q: 'politics'
+    //     }
+    //   },
+    //   function(err, response, body) {
+    //     body = JSON.parse(body);
+    //     console.log(body);
+    //     let article = {
+    //       title: body.response.docs[0].headline.main,
+    //       snippet: body.response.docs[0].snippet,
+    //       url: body.response.docs[0].web_url,
+    //       image: `http://nytimes.com/${
+    //         body.response.docs[0].multimedia[17].url
+    //       }`,
+    //       posted: moment()
+    //     };
+    //     cb(article);
+    //   }
+    // );
   }
 };
