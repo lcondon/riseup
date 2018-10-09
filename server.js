@@ -10,6 +10,7 @@ const http = require('http');
 const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
 const logger = require('morgan');
+const proxy = require('http-proxy-middleware');
 
 const PORT = process.env.PORT || 3001;
 
@@ -57,13 +58,20 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// app.use(
+//   '/socket.io',
+//   proxy({ target: 'http://localhost:3002', changeOrigin: true, ws: true })
+// );
+
 app.use('/', router);
 
 let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
+// const server = http.createServer();
 const io = require('socket.io')(server);
+app.set('io', io);
 
 io.on('connection', function(socket) {
   console.log(socket.id);

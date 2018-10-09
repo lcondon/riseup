@@ -82,7 +82,7 @@ class TextFields extends React.Component {
         console.log(response);
         if (response.status === 200) {
           this.props.addUser(response.data);
-          window.location.href = '/article';
+          this.props.history.push('/article');
         }
       })
       .catch(err => {

@@ -95,7 +95,7 @@ class TextFields extends React.Component {
         console.log(response);
         if (response.data._id) {
           this.props.addUser(response.data);
-          window.location.href = '/survey';
+          this.props.history.push('/survey');
         } else {
           console.log('no go');
         }

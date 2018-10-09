@@ -28,30 +28,14 @@ export default {
     return axios.delete('/api/users', { data: { id: id } });
   },
 
-  getArticle: function(cb) {
+  getArticle: function() {
     return axios.get('/api/articles');
-    // request.get(
-    //   {
-    //     url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-    //     qs: {
-    //       'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
-    //       q: 'politics'
-    //     }
-    //   },
-    //   function(err, response, body) {
-    //     body = JSON.parse(body);
-    //     console.log(body);
-    //     let article = {
-    //       title: body.response.docs[0].headline.main,
-    //       snippet: body.response.docs[0].snippet,
-    //       url: body.response.docs[0].web_url,
-    //       image: `http://nytimes.com/${
-    //         body.response.docs[0].multimedia[17].url
-    //       }`,
-    //       posted: moment()
-    //     };
-    //     cb(article);
-    //   }
-    // );
+  },
+
+  postArticle: function() {
+    return axios.post('/api/articles');
+  },
+  getArchive: function() {
+    return axios.get('/api/articles/archive');
   }
 };

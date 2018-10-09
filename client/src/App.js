@@ -8,6 +8,7 @@ import Survey from './components/Survey';
 import Messages from './components/Messages';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
+import Archive from './components/Archive';
 // import ErrorBoundary from './components/ErrorBoundary';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
@@ -63,6 +64,7 @@ class App extends React.Component {
               <Route exact path="/survey/" component={Survey} />
               <Route path="/messages/:id?" component={Messages} />
               <Route exact path="/profile" component={Profile} />
+              <Route exact path="/archive" component={Archive} />
               <Route component={NotFound} />
             </Switch>
           </MuiThemeProvider>

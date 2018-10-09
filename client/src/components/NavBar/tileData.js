@@ -5,7 +5,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
-import ReceiptIcon from '@material-ui/icons/Receipt';
+import ArticleIcon from '@material-ui/icons/ViewCompact';
+import ArchiveIcon from '@material-ui/icons/Archive';
 import Divider from '@material-ui/core/Divider';
 
 export const mailFolderListItems = (
@@ -18,9 +19,15 @@ export const mailFolderListItems = (
     </ListItem>
     <ListItem button component="a" href="/article">
       <ListItemIcon>
-        <ReceiptIcon />
+        <ArticleIcon />
       </ListItemIcon>
       <ListItemText primary="Article of the Day" />
+    </ListItem>
+    <ListItem button component="a" href="/archive">
+      <ListItemIcon>
+        <ArchiveIcon />
+      </ListItemIcon>
+      <ListItemText primary="Past Articles" />
     </ListItem>
   </div>
 );
@@ -35,9 +42,15 @@ export const userFolderListItems = (
     </ListItem>
     <ListItem button component="a" href="/article">
       <ListItemIcon>
-        <ReceiptIcon />
+        <ArticleIcon />
       </ListItemIcon>
       <ListItemText primary="Article of the Day" />
+    </ListItem>
+    <ListItem button component="a" href="/archive">
+      <ListItemIcon>
+        <ArchiveIcon />
+      </ListItemIcon>
+      <ListItemText primary="Past Articles" />
     </ListItem>
     <ListItem button component="a" href="/messages">
       <ListItemIcon>
