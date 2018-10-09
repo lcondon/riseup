@@ -7,7 +7,6 @@ router
   .route('/')
   .get(function(req, res) {
     // res.json({ pleas: 'please' });
-    console.log('maybe');
     // res.json('yea');
     // db.Article.find({}).then(results => {
     //   if (results.length > 1) {
@@ -26,7 +25,6 @@ router
           res.json('erro');
         } else {
           body = JSON.parse(body);
-          console.log(body);
           db.Article.create({
             title: body.response.docs[0].headline.main,
             text: body.response.docs[0].snippet,

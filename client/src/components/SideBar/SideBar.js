@@ -21,109 +21,104 @@ const styles = theme => ({
   }
 });
 
-class SideBar extends React.Component {
-  state = {
-    messages: []
-  };
-
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.listBody}>
-        {/* {this.state.messages.map(message => (
+const SideBar = props => {
+  const { classes } = props;
+  // const { messages } = this.props;
+  return (
+    <div className={classes.listBody}>
+      {/* {this.state.messages.map(message => (
           <ListItem button component="a" href="/login">
             <ListItemAvatar />
             <ListItemText primary={message.name} />
           </ListItem>
         ))} */}
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Avatar className={classes.body}>W</Avatar>
-          <Hidden smDown>
-            <ListItemText className={classes.body} primary="Message" />
-          </Hidden>
-        </ListItem>
-        <Divider />
-      </div>
-    );
-  }
-}
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+      <ListItem button>
+        <Avatar className={classes.body}>W</Avatar>
+        <Hidden smDown>
+          <ListItemText className={classes.body} primary="Message" />
+        </Hidden>
+      </ListItem>
+      <Divider />
+    </div>
+  );
+};
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired

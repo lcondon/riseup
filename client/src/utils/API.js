@@ -1,6 +1,4 @@
 import axios from 'axios';
-import request from 'request';
-import moment from 'moment';
 
 export default {
   // Gets all books

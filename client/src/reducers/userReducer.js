@@ -1,4 +1,7 @@
-let initial = {};
+let initial = {
+  loggedIn: false,
+  info: {}
+};
 
 export default (state = initial, action) => {
   switch (action.type) {

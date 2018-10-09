@@ -146,11 +146,7 @@ class MenuAppBar extends React.Component {
               onClick={this.toggleDrawer(true)}>
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="title"
-              color="inherit"
-              className={classes.grow}
-            />
+            <Typography variant="h6" color="inherit" className={classes.grow} />
             {this.props.loggedIn ? (
               <div>
                 <IconButton

@@ -21,6 +21,10 @@ const mapStateToProps = state => {
 };
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+    suppressDeprecationWarnings: true
+  },
   palette: {
     primary: {
       main: '#44C2CE',
