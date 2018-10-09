@@ -20,6 +20,7 @@ import { connect } from 'react-redux';
 import { dropUser } from '../../actions/dropUser';
 import { addUser } from '../../actions/addUser';
 import compose from 'recompose/compose';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
@@ -93,13 +94,12 @@ class MenuAppBar extends React.Component {
   };
 
   handleSignOut = () => {
-    console.log(this.props.user);
     this.props.dropUser(true);
+    this.props.history.push(`/`);
     axios.post('/api/users/logout').then(results => {
       // if (window.location.pathname === '/') {
       // window.location.reload(true);
       // } else {
-      window.location.href = '/';
       // }
     });
   };
@@ -229,6 +229,7 @@ MenuAppBar.propTypes = {
 export default compose(
   withStyles(styles),
   withWidth(),
+  withRouter,
   connect(
     mapStateToProps,
     mapDispatchToProps

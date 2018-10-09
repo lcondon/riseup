@@ -56,7 +56,13 @@ class ArticleBody extends React.Component {
   componentDidMount() {
     API.getArticle().then(result => {
       console.log(result);
-      this.setState({ article: result.data });
+      if (result.status === 404) {
+        API.postArticle().then(result2 => {
+          this.setState({ article: result2.data });
+        });
+      } else {
+        this.setState({ article: result.data });
+      }
     });
   }
 

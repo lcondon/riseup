@@ -6,51 +6,47 @@ const moment = require('moment');
 router
   .route('/')
   .get(function(req, res) {
-    // res.json({ pleas: 'please' });
-    // res.json('yea');
-    // db.Article.find({}).then(results => {
-    //   if (results.length > 1) {
-    //     res.json(results[results.length - 1]);
-    //   } else {
+    db.Article.find({}).then(results => {
+      if (
+        results.length > 0 &&
+        moment().diff(results[results.length - 1].date, 'days') < 7
+      ) {
+        res.json(results[results.length - 1]);
+      } else {
+        res.sendStatus(404);
+      }
+    });
+  })
+  .post(function(req, res) {
     request.get(
       {
         url: 'http://api.nytimes.com/svc/search/v2/articlesearch.json',
         qs: {
           'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
-          q: 'politics'
+          q: 'politics',
+          sort: 'newest'
         }
       },
       function(err, response, body) {
         if (err) {
-          res.json('erro');
+          res.json('error');
         } else {
           body = JSON.parse(body);
           db.Article.create({
             title: body.response.docs[0].headline.main,
             text: body.response.docs[0].snippet,
             url: body.response.docs[0].web_url,
-            image: `http://nytimes.com/${
-              body.response.docs[0].multimedia[17].url
-            }`,
-            date: moment()
+            image:
+              `http://nytimes.com/${
+                body.response.docs[0].multimedia[17].url
+              }` || null,
+            date: moment().format()
           }).then(result => {
             res.json(result);
           });
         }
       }
     );
-    //   }
-    // });
-  })
-  .post(function(req, res) {})
-  .put(function(req, res) {
-    console.log(req.body);
-    db.User.findByIdAndUpdate(req.body.user, {
-      responses: req.body.responses
-    }).then(function(results) {
-      console.log(results);
-      res.json(results);
-    });
   })
   .delete(function(req, res) {
     console.log(1);
@@ -61,5 +57,11 @@ router
       res.json(results);
     });
   });
+
+router.route('/archive').get(function(req, res) {
+  db.Article.find({}).then(function(results) {
+    res.json(results);
+  });
+});
 
 module.exports = router;
