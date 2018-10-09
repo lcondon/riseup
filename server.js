@@ -6,7 +6,6 @@ const dbConnection = require('./db');
 const db = require('./models'); // loads our connection to the mongo database
 const passport = require('./passport');
 const path = require('path');
-const socket = require('socket.io');
 const http = require('http');
 const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
@@ -60,11 +59,11 @@ app.use(passport.session());
 
 app.use('/', router);
 
-let server2 = app.listen(PORT, function() {
+let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-const io = socket(server2);
+const io = require('socket.io')(server);
 
 io.on('connection', function(socket) {
   console.log(socket.id);
