@@ -18,29 +18,14 @@ const router = require('./routes');
 
 const app = express();
 
-const server = http.Server(app);
-const io = socket(server);
-
-io.on('connection', function(socket) {
-  console.log(socket.id);
-
-  socket.on('SEND_MESSAGE', function(data) {
-    io.emit('RECEIVE_MESSAGE', data);
-    console.log(data);
-  });
-
-  socket.on('SEND_COMMENT', function(data) {
-    io.emit('RECEIVE_COMMENT', data);
-    console.log(data);
-  });
-});
+// server.listen(3002);
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
+  // res.header(
+  //   'Access-Control-Allow-Headers',
+  //   'Origin, X-Requested-With, Content-Type, Accept'
+  // );
   res.header('Access-Control-Allow-Credentials', true);
   //  res.io = skt;
   next();
@@ -75,8 +60,22 @@ app.use(passport.session());
 
 app.use('/', router);
 
-server.listen(80);
-
-app.listen(PORT, function() {
+let server2 = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+const io = socket(server2);
+
+io.on('connection', function(socket) {
+  console.log(socket.id);
+
+  socket.on('SEND_MESSAGE', function(data) {
+    io.emit('RECEIVE_MESSAGE', data);
+    console.log(data);
+  });
+
+  socket.on('SEND_COMMENT', function(data) {
+    io.emit('RECEIVE_COMMENT', data);
+    console.log(data);
+  });
 });

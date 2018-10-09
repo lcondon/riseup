@@ -4,35 +4,45 @@ const request = require('request');
 const moment = require('moment');
 
 router
-  .route('/daily')
-  .get((req, res) => {
+  .route('/')
+  .get(function(req, res) {
+    // res.json({ pleas: 'please' });
+    console.log('maybe');
+    // res.json('yea');
     // db.Article.find({}).then(results => {
-    console.log('results');
-    // });
-    // request.get(
-    //   {
-    //     url: 'https://api.nytimes.com/svc/search/v2/articlesearch.json',
-    //     qs: {
-    //       'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
-    //       q: 'politics'
-    //     }
-    //   },
-    //   function(err, response, body) {
-    //     body = JSON.parse(body);
-    //     console.log(body);
-    //     db.Article.create({
-    //       title: body.response.docs[0].headline.main,
-    //       snippet: body.response.docs[0].snippet,
-    //       url: body.response.docs[0].web_url,
-    //       image: `http://nytimes.com/${
-    //         body.response.docs[0].multimedia[17].url
-    //       }`,
-    //       posted: moment.format()
-    //     }).then(result => {
-    //       res.json(body);
-    //     });
+    //   if (results.length > 1) {
+    //     res.json(results[results.length - 1]);
+    //   } else {
+    request.get(
+      {
+        url: 'http://api.nytimes.com/svc/search/v2/articlesearch.json',
+        qs: {
+          'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
+          q: 'politics'
+        }
+      },
+      function(err, response, body) {
+        if (err) {
+          res.json('erro');
+        } else {
+          body = JSON.parse(body);
+          console.log(body);
+          db.Article.create({
+            title: body.response.docs[0].headline.main,
+            text: body.response.docs[0].snippet,
+            url: body.response.docs[0].web_url,
+            image: `http://nytimes.com/${
+              body.response.docs[0].multimedia[17].url
+            }`,
+            date: moment()
+          }).then(result => {
+            res.json(result);
+          });
+        }
+      }
+    );
     //   }
-    // );
+    // });
   })
   .post(function(req, res) {})
   .put(function(req, res) {

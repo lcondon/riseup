@@ -94,7 +94,7 @@ class Article extends React.Component {
       pastComments: []
     };
 
-    this.socket = io('http://localhost');
+    this.socket = io('http://localhost:3001');
 
     this.socket.on('RECEIVE_COMMENT', function(data) {
       addComment(data);
@@ -108,12 +108,21 @@ class Article extends React.Component {
 
     this.postComment = ev => {
       ev.preventDefault();
-      this.socket.emit('SEND_COMMENT', {
-        user: this.props.user.firstName + ' ' + this.props.user.lastName,
-        userInitial: this.props.user.firstName.charAt(0),
-        comment: this.state.comment,
-        time: moment().format('dddd, MMMM Do YYYY, h:mm a')
-      });
+      let message;
+      this.props.loggedIn
+        ? (message = {
+            user: this.props.user.firstName + ' ' + this.props.user.lastName,
+            userInitial: this.props.user.firstName.charAt(0),
+            comment: this.state.comment,
+            time: moment().format('dddd, MMMM Do YYYY, h:mm a')
+          })
+        : (message = {
+            user: 'Anonymous',
+            userInitial: 'A',
+            comment: this.state.comment,
+            time: moment().format('dddd, MMMM Do YYYY, h:mm a')
+          });
+      this.socket.emit('SEND_COMMENT', message);
       this.setState({ comment: '' });
     };
   }

@@ -54,8 +54,9 @@ class ArticleBody extends React.Component {
   };
 
   componentDidMount() {
-    API.getArticle(result => {
-      this.setState({ article: result });
+    API.getArticle().then(result => {
+      console.log(result);
+      this.setState({ article: result.data });
     });
   }
 
@@ -88,7 +89,7 @@ class ArticleBody extends React.Component {
           />
         </Grid>
         <p className={classes.body} style={{ textAlign: 'center' }}>
-          {this.state.article.snippet}
+          {this.state.article.text}
         </p>
       </Paper>
     );

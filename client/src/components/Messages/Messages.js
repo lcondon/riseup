@@ -100,7 +100,7 @@ class Messages extends React.Component {
       pastMessages: []
     };
 
-    this.socket = io('http://localhost');
+    this.socket = io('http://localhost:3001');
 
     this.socket.on('RECEIVE_MESSAGE', function(data) {
       // console.log(data)
