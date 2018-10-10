@@ -60,7 +60,7 @@ app.use(passport.session());
 
 // app.use(
 //   '/socket.io',
-//   proxy({ target: 'http://localhost:3002', changeOrigin: true, ws: true })
+//   proxy({ target: 'http://localhost:8080', changeOrigin: true, ws: true })
 // );
 
 app.use('/', router);
@@ -69,20 +69,8 @@ let server = app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-// const server = http.createServer();
-const io = require('socket.io')(server);
-app.set('io', io);
+let socketEvents = require('./socketEvents');
 
-io.on('connection', function(socket) {
-  console.log(socket.id);
+const io = require('socket.io').listen(server);
 
-  socket.on('SEND_MESSAGE', function(data) {
-    io.emit('RECEIVE_MESSAGE', data);
-    console.log(data);
-  });
-
-  socket.on('SEND_COMMENT', function(data) {
-    io.emit('RECEIVE_COMMENT', data);
-    console.log(data);
-  });
-});
+socketEvents(io);

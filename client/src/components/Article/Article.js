@@ -7,17 +7,17 @@ import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-// import { withWidth } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SendIcon from '@material-ui/icons/CallMade';
+// import { withWidth } from '@material-ui/core';
 // import API from '../../utils/API';
-import io from 'socket.io-client';
-import moment from 'moment';
-// import * as Scroll from 'react-scroll';
-import uuidv4 from 'uuid/v4';
+import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
-import compose from 'recompose/compose';
+import io from 'socket.io-client';
+import uuidv4 from 'uuid/v4';
+import moment from 'moment';
+// import * as Scroll from 'react-scroll';
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
