@@ -59,11 +59,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api', router);
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
+
+app.use('/api', router);
 
 io.on('connect', function(socket) {
   console.log(socket.id);
@@ -85,6 +85,6 @@ io.on('connect', function(socket) {
   });
 });
 
-server.listen(PORT, function() {
+app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
