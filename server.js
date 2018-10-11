@@ -6,38 +6,51 @@ const dbConnection = require('./db');
 const db = require('./models'); // loads our connection to the mongo database
 const passport = require('./passport');
 const path = require('path');
-const http = require('http');
 const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
 const logger = require('morgan');
-const proxy = require('http-proxy-middleware');
+const compression = require('compression');
 
-const PORT = process.env.PORT || 3001;
+const normalizePort = port => parseInt(port, 10);
+const PORT = normalizePort(process.env.PORT || 3001);
 
 const router = require('./routes');
 
 const app = express();
 
-// server.listen(3002);
-
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.header(
-  //   'Access-Control-Allow-Headers',
-  //   'Origin, X-Requested-With, Content-Type, Accept'
-  // );
-  res.header('Access-Control-Allow-Credentials', true);
-  //  res.io = skt;
-  next();
-});
+var http = require('http');
+var server = http.createServer(app);
+var io = require('socket.io')(server);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.disable('x-powered-by');
+  app.use(compression());
+  app.use(logger('common'));
+  app.use(express.static(path.resolve(__dirname, './client/build')));
+  app.use(function(req, res, next) {
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+  });
+} else if (process.env.NODE_ENV === 'production') {
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    res.header('Access-Control-Allow-Credentials', true);
+    next();
+  });
 }
+
 app.use(
   session({
     secret: 'keyboard cat',
@@ -48,7 +61,7 @@ app.use(
     rolling: true,
     name: 'sid',
     cookie: {
-      httpOnly: true,
+      httpOnly: false,
       maxAge: 20 * 60 * 1000 // 20 minutes
     }
   })
@@ -58,22 +71,13 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(
-//   '/socket.io',
-//   proxy({ target: 'http://localhost:3002', changeOrigin: true, ws: true })
-// );
+app.use('/api', router);
 
-app.use('/', router);
-
-let server = app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-// const server = http.createServer();
-const io = require('socket.io')(server);
-app.set('io', io);
-
-io.on('connection', function(socket) {
+io.on('connect', function(socket) {
   console.log(socket.id);
 
   socket.on('SEND_MESSAGE', function(data) {
@@ -85,4 +89,14 @@ io.on('connection', function(socket) {
     io.emit('RECEIVE_COMMENT', data);
     console.log(data);
   });
+
+  socket.on('GET_USERS', function(data) {
+    db.Article.find({}).then(results => {
+      io.emit('SEND_USERS', results);
+    });
+  });
+});
+
+app.get('*', function(req, res) {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
 });

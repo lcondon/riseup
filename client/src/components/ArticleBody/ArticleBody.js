@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import API from '../../utils/API';
-
 const styles = theme => ({
   root: {
     marginTop: '10px',
@@ -49,14 +48,12 @@ const styles = theme => ({
 });
 
 class ArticleBody extends React.Component {
-  state = {
-    article: {}
-  };
+  state = { article: {} };
 
   componentDidMount() {
     API.getArticle().then(result => {
       console.log(result);
-      if (result.status === 404) {
+      if (result.error) {
         API.postArticle().then(result2 => {
           this.setState({ article: result2.data });
         });
@@ -65,7 +62,6 @@ class ArticleBody extends React.Component {
       }
     });
   }
-
   render() {
     const { classes } = this.props;
     return (

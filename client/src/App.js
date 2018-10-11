@@ -16,6 +16,17 @@ import { withTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import SocketContext from './socket-context';
+import io from 'socket.io-client';
+
+const socket = io(
+  { host: '/', port: '' },
+  { transports: ['websocket'] },
+  {
+    secure: true,
+    rejectUnauthorized: false
+  }
+);
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
@@ -39,34 +50,29 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-  // componentDidMount() {
-  //   console.log(this.props);
-
-  //   API.getUser().then(response => {
-  //     console.log(response);
-  //     if (response.data._id) {
-  //       this.setState({ loggedIn: true });
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    socket.connect();
+  }
 
   render() {
     return (
       <Router>
         <div>
           <MuiThemeProvider theme={theme}>
-            <NavBar />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/login" component={LogIn} />
-              <Route exact path="/article" component={Article} />
-              <Route exact path="/survey/" component={Survey} />
-              <Route path="/messages/:id?" component={Messages} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/archive" component={Archive} />
-              <Route component={NotFound} />
-            </Switch>
+            <SocketContext.Provider value={socket}>
+              <NavBar />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/login" component={LogIn} />
+                <Route exact path="/article" component={Article} />
+                <Route exact path="/survey" component={Survey} />
+                <Route path="/messages" component={Messages} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/archive" component={Archive} />
+                <Route component={NotFound} />
+              </Switch>
+            </SocketContext.Provider>
           </MuiThemeProvider>
         </div>
       </Router>
