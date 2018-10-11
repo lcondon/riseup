@@ -19,7 +19,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SocketContext from './socket-context';
 import io from 'socket.io-client';
 
-const socket = io(process.env.REACT_APP_SOCKET, {
+const socket = io(process.env.REACT_APP_SOCKET || 'http://localhost:3001', {
   secure: true,
   rejectUnauthorized: false,
   path: '/chat/socket.io'
