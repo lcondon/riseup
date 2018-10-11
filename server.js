@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieparser());
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname + '/client/build')));
+  app.use(express.static('client/build'));
 }
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
@@ -85,6 +85,6 @@ io.on('connect', function(socket) {
   });
 });
 
-server.listen(PORT, function() {
+app.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
