@@ -16,6 +16,14 @@ import { withTheme } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import SocketContext from './socket-context';
+import io from 'socket.io-client';
+
+const socket = io('http://localhost:3001', {
+  secure: true,
+  rejectUnauthorized: false,
+  path: '/chat/socket.io'
+});
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
@@ -55,18 +63,20 @@ class App extends React.Component {
       <Router>
         <div>
           <MuiThemeProvider theme={theme}>
-            <NavBar />
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/login" component={LogIn} />
-              <Route exact path="/article" component={Article} />
-              <Route exact path="/survey/" component={Survey} />
-              <Route path="/messages/:id?" component={Messages} />
-              <Route exact path="/profile" component={Profile} />
-              <Route exact path="/archive" component={Archive} />
-              <Route component={NotFound} />
-            </Switch>
+            <SocketContext.Provider value={socket}>
+              <NavBar />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/signup" component={SignUp} />
+                <Route exact path="/login" component={LogIn} />
+                <Route exact path="/article" component={Article} />
+                <Route exact path="/survey" component={Survey} />
+                <Route path="/messages" component={Messages} />
+                <Route exact path="/profile" component={Profile} />
+                <Route exact path="/archive" component={Archive} />
+                <Route component={NotFound} />
+              </Switch>
+            </SocketContext.Provider>
           </MuiThemeProvider>
         </div>
       </Router>

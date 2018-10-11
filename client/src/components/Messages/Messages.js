@@ -1,24 +1,22 @@
-import React from "react";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
-import SideBar from "../SideBar";
-import PropTypes from "prop-types";
-import TextField from "@material-ui/core/TextField";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import Button from "@material-ui/core/Button";
-import Hidden from "@material-ui/core/Hidden";
-import withWidth from "@material-ui/core/withWidth";
-import SendIcon from "@material-ui/icons/Send";
-import compose from "recompose/compose";
-import Divider from "@material-ui/core/Divider";
-import io from "socket.io-client";
-import * as Scroll from "react-scroll";
-import uuidv4 from "uuid/v4";
-import { connect } from "react-redux";
-import moment from "moment";
-import quotes from "./quotes.json";
+import React from 'react';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import SideBar from '../SideBar';
+import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Button from '@material-ui/core/Button';
+import Hidden from '@material-ui/core/Hidden';
+import withWidth from '@material-ui/core/withWidth';
+import SendIcon from '@material-ui/icons/Send';
+import compose from 'recompose/compose';
+import Divider from '@material-ui/core/Divider';
+import * as Scroll from 'react-scroll';
+import uuidv4 from 'uuid/v4';
+import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
+import SocketContext from '../../socket-context';
 
 const mapStateToProps = state => {
   return { user: state.user.info };
@@ -30,12 +28,12 @@ const mapDispatchToProps = dispatch => ({
 
 const styles = theme => ({
   root: {
-    marginTop: "10px",
-    overflow: "hidden",
+    marginTop: '10px',
+    overflow: 'hidden',
     maxWidth: 1000,
-    marginRight: "auto",
-    marginLeft: "auto",
-    [theme.breakpoints.down("xs")]: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    [theme.breakpoints.down('xs')]: {
       marginTop: 0,
       paddingTop: 0
     }
@@ -44,7 +42,7 @@ const styles = theme => ({
     margin: theme.spacing.unit * 2,
     padding: 0,
     height: 475,
-    [theme.breakpoints.down("xs")]: {
+    [theme.breakpoints.down('xs')]: {
       height: `calc(100vh - 50px)`,
       margin: 0
     }
@@ -54,47 +52,47 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   },
   button: {
-    fontFamily: "Montserrat"
+    fontFamily: 'Montserrat'
   },
   textField: {
     // marginLeft: theme.spacing.unit * 2,
     marginRight: theme.spacing.unit,
-    width: "100%",
-    fontFamily: "Montserrat",
+    width: '100%',
+    fontFamily: 'Montserrat',
     flexBasis: 200
   },
   margin: {
     margin: theme.spacing.unit
   },
   title: {
-    "font-family": "Rubik",
-    color: "#01163D"
+    'font-family': 'Rubik',
+    color: '#01163D'
   },
   subtitle: {
-    "font-family": "Rubik",
-    color: "#389EA8"
+    'font-family': 'Rubik',
+    color: '#389EA8'
   },
   body: {
-    fontFamily: "Montserrat"
+    fontFamily: 'Montserrat'
   },
   sideBar: {
-    overflowY: "scroll",
-    overflowX: "hidden"
+    overflowY: 'scroll',
+    overflowX: 'hidden'
   },
   singleUserMessage: {
     marginBottom: 10,
-    fontFamily: "Montserrat"
+    fontFamily: 'Montserrat'
   },
   messages: {
-    overflowY: "scroll",
-    height: "fit-content",
+    overflowY: 'scroll',
+    height: 'fit-content',
     maxHeight: 300,
-    fontFamily: "Montserrat"
+    fontFamily: 'Montserrat'
   },
   quoteAuthor: {
-    textAlign: "center",
-    fontStyle: "italic",
-    fontFamily: "Montserrat"
+    textAlign: 'center',
+    fontStyle: 'italic',
+    fontFamily: 'Montserrat'
   }
 });
 
@@ -105,27 +103,31 @@ var scroll = Scroll.animateScroll;
 class Messages extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       user: {},
-      message: "",
+      message: '',
       pastMessages: [],
       famousQuote: {},
       number: null
     };
 
     this.updateQuote = () => {
-      const startDate = moment("10/03/2018").format("MM DD YYYY");
-      let dateDifference = moment().diff(startDate, "weeks") - 1;
+      const startDate = moment('10/03/2018').format('MM DD YYYY');
+      let dateDifference = moment().diff(startDate, 'weeks') - 1;
       this.setState({
         famousQuote: quotes[dateDifference],
         number: dateDifference
       });
     };
+  }
 
-    this.socket = io("http://localhost:3001");
-
-    this.socket.on("RECEIVE_MESSAGE", function(data) {
+  componentDidMount() {
+    this.props.socket.emit('GET_USERS');
+    this.props.socket.on('SEND_USERS', data => {
+      console.log(data);
+    });
+    this.scrollToBottom();
+    this.props.socket.on('RECEIVE_MESSAGE', function(data) {
       // console.log(data)
       addMessage(data);
     });
@@ -138,26 +140,21 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
-//Find username answer to questionNumber
-//If true, then find user with false
-//If false, then find user with true
-//Match them and create roomName
+      //Find username answer to questionNumber
+      //If true, then find user with false
+      //If false, then find user with true
+      //Match them and create roomName
     };
 
     this.sendMessage = ev => {
       ev.preventDefault();
       scroll.scrollToBottom();
-      this.socket.emit("SEND_MESSAGE", {
+      this.props.socket.emit('SEND_MESSAGE', {
         user: this.props.user.firstName,
         message: this.state.message
       });
-      this.setState({ message: "" });
+      this.setState({ message: '' });
     };
-  }
-
-  componentDidMount() {
-    this.scrollToBottom();
-    this.updateQuote();
   }
 
   componentDidUpdate() {
@@ -165,10 +162,10 @@ class Messages extends React.Component {
   }
 
   scrollToBottom() {
-    scroller.scrollTo("test1", {
+    scroller.scrollTo('test1', {
       duration: 1500,
       smooth: true,
-      containerId: "messageContainer",
+      containerId: 'messageContainer',
       offset: 50 // Scrolls to element + 50 pixels down the page
     });
   }
@@ -185,11 +182,11 @@ class Messages extends React.Component {
       <div className={classes.root}>
         <Hidden xsDown>
           <Paper className={classes.paper}>
-            <h1 style={{ textAlign: "center" }} className={classes.title}>
+            <h1 style={{ textAlign: 'center' }} className={classes.title}>
               Messages
             </h1>
             <Divider />
-            <h2 style={{ textAlign: "center" }} className={classes.subtitle}>
+            <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
               {this.state.famousQuote.quote}
             </h2>
             <p className={classes.quoteAuthor}>
@@ -203,8 +200,7 @@ class Messages extends React.Component {
                 id="submitCommentBtn"
                 variant="contained"
                 onClick={this.matchUser}
-                color="secondary"
-              >
+                color="secondary">
                 Match Me
               </Button>
             </Grid>
@@ -214,9 +210,8 @@ class Messages extends React.Component {
           <Grid
             container
             spacing={16}
-            style={{ height: "inherit" }}
-            direction="row"
-          >
+            style={{ height: 'inherit' }}
+            direction="row">
             <Grid item xs={3} className={classes.sideBar}>
               <SideBar class={classes.sideBar} />
             </Grid>
@@ -227,8 +222,7 @@ class Messages extends React.Component {
               container
               alignItems="flex-end"
               direction="row"
-              justify="center"
-            >
+              justify="center">
               <Grid item style={{ paddingBottom: 0 }} xs={12}>
                 <div id="messageContainer" className={classes.messages}>
                   {this.state.pastMessages.map(message => {
@@ -258,7 +252,7 @@ class Messages extends React.Component {
                   className={classes.textField}
                   InputLabelProps={{
                     disabled: true,
-                    variant: "outlined"
+                    variant: 'outlined'
                   }}
                   InputProps={{
                     endAdornment: (
@@ -268,8 +262,7 @@ class Messages extends React.Component {
                           id="submitCommentBtn"
                           size="medium"
                           color="secondary"
-                          onClick={ev => this.sendMessage(ev)}
-                        >
+                          onClick={ev => this.sendMessage(ev)}>
                           <SendIcon />
                         </Button>
                       </InputAdornment>
@@ -285,6 +278,12 @@ class Messages extends React.Component {
   };
 }
 
+const MessagesWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <Messages {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
 Messages.propTypes = {
   classes: PropTypes.object.isRequired
 };
@@ -296,4 +295,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(Messages);
+)(MessagesWithSocket);

@@ -6,11 +6,9 @@ const dbConnection = require('./db');
 const db = require('./models'); // loads our connection to the mongo database
 const passport = require('./passport');
 const path = require('path');
-const http = require('http');
 const cookieparser = require('cookie-parser');
 const flash = require('connect-flash');
 const logger = require('morgan');
-const proxy = require('http-proxy-middleware');
 
 const PORT = process.env.PORT || 3001;
 
@@ -18,17 +16,10 @@ const router = require('./routes');
 
 const app = express();
 
-// server.listen(3002);
-
-app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.header(
-  //   'Access-Control-Allow-Headers',
-  //   'Origin, X-Requested-With, Content-Type, Accept'
-  // );
-  res.header('Access-Control-Allow-Credentials', true);
-  //  res.io = skt;
-  next();
+var http = require('http');
+var server = http.Server(app);
+var io = require('socket.io')(server, {
+  path: '/chat/socket.io'
 });
 
 app.use(logger('dev'));
@@ -38,6 +29,16 @@ app.use(cookieparser());
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 }
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
+
 app.use(
   session({
     secret: 'keyboard cat',
@@ -58,19 +59,28 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use(
-//   '/socket.io',
-//   proxy({ target: 'http://localhost:8080', changeOrigin: true, ws: true })
-// );
+app.use('/api', router);
 
-app.use('/', router);
+io.on('connect', function(socket) {
+  console.log(socket.id);
 
-let server = app.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+  socket.on('SEND_MESSAGE', function(data) {
+    io.emit('RECEIVE_MESSAGE', data);
+    console.log(data);
+  });
+
+  socket.on('SEND_COMMENT', function(data) {
+    io.emit('RECEIVE_COMMENT', data);
+    console.log(data);
+  });
+
+  socket.on('GET_USERS', function(data) {
+    db.Article.find({}).then(results => {
+      io.emit('SEND_USERS', results);
+    });
+  });
 });
 
-let socketEvents = require('./socketEvents');
-
-const io = require('socket.io').listen(server);
-
-socketEvents(io);
+server.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
