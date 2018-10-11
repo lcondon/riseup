@@ -19,11 +19,15 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SocketContext from './socket-context';
 import io from 'socket.io-client';
 
-const socket = io(process.env.REACT_APP_SOCKET || 'http://localhost:3001', {
-  secure: true,
-  rejectUnauthorized: false,
-  path: '/chat/socket.io'
-});
+const socket = io(
+  { host: '/', port: '' },
+  { transports: ['websocket'] },
+  {
+    secure: true,
+    rejectUnauthorized: false,
+    path: '/chat/socket.io'
+  }
+);
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
@@ -47,16 +51,9 @@ const theme = createMuiTheme({
 });
 
 class App extends React.Component {
-  // componentDidMount() {
-  //   console.log(this.props);
-
-  //   API.getUser().then(response => {
-  //     console.log(response);
-  //     if (response.data._id) {
-  //       this.setState({ loggedIn: true });
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    socket.connect();
+  }
 
   render() {
     return (

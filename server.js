@@ -24,9 +24,13 @@ var io = require('socket.io')(server, {
   path: '/chat/socket.io'
 });
 
+server.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieparser());
 if (process.env.NODE_ENV === 'production') {
   app.disable('x-powered-by');
@@ -35,7 +39,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.resolve(__dirname, 'client/build')));
 
   app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, './client/build/index.html'));
   });
 } else if (process.env.NODE_ENV === 'production') {
   app.use(function(req, res, next) {
@@ -89,8 +93,4 @@ io.on('connect', function(socket) {
       io.emit('SEND_USERS', results);
     });
   });
-});
-
-server.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
