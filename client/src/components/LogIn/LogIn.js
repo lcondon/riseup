@@ -10,14 +10,7 @@ import API from '../../utils/API';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
 import compose from 'recompose/compose';
-
-const mapStateToProps = state => {
-  return { user: state.user, article: state.article };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -179,10 +172,4 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(TextFields);
+export default compose(withStyles(styles))(decorator(TextFields));

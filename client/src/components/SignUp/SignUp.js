@@ -11,14 +11,7 @@ import compose from 'recompose/compose';
 import API from '../../utils/API';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
-
-const mapStateToProps = state => ({
-  ...state
-});
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -201,9 +194,5 @@ TextFields.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(TextFields);
+  withWidth()
+)(decorator(TextFields));
