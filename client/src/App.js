@@ -20,7 +20,7 @@ import SocketContext from './socket-context';
 import io from 'socket.io-client';
 
 const socket = io(
-  { host: '/chat/', port: '' },
+  { host: '/', port: '' },
   { transports: ['websocket'] },
   {
     secure: true,

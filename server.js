@@ -20,13 +20,7 @@ const app = express();
 
 var http = require('http');
 var server = http.createServer(app);
-var io = require('socket.io')(server, {
-  path: '/chat/socket.io'
-});
-
-server.listen(PORT, function() {
-  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+var io = require('socket.io')(server);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -74,6 +68,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/api', router);
+
+server.listen(PORT, function() {
+  console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
 
 io.on('connect', function(socket) {
   console.log(socket.id);
