@@ -14,7 +14,7 @@ import SendIcon from '@material-ui/icons/CallMade';
 import compose from 'recompose/compose';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
-import io from 'socket.io-client';
+import SocketContext from '../../socket-context';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 // import * as Scroll from 'react-scroll';
@@ -93,10 +93,10 @@ class Article extends React.Component {
       comment: '',
       pastComments: []
     };
+  }
 
-    this.socket = io('http://localhost:3001');
-
-    this.socket.on('RECEIVE_COMMENT', function(data) {
+  componentDidMount() {
+    this.props.socket.on('RECEIVE_COMMENT', function(data) {
       addComment(data);
     });
 
@@ -122,7 +122,7 @@ class Article extends React.Component {
             comment: this.state.comment,
             time: moment().format('dddd, MMMM Do YYYY, h:mm a')
           });
-      this.socket.emit('SEND_COMMENT', message);
+      this.props.socket.emit('SEND_COMMENT', message);
       this.setState({ comment: '' });
     };
   }
@@ -205,6 +205,12 @@ class Article extends React.Component {
   }
 }
 
+const ArticleWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <Article {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
 Article.propTypes = {
   classes: PropTypes.object.isRequired
 };
@@ -215,4 +221,4 @@ export default compose(
     mapStateToProps,
     mapDispatchToProps
   )
-)(Article);
+)(ArticleWithSocket);

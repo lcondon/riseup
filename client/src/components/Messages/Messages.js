@@ -12,14 +12,19 @@ import withWidth from '@material-ui/core/withWidth';
 import SendIcon from '@material-ui/icons/Send';
 import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
-import io from 'socket.io-client';
 import * as Scroll from 'react-scroll';
 import uuidv4 from 'uuid/v4';
 import { connect } from 'react-redux';
+import { addUser } from '../../actions/addUser';
+import SocketContext from '../../socket-context';
 
 const mapStateToProps = state => {
   return { user: state.user.info, loggedIn: state.user.loggedIn };
 };
+
+const mapDispatchToProps = dispatch => ({
+  addUser: user => dispatch(addUser(user))
+});
 
 const styles = theme => ({
   root: {
@@ -93,16 +98,20 @@ var scroll = Scroll.animateScroll;
 class Messages extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       user: {},
       message: '',
       pastMessages: []
     };
+  }
 
-    this.socket = io('http://localhost:3001');
-
-    this.socket.on('RECEIVE_MESSAGE', function(data) {
+  componentDidMount() {
+    this.props.socket.emit('GET_USERS');
+    this.props.socket.on('SEND_USERS', data => {
+      console.log(data);
+    });
+    this.scrollToBottom();
+    this.props.socket.on('RECEIVE_MESSAGE', function(data) {
       // console.log(data)
       addMessage(data);
     });
@@ -115,16 +124,12 @@ class Messages extends React.Component {
     this.sendMessage = ev => {
       ev.preventDefault();
       scroll.scrollToBottom();
-      this.socket.emit('SEND_MESSAGE', {
+      this.props.socket.emit('SEND_MESSAGE', {
         user: this.props.user.firstName,
         message: this.state.message
       });
       this.setState({ message: '' });
     };
-  }
-
-  componentDidMount() {
-    this.scrollToBottom();
   }
 
   componentDidUpdate() {
@@ -243,6 +248,12 @@ class Messages extends React.Component {
   };
 }
 
+const MessagesWithSocket = props => (
+  <SocketContext.Consumer>
+    {socket => <Messages {...props} socket={socket} />}
+  </SocketContext.Consumer>
+);
+
 Messages.propTypes = {
   classes: PropTypes.object.isRequired
 };
@@ -252,6 +263,6 @@ export default compose(
   withWidth(),
   connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
   )
-)(Messages);
+)(MessagesWithSocket);
