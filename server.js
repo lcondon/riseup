@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === 'production') {
   app.disable('x-powered-by');
   app.use(compression());
   app.use(logger('common'));
-  app.use(express.static(path.resolve(__dirname, '../client/build')));
+  app.use(express.static(path.resolve(__dirname, './client/build')));
   app.use(function(req, res, next) {
     res.header(
       'Access-Control-Allow-Headers',
