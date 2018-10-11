@@ -20,12 +20,11 @@ import SocketContext from './socket-context';
 import io from 'socket.io-client';
 
 const socket = io(
-  { host: '/', port: '' },
+  { host: '/chat/', port: '' },
   { transports: ['websocket'] },
   {
     secure: true,
-    rejectUnauthorized: false,
-    path: '/chat/socket.io'
+    rejectUnauthorized: false
   }
 );
 
