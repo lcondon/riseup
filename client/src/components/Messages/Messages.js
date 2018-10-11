@@ -117,10 +117,21 @@ class Messages extends React.Component {
     this.updateQuote = () => {
       const startDate = moment("10/03/2018").format("MM DD YYYY");
       let dateDifference = moment().diff(startDate, "weeks") - 1;
-      this.setState({
-        famousQuote: quotes[dateDifference],
-        number: dateDifference
-      });
+      if (dateDifference > 9){
+        var dividend = Math.floor(dateDifference/9)
+        var minuend = dividend*9
+        let newDifference = dateDifference - minuend 
+        this.setState({
+          famousQuote: quotes[newDifference],
+          number: newDifference
+        });
+      } else {
+        this.setState({
+          famousQuote: quotes[dateDifference],
+          number: dateDifference
+        });
+      }
+  
     };
 
     this.socket = io("http://localhost:3001");
