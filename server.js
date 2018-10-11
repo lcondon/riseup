@@ -31,10 +31,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  );
+  // res.header(
+  //   'Access-Control-Allow-Headers',
+  //   'Origin, X-Requested-With, Content-Type, Accept'
+  // );
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
@@ -59,9 +59,9 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, './client/build/index.html'));
+// });
 
 app.use('/api', router);
 
@@ -85,6 +85,6 @@ io.on('connect', function(socket) {
   });
 });
 
-app.listen(PORT, function() {
+server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
