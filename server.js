@@ -61,6 +61,10 @@ app.use(passport.session());
 
 app.use('/api', router);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+
 io.on('connect', function(socket) {
   console.log(socket.id);
 
