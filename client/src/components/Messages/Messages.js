@@ -19,14 +19,7 @@ import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
 import quotes from './quotes.json';
 import moment from 'moment';
-
-const mapStateToProps = state => {
-  return { user: state.user.info };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -114,12 +107,12 @@ class Messages extends React.Component {
     };
 
     this.updateQuote = () => {
-      const startDate = moment("10/03/2018").format("MM DD YYYY");
-      let dateDifference = moment().diff(startDate, "weeks") - 1;
-      if (dateDifference > 9){
-        var dividend = Math.floor(dateDifference/9)
-        var minuend = dividend*9
-        let newDifference = dateDifference - minuend 
+      const startDate = moment('10/03/2018').format('MM DD YYYY');
+      let dateDifference = moment().diff(startDate, 'weeks') - 1;
+      if (dateDifference > 9) {
+        var dividend = Math.floor(dateDifference / 9);
+        var minuend = dividend * 9;
+        let newDifference = dateDifference - minuend;
         this.setState({
           famousQuote: quotes[newDifference],
           number: newDifference
@@ -130,7 +123,6 @@ class Messages extends React.Component {
           number: dateDifference
         });
       }
-
     };
   }
 
@@ -303,9 +295,5 @@ Messages.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(MessagesWithSocket);
+  withWidth()
+)(decorator(MessagesWithSocket));

@@ -8,17 +8,8 @@ import Divider from '@material-ui/core/Divider';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 import API from '../../utils/API';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import compose from 'recompose/compose';
-
-const mapStateToProps = state => {
-  return { user: state.user.info };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -464,10 +455,4 @@ Survey.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(Survey);
+export default compose(withStyles(styles))(decorator(Survey));

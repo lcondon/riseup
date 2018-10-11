@@ -13,17 +13,8 @@ import { withWidth } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
 import AlertDialog from '../Alert';
 import compose from 'recompose/compose';
-import { connect } from 'react-redux';
-import { dropUser } from '../../actions/dropUser';
 import API from '../../utils/API';
-
-const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
-};
-
-const mapDispatchToProps = dispatch => ({
-  dropUser: user => dispatch(dropUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -180,9 +171,5 @@ Profile.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(Profile);
+  withWidth()
+)(decorator(Profile));

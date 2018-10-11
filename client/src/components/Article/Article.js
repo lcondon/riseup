@@ -9,23 +9,11 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SendIcon from '@material-ui/icons/CallMade';
-// import { withWidth } from '@material-ui/core';
-// import API from '../../utils/API';
 import compose from 'recompose/compose';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
-// import * as Scroll from 'react-scroll';
-
-const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -215,10 +203,4 @@ Article.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(ArticleWithSocket);
+export default compose(withStyles(styles))(decorator(ArticleWithSocket));
