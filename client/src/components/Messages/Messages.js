@@ -17,6 +17,8 @@ import uuidv4 from 'uuid/v4';
 import { connect } from 'react-redux';
 import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
+import quotes from './quotes.json';
+import moment from 'moment';
 
 const mapStateToProps = state => {
   return { user: state.user.info };
