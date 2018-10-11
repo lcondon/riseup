@@ -6,16 +6,18 @@ const moment = require('moment');
 router
   .route('/')
   .get(function(req, res) {
-    db.Article.find({}).then(results => {
-      if (
-        results.length > 0 &&
-        moment().diff(results[results.length - 1].date, 'days') < 7
-      ) {
-        res.json(results[results.length - 1]);
-      } else {
-        res.sendStatus(404);
-      }
-    });
+    db.Article.find({})
+      .then(results => {
+        if (
+          results.length > 0 &&
+          moment().diff(results[results.length - 1].date, 'days') < 7
+        ) {
+          res.json(results[results.length - 1]);
+        } else {
+          res.json({ error: 'not found' });
+        }
+      })
+      .catch(error => res.json({ error: 'not found' }));
   })
   .post(function(req, res) {
     request.get(
