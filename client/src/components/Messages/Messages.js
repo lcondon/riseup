@@ -19,7 +19,7 @@ import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
 
 const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
+  return { user: state.user.info };
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -88,6 +88,11 @@ const styles = theme => ({
     height: 'fit-content',
     maxHeight: 300,
     fontFamily: 'Montserrat'
+  },
+  quoteAuthor: {
+    textAlign: 'center',
+    fontStyle: 'italic',
+    fontFamily: 'Montserrat'
   }
 });
 
@@ -101,7 +106,18 @@ class Messages extends React.Component {
     this.state = {
       user: {},
       message: '',
-      pastMessages: []
+      pastMessages: [],
+      famousQuote: {},
+      number: null
+    };
+
+    this.updateQuote = () => {
+      const startDate = moment('10/03/2018').format('MM DD YYYY');
+      let dateDifference = moment().diff(startDate, 'weeks') - 1;
+      this.setState({
+        famousQuote: quotes[dateDifference],
+        number: dateDifference
+      });
     };
   }
 
@@ -119,6 +135,15 @@ class Messages extends React.Component {
     const addMessage = data => {
       this.setState({ pastMessages: [...this.state.pastMessages, data] });
       console.log(this.state.pastMessages);
+    };
+
+    this.matchUser = () => {
+      let questionNumber = this.state.number;
+      console.log(questionNumber);
+      //Find username answer to questionNumber
+      //If true, then find user with false
+      //If false, then find user with true
+      //Match them and create roomName
     };
 
     this.sendMessage = ev => {
@@ -162,14 +187,19 @@ class Messages extends React.Component {
             </h1>
             <Divider />
             <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
-              Maybe a quote to discuss
+              {this.state.famousQuote.quote}
             </h2>
+            <p className={classes.quoteAuthor}>
+              --
+              {this.state.famousQuote.author}
+            </p>
             <p>{match.params.id}</p>
             <Grid container justify="center">
               <Button
                 className={classes.button}
                 id="submitCommentBtn"
                 variant="contained"
+                onClick={this.matchUser}
                 color="secondary">
                 Match Me
               </Button>
