@@ -16,20 +16,18 @@ import { mailFolderListItems, userFolderListItems } from '../NavBar/tileData';
 import { withWidth } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { connect } from 'react-redux';
-import { dropUser } from '../../actions/dropUser';
-import { addUser } from '../../actions/addUser';
+
 import compose from 'recompose/compose';
 import { withRouter } from 'react-router-dom';
+import decorator from '../../utils/decorator';
 
-const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user)),
-  dropUser: user => dispatch(dropUser(user))
-});
+// function select(state) {
+//   return state.user
+// }
+// function handleChange() {
+// select(store.getState())
+// }
+// ​
 
 const styles = theme => ({
   root: {
@@ -229,9 +227,5 @@ MenuAppBar.propTypes = {
 export default compose(
   withStyles(styles),
   withWidth(),
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(MenuAppBar);
+  withRouter
+)(decorator(MenuAppBar));
