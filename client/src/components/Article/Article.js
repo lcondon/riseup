@@ -139,11 +139,10 @@ class Article extends React.Component {
       if (result.data.error) {
         API.postArticle().then(result2 => {
           this.setState({ article: result2.data });
-          this.setState({ pastComments: result2.data.comments });
         });
       } else {
         this.setState({ article: result.data });
-        this.setState({ pastComments: result.data.comments });
+        this.setState({ pastComments: result.data.comments.reverse() });
       }
     });
   }
