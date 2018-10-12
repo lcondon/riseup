@@ -20,7 +20,7 @@ import decorator from './utils/decorator';
 import Messages from './components/Messages';
 
 const socket = io(
-  `${window.location.protocol()}://${window.location.host()}`,
+  { host: '/', port: '' },
   { path: '/socket.io' },
   { transports: ['websocket'] },
   {
