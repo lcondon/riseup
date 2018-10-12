@@ -20,7 +20,7 @@ const app = express();
 
 var http = require('http');
 var server = http.createServer(app);
-var io = require('socket.io')(server, { path: '/socket.io' });
+var io = require('socket.io').listen(server);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -77,7 +77,7 @@ server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-io.on('connect', function(socket) {
+io.sockets.on('connect', function(socket) {
   console.log(socket.id);
 
   socket.on('SEND_MESSAGE', function(data) {

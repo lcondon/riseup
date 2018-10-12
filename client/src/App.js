@@ -21,7 +21,6 @@ import Messages from './components/Messages';
 
 const socket = io(
   { host: '/', port: '' },
-  { path: '/socket.io' },
   { transports: ['websocket'] },
   {
     secure: true,
