@@ -14,6 +14,16 @@ import SocketContext from '../../socket-context';
 import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import decorator from '../../utils/decorator';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Slide from '@material-ui/core/Slide';
+import { Link } from 'react-router-dom';
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 const styles = theme => ({
   root: {
@@ -69,6 +79,13 @@ const styles = theme => ({
     fontFamily: 'Rubik',
     fontSize: 14,
     fontStyle: 'italic'
+  },
+  alertTitle: {
+    fontFamily: 'Rubik',
+    color: '#01163D !important',
+    marginTop: 20,
+    marginBottom: 10,
+    marginLeft: 20
   }
 });
 
@@ -79,11 +96,10 @@ class Article extends React.Component {
     this.state = {
       user: {},
       comment: '',
-      pastComments: []
+      pastComments: [],
+      open: false
     };
-  }
 
-  componentDidMount() {
     this.props.socket.on('RECEIVE_COMMENT', function(data) {
       addComment(data);
     });
@@ -97,23 +113,22 @@ class Article extends React.Component {
     this.postComment = ev => {
       ev.preventDefault();
       let message;
-      this.props.loggedIn
-        ? (message = {
-            user: this.props.user.firstName + ' ' + this.props.user.lastName,
-            userInitial: this.props.user.firstName.charAt(0),
-            comment: this.state.comment,
-            time: moment().format('dddd, MMMM Do YYYY, h:mm a')
-          })
-        : (message = {
-            user: 'Anonymous',
-            userInitial: 'A',
-            comment: this.state.comment,
-            time: moment().format('dddd, MMMM Do YYYY, h:mm a')
-          });
-      this.props.socket.emit('SEND_COMMENT', message);
-      this.setState({ comment: '' });
+      if (this.props.loggedIn) {
+        message = {
+          user: this.props.user.firstName + ' ' + this.props.user.lastName,
+          userInitial: this.props.user.firstName.charAt(0),
+          comment: this.state.comment,
+          time: moment().format('dddd, MMMM Do YYYY, h:mm a')
+        };
+        this.props.socket.emit('SEND_COMMENT', message);
+        this.setState({ comment: '' });
+      } else {
+        this.setState({ open: true });
+      }
     };
   }
+
+  componentDidMount() {}
 
   render() {
     const { classes } = this.props;
@@ -162,6 +177,39 @@ class Article extends React.Component {
               </Grid>
             </Grid>
           </Paper>
+          <div>
+            <Dialog
+              open={this.state.open}
+              TransitionComponent={Transition}
+              keepMounted
+              onClose={this.handleClose}
+              aria-labelledby="alert-dialog-slide-title"
+              aria-describedby="alert-dialog-slide-description">
+              {/* <DialogTitle> */}
+              <h2 className={classes.alertTitle}>Woops</h2>
+              {/* </DialogTitle> */}
+              <DialogContent>
+                <DialogContentText
+                  id="alert-dialog-slide-description"
+                  className={classes.body}>
+                  You must be logged in to comment.
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  onClick={() => this.handleClose}
+                  className={classes.button}
+                  color="primary">
+                  Cancel
+                </Button>
+                <Link style={{ textDecoration: 'none' }} to="/login">
+                  <Button className={classes.button} color="primary">
+                    Ok
+                  </Button>
+                </Link>
+              </DialogActions>
+            </Dialog>
+          </div>
           <div className="articleComments">
             {this.state.pastComments.map(comment => {
               return (

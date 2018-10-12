@@ -159,7 +159,7 @@ class Messages extends React.Component {
     ev.preventDefault();
     scroll.scrollToBottom();
     let message = {
-      user: this.props.user.firstName,
+      user: this.props.user,
       message: this.state.message
     };
     this.props.socket.emit('SEND_MESSAGE', message);
@@ -233,7 +233,7 @@ class Messages extends React.Component {
                   {this.state.pastMessages.map(message => {
                     return (
                       <div className={classes.singleUserMessage} key={uuidv4()}>
-                        <strong> {message.user} </strong>: {message.message}
+                        <strong> {message.user._id} </strong>: {message.message}
                       </div>
                     );
                   })}

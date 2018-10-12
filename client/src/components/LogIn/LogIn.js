@@ -66,19 +66,16 @@ class TextFields extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log(this.props.user);
+    console.log(this.props);
     event.preventDefault();
-    API.logInUser(this.state.email, this.state.password)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          this.props.actions.addUser(response.data);
-          this.props.history.push('/article');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    API.logInUser(this.state.email, this.state.password).then(response => {
+      console.log(response);
+      if (response.status === 200) {
+        this.props.actions.addUser(response.data);
+        this.props.actions.logIn(true);
+        this.props.history.push('/article');
+      }
+    });
 
     // axios
     //   .get('/logme')

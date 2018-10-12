@@ -20,8 +20,8 @@ const decorator = ComponentToDecorate => {
 
   return connect(
     state => ({
-      user: state.user.info,
-      loggedIn: state.user.loggedIn
+      user: state.user,
+      loggedIn: state.loggedIn
     }),
     dispatch => ({
       userActions: bindActionCreators(actions, dispatch)

@@ -11,7 +11,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withWidth } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-import AlertDialog from '../Alert';
+import AlertDialog from './ProfileAlert';
 import compose from 'recompose/compose';
 import API from '../../utils/API';
 import decorator from '../../utils/decorator';
@@ -73,11 +73,12 @@ class Profile extends React.Component {
   };
 
   handleDelete = id => {
-    this.props.actions.dropUser(true);
     console.log(this.props.user);
     API.deleteUser(id).then(results => {
+      this.props.actions.dropUser();
+      this.props.actions.logOut(false);
       console.log(results);
-      window.location.href = '/';
+      this.props.history.push(`/`);
     });
   };
 

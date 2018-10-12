@@ -94,7 +94,8 @@ class MenuAppBar extends React.Component {
   };
 
   handleSignOut = () => {
-    this.props.actions.dropUser(true);
+    this.props.actions.dropUser();
+    this.props.actions.logOut(false);
     this.props.history.push(`/`);
     axios.post('/api/users/logout').then(results => {
       // if (window.location.pathname === '/') {
