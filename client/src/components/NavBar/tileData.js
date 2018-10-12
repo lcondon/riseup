@@ -8,62 +8,79 @@ import PersonIcon from '@material-ui/icons/Person';
 import ArticleIcon from '@material-ui/icons/ViewCompact';
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Divider from '@material-ui/core/Divider';
+import { Link } from 'react-router-dom';
 
 export const mailFolderListItems = (
   <div>
-    <ListItem button component="a" href="/">
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="About Us" />
-    </ListItem>
-    <ListItem button component="a" href="/article">
-      <ListItemIcon>
-        <ArticleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Article of the Day" />
-    </ListItem>
-    <ListItem button component="a" href="/archive">
-      <ListItemIcon>
-        <ArchiveIcon />
-      </ListItemIcon>
-      <ListItemText primary="Past Articles" />
-    </ListItem>
+    <Link style={{ textDecoration: 'none' }} to="/">
+      <ListItem button>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/article">
+      <ListItem button>
+        <ListItemIcon>
+          <ArticleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Article of the Day" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/archive">
+      <ListItem button>
+        <ListItemIcon>
+          <ArchiveIcon />
+        </ListItemIcon>
+        <ListItemText primary="Past Articles" />
+      </ListItem>
+    </Link>
   </div>
 );
 
 export const userFolderListItems = (
   <div>
-    <ListItem button component="a" href="/">
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="About Us" />
-    </ListItem>
-    <ListItem button component="a" href="/article">
-      <ListItemIcon>
-        <ArticleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Article of the Day" />
-    </ListItem>
-    <ListItem button component="a" href="/archive">
-      <ListItemIcon>
-        <ArchiveIcon />
-      </ListItemIcon>
-      <ListItemText primary="Past Articles" />
-    </ListItem>
-    <ListItem button component="a" href="/messages">
-      <ListItemIcon>
-        <MailIcon />
-      </ListItemIcon>
-      <ListItemText primary="Messages" />
-    </ListItem>
+    <Link style={{ textDecoration: 'none' }} to="/">
+      <ListItem button>
+        <ListItemIcon>
+          <HomeIcon />
+        </ListItemIcon>
+        <ListItemText primary="About Us" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/article">
+      <ListItem button>
+        <ListItemIcon>
+          <ArticleIcon />
+        </ListItemIcon>
+        <ListItemText primary="Article of the Day" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/archive">
+      <ListItem button>
+        <ListItemIcon>
+          <ArchiveIcon />
+        </ListItemIcon>
+        <ListItemText primary="Past Articles" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/messages">
+      <ListItem button>
+        <ListItemIcon>
+          <MailIcon />
+        </ListItemIcon>
+        <ListItemText primary="Messages" />
+      </ListItem>
+    </Link>
     <Divider />
-    <ListItem button component="a" href="/profile">
-      <ListItemIcon>
-        <PersonIcon />
-      </ListItemIcon>
-      <ListItemText primary="Your Account" />
-    </ListItem>
+    <Link style={{ textDecoration: 'none' }} to="/profile">
+      <ListItem button>
+        <ListItemIcon>
+          <PersonIcon />
+        </ListItemIcon>
+        <ListItemText primary="Your Account" />
+      </ListItem>
+    </Link>
   </div>
 );

@@ -56,7 +56,9 @@ const styles = theme => ({
     fontFamily: 'Montserrat'
   },
   list: {
-    fontFamily: 'Montserrat'
+    fontFamily: 'Montserrat',
+    'text-decoration': 'none',
+    color: '#01163D'
   },
   button: {
     fontFamily: 'Montserrat'

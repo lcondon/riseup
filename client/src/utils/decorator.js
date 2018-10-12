@@ -1,19 +1,17 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { dropUser } from '../actions/dropUser';
-import { addUser } from '../actions/addUser';
+import * as actions from '../actions';
 
 const decorator = ComponentToDecorate => {
   class ComponentDecorated extends React.Component {
     render() {
-      const { user, loggedIn, addUser, dropUser, ...rest } = this.props;
+      const { user, loggedIn, userActions, ...rest } = this.props;
       return (
         <ComponentToDecorate
           user={user}
           loggedIn={loggedIn}
-          addUser={addUser}
-          dropUser={dropUser}
+          actions={userActions}
           {...rest}
         />
       );
@@ -26,8 +24,7 @@ const decorator = ComponentToDecorate => {
       loggedIn: state.user.loggedIn
     }),
     dispatch => ({
-      addUser: user => dispatch(addUser(user)),
-      dropUser: user => dispatch(dropUser(user))
+      userActions: bindActionCreators(actions, dispatch)
     })
   )(ComponentDecorated);
 };

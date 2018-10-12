@@ -7,8 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import API from '../../utils/API';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import compose from 'recompose/compose';
 import decorator from '../../utils/decorator';
 
@@ -74,7 +72,7 @@ class TextFields extends React.Component {
       .then(response => {
         console.log(response);
         if (response.status === 200) {
-          this.props.addUser(response.data);
+          this.props.actions.addUser(response.data);
           this.props.history.push('/article');
         }
       })

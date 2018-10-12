@@ -79,7 +79,7 @@ class Survey extends Component {
 
     API.updateUser(this.props.user._id, this.state).then(results => {
       console.log(results);
-      this.props.addUser(results.data);
+      this.props.actions.addUser(results.data);
       this.props.history.push('/messages');
     });
   };

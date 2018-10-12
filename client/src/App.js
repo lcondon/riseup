@@ -5,7 +5,6 @@ import SignUp from './components/SignUp';
 import LogIn from './components/LogIn';
 import Article from './components/Article';
 import Survey from './components/Survey';
-import Messages from './components/Messages';
 import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import Archive from './components/Archive';
@@ -13,11 +12,12 @@ import Archive from './components/Archive';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { withTheme } from '@material-ui/core/styles';
-import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SocketContext from './socket-context';
 import io from 'socket.io-client';
+import decorator from './utils/decorator';
+import Messages from './components/Messages';
 
 const socket = io(
   { host: '/', port: '' },
@@ -27,10 +27,6 @@ const socket = io(
     rejectUnauthorized: false
   }
 );
-
-const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
-};
 
 const theme = createMuiTheme({
   typography: {
@@ -80,7 +76,4 @@ class App extends React.Component {
   }
 }
 
-export default compose(
-  withTheme(),
-  connect(mapStateToProps)
-)(App);
+export default compose(withTheme())(decorator(App));

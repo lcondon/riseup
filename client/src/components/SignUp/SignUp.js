@@ -9,8 +9,6 @@ import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
 import API from '../../utils/API';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import decorator from '../../utils/decorator';
 
 const styles = theme => ({

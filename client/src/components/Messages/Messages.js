@@ -14,8 +14,6 @@ import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
 import * as Scroll from 'react-scroll';
 import uuidv4 from 'uuid/v4';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
 import quotes from './quotes.json';
 import moment from 'moment';
@@ -124,24 +122,21 @@ class Messages extends React.Component {
         });
       }
     };
-  }
-
-  componentDidMount() {
     this.props.socket.emit('GET_USERS');
     this.props.socket.on('SEND_USERS', data => {
       console.log(data);
     });
-    this.scrollToBottom();
+
     this.props.socket.on('RECEIVE_MESSAGE', function(data) {
       // console.log(data)
       addMessage(data);
     });
-
     const addMessage = data => {
-      this.setState({ pastMessages: [...this.state.pastMessages, data] });
+      this.setState(prevState => ({
+        pastMessages: [...prevState.pastMessages, data]
+      }));
       console.log(this.state.pastMessages);
     };
-
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
@@ -150,21 +145,26 @@ class Messages extends React.Component {
       //If false, then find user with true
       //Match them and create roomName
     };
+  }
 
-    this.sendMessage = ev => {
-      ev.preventDefault();
-      scroll.scrollToBottom();
-      this.props.socket.emit('SEND_MESSAGE', {
-        user: this.props.user.firstName,
-        message: this.state.message
-      });
-      this.setState({ message: '' });
-    };
+  componentDidMount() {
+    this.scrollToBottom();
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
   }
+
+  sendMessage = ev => {
+    ev.preventDefault();
+    scroll.scrollToBottom();
+    let message = {
+      user: this.props.user.firstName,
+      message: this.state.message
+    };
+    this.props.socket.emit('SEND_MESSAGE', message);
+    this.setState({ message: '' });
+  };
 
   scrollToBottom() {
     scroller.scrollTo('test1', {
