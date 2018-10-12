@@ -104,24 +104,6 @@ class Messages extends React.Component {
       number: null
     };
 
-    this.updateQuote = () => {
-      const startDate = moment('10/03/2018').format('MM DD YYYY');
-      let dateDifference = moment().diff(startDate, 'weeks') - 1;
-      if (dateDifference > 9) {
-        var dividend = Math.floor(dateDifference / 9);
-        var minuend = dividend * 9;
-        let newDifference = dateDifference - minuend;
-        this.setState({
-          famousQuote: quotes[newDifference],
-          number: newDifference
-        });
-      } else {
-        this.setState({
-          famousQuote: quotes[dateDifference],
-          number: dateDifference
-        });
-      }
-    };
     this.props.socket.emit('GET_USERS');
     this.props.socket.on('SEND_USERS', data => {
       console.log(data);
@@ -148,6 +130,22 @@ class Messages extends React.Component {
   }
 
   componentDidMount() {
+    const startDate = moment('10/03/2018').format('MM DD YYYY');
+    let dateDifference = moment().diff(startDate, 'weeks') - 1;
+    if (dateDifference > 9) {
+      var dividend = Math.floor(dateDifference / 9);
+      var minuend = dividend * 9;
+      let newDifference = dateDifference - minuend;
+      this.setState({
+        famousQuote: quotes[newDifference],
+        number: newDifference
+      });
+    } else {
+      this.setState({
+        famousQuote: quotes[dateDifference],
+        number: dateDifference
+      });
+    }
     this.scrollToBottom();
   }
 
@@ -233,7 +231,8 @@ class Messages extends React.Component {
                   {this.state.pastMessages.map(message => {
                     return (
                       <div className={classes.singleUserMessage} key={uuidv4()}>
-                        <strong> {message.user._id} </strong>: {message.message}
+                        <strong> {message.user.firstName} </strong>:{' '}
+                        {message.message}
                       </div>
                     );
                   })}
