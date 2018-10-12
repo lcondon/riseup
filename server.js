@@ -20,7 +20,7 @@ const app = express();
 
 var http = require('http');
 var server = http.createServer(app);
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, { path: '/socket.io' });
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
