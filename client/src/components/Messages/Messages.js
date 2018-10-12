@@ -127,7 +127,7 @@ class Messages extends React.Component {
       console.log(data);
     });
 
-    this.props.socket.on('RECEIVE_MESSAGE', function(data) {
+    this.props.socket.on('RECEIVE_MESSAGE', data => {
       // console.log(data)
       addMessage(data);
     });
