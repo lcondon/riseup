@@ -20,6 +20,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
+import API from '../../utils/API';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -97,7 +98,8 @@ class Article extends React.Component {
       user: {},
       comment: '',
       pastComments: [],
-      open: false
+      open: false,
+      article: {}
     };
 
     this.props.socket.on('RECEIVE_COMMENT', function(data) {
@@ -106,7 +108,7 @@ class Article extends React.Component {
 
     const addComment = data => {
       console.log(data);
-      this.setState({ pastComments: [data, ...this.state.pastComments] });
+      this.setState({ pastComments: [data.info, ...this.state.pastComments] });
       console.log(this.state.pastComments);
     };
 
@@ -115,10 +117,13 @@ class Article extends React.Component {
       let message;
       if (this.props.loggedIn) {
         message = {
-          user: this.props.user.firstName + ' ' + this.props.user.lastName,
-          userInitial: this.props.user.firstName.charAt(0),
-          comment: this.state.comment,
-          time: moment().format('dddd, MMMM Do YYYY, h:mm a')
+          info: {
+            user: this.props.user.firstName + ' ' + this.props.user.lastName,
+            userInitial: this.props.user.firstName.charAt(0),
+            comment: this.state.comment,
+            time: moment().format('dddd, MMMM Do YYYY, h:mm a')
+          },
+          articleId: this.state.article._id
         };
         this.props.socket.emit('SEND_COMMENT', message);
         this.setState({ comment: '' });
@@ -128,7 +133,20 @@ class Article extends React.Component {
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    API.getArticle().then(result => {
+      console.log(result);
+      if (result.data.error) {
+        API.postArticle().then(result2 => {
+          this.setState({ article: result2.data });
+          this.setState({ pastComments: result2.data.comments });
+        });
+      } else {
+        this.setState({ article: result.data });
+        this.setState({ pastComments: result.data.comments });
+      }
+    });
+  }
 
   render() {
     const { classes } = this.props;
@@ -137,7 +155,7 @@ class Article extends React.Component {
     return (
       <div className={classes.root}>
         <div className={classes.wrapper}>
-          <ArticleBody />
+          <ArticleBody article={this.state.article} />
           <Paper className={classes.paperComment}>
             <Grid
               container
@@ -177,39 +195,6 @@ class Article extends React.Component {
               </Grid>
             </Grid>
           </Paper>
-          <div>
-            <Dialog
-              open={this.state.open}
-              TransitionComponent={Transition}
-              keepMounted
-              onClose={this.handleClose}
-              aria-labelledby="alert-dialog-slide-title"
-              aria-describedby="alert-dialog-slide-description">
-              {/* <DialogTitle> */}
-              <h2 className={classes.alertTitle}>Woops</h2>
-              {/* </DialogTitle> */}
-              <DialogContent>
-                <DialogContentText
-                  id="alert-dialog-slide-description"
-                  className={classes.body}>
-                  You must be logged in to comment.
-                </DialogContentText>
-              </DialogContent>
-              <DialogActions>
-                <Button
-                  onClick={() => this.handleClose}
-                  className={classes.button}
-                  color="primary">
-                  Cancel
-                </Button>
-                <Link style={{ textDecoration: 'none' }} to="/login">
-                  <Button className={classes.button} color="primary">
-                    Ok
-                  </Button>
-                </Link>
-              </DialogActions>
-            </Dialog>
-          </div>
           <div className="articleComments">
             {this.state.pastComments.map(comment => {
               return (
@@ -235,6 +220,39 @@ class Article extends React.Component {
               );
             })}
           </div>
+        </div>
+        <div>
+          <Dialog
+            open={this.state.open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description">
+            {/* <DialogTitle> */}
+            <h2 className={classes.alertTitle}>Woops</h2>
+            {/* </DialogTitle> */}
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                className={classes.body}>
+                You must be logged in to comment.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => this.handleClose}
+                className={classes.button}
+                color="primary">
+                Cancel
+              </Button>
+              <Link style={{ textDecoration: 'none' }} to="/login">
+                <Button className={classes.button} color="primary">
+                  Ok
+                </Button>
+              </Link>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     );

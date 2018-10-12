@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-import API from '../../utils/API';
+
 const styles = theme => ({
   root: {
     marginTop: '10px',
@@ -48,20 +48,6 @@ const styles = theme => ({
 });
 
 class ArticleBody extends React.Component {
-  state = { article: {} };
-
-  componentDidMount() {
-    API.getArticle().then(result => {
-      console.log(result);
-      if (result.data.error) {
-        API.postArticle().then(result2 => {
-          this.setState({ article: result2.data });
-        });
-      } else {
-        this.setState({ article: result.data });
-      }
-    });
-  }
   render() {
     const { classes } = this.props;
     return (
@@ -71,27 +57,27 @@ class ArticleBody extends React.Component {
         </h1>
 
         <a
-          href={this.state.article.url}
+          href={this.props.article.url}
           target="_blank"
           rel="noreferrer noopener"
           className={classes.subtitle}>
           {' '}
           <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
-            {this.state.article.title}
+            {this.props.article.title}
           </h2>
         </a>
 
         <Divider />
         <Grid container justify="center">
           <img
-            src={this.state.article.image}
+            src={this.props.article.image}
             alt="Article"
             justify="center"
             className={classes.image}
           />
         </Grid>
         <p className={classes.body} style={{ textAlign: 'center' }}>
-          {this.state.article.text}
+          {this.props.article.text}
         </p>
       </Paper>
     );

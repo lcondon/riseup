@@ -86,6 +86,11 @@ io.sockets.on('connect', function(socket) {
   });
 
   socket.on('SEND_COMMENT', function(data) {
+    db.Article.findByIdAndUpdate(data.articleId, {
+      $push: { comments: data.info }
+    }).then(results => {
+      console.log(results);
+    });
     io.emit('RECEIVE_COMMENT', data);
     console.log(data);
   });
