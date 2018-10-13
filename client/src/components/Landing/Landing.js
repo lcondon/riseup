@@ -1,65 +1,65 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import { withStyles } from "@material-ui/core/styles";
-import PropTypes from "prop-types";
-import Divider from "@material-ui/core/Divider";
-import { withWidth } from "@material-ui/core";
-import compose from "recompose/compose";
-import { Link } from "react-router-dom";
-import anime from "animejs";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import { withStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
+import Divider from '@material-ui/core/Divider';
+import { withWidth } from '@material-ui/core';
+import compose from 'recompose/compose';
+import { Link } from 'react-router-dom';
+import anime from 'animejs';
 
 const styles = theme => ({
   root: {
-    marginTop: "10px",
-    overflow: "hidden",
+    marginTop: '10px',
+    overflow: 'hidden',
     // padding: `0 ${theme.spacing.unit * 3}px`,
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       padding: `0 ${theme.spacing.unit * 3}px`
     }
   },
   wrapper: {
     maxWidth: 1000,
-    marginLeft: "auto",
-    marginRight: "auto"
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
   paper: {
     margin: theme.spacing.unit * 2,
     padding: theme.spacing.unit * 4
   },
   img: {
-    [theme.breakpoints.up("xs")]: {
+    [theme.breakpoints.up('xs')]: {
       width: 350
     },
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       width: 500
     },
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up('md')]: {
       width: 550
     }
   },
   title: {
-    "font-family": "Rubik",
-    color: "#01163D",
+    'font-family': 'Rubik',
+    color: '#01163D',
     margin: 0,
-    [theme.breakpoints.up("xs")]: {
-      "font-size": 60
+    [theme.breakpoints.up('xs')]: {
+      'font-size': 60
     },
-    [theme.breakpoints.up("sm")]: {
-      "font-size": 80
+    [theme.breakpoints.up('sm')]: {
+      'font-size': 80
     },
-    [theme.breakpoints.up("md")]: {
-      "font-size": 100
+    [theme.breakpoints.up('md')]: {
+      'font-size': 100
     }
   },
   link: {
-    "text-decoration": "none",
-    "font-family": "Rubik",
-    color: "#01163D"
+    'text-decoration': 'none',
+    'font-family': 'Rubik',
+    color: '#01163D'
   },
   body: {
-    fontFamily: "Montserrat"
+    fontFamily: 'Montserrat'
   },
   imageSpace: {
     height: 400
@@ -67,26 +67,26 @@ const styles = theme => ({
 });
 
 const logStyles = {
-  width: "100%",
+  width: '100%',
   marginTop: 0,
   marginBottom: 0,
-  fontFamily: "Montserrat"
+  fontFamily: 'Montserrat'
 };
 
 const signStyles = {
-  width: "100%",
+  width: '100%',
   marginTop: 0,
   marginBottom: 0,
-  fontFamily: "Montserrat"
+  fontFamily: 'Montserrat'
 };
 
 class Landing extends React.Component {
   componentDidMount() {
     anime({
-      targets: "#logoDiv img",
-      rotate: "2turn",
+      targets: '#logoDiv img',
+      rotate: '2turn',
       duration: 2500,
-      easing: "easeOutSine"
+      easing: 'easeOutSine'
     });
     anime.speed = 0.75;
   }
@@ -110,27 +110,28 @@ class Landing extends React.Component {
             <Paper className={classes.paper}>
               <Grid container justify="center">
                 <Grid item xs={10}>
-                  <h1 style={{ textAlign: "center" }} className={classes.title}>
+                  <h1 style={{ textAlign: 'center' }} className={classes.title}>
                     riseUP
                   </h1>
                   <Divider />
                 </Grid>
                 <Grid item xs={12} sm={10}>
                   <p className={classes.body}>
-                    riseUp is a political application that seeks to match users
-                    with differing political opinions for meaningful discussions
-                    about today's issues.
-                  </p>
-                  <p className={classes.body}>
-                    While the Associated Press believes "Americans are more
-                    divided than ever," riseUp hopes to become a platform to
-                    bridge that gap. We seek to create connections that allow
-                    users to engage and debate issues in a productive manner.
-                  </p>
-                  <p className={classes.body}>
-                    Users will have the ability to comment on current political
-                    topics and significant historical events as well as message
-                    other users one-on-one for further discussions.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+                    libero metus, posuere quis odio sed, molestie ornare urna.
+                    Curabitur pulvinar vulputate augue ac blandit. Nulla dictum
+                    eu neque ac consectetur. Sed ut nisl ut lacus tincidunt
+                    bibendum eu ut velit. Donec eu leo ligula. Nullam posuere
+                    lobortis laoreet. Morbi maximus ultricies lorem, quis
+                    maximus ligula tincidunt in. Pellentesque habitant morbi
+                    tristique senectus et netus et malesuada fames ac turpis
+                    egestas. Maecenas condimentum, lacus nec egestas
+                    scelerisque, massa ligula ultrices mi, ac ullamcorper ante
+                    nisi at leo. Integer condimentum metus odio, vitae maximus
+                    nulla lobortis a. Quisque iaculis et nunc id pretium.
+                    Curabitur facilisis iaculis dapibus. Pellentesque dignissim
+                    velit ac lectus euismod, eu placerat est ultrices. Etiam ut
+                    mi feugiat, cursus.
                   </p>
                 </Grid>
                 <Grid container justify="center" spacing={8}>
@@ -140,8 +141,7 @@ class Landing extends React.Component {
                         id="landingLogBtn"
                         style={logStyles}
                         variant="contained"
-                        color="secondary"
-                      >
+                        color="secondary">
                         Login
                       </Button>
                     </Link>
@@ -152,8 +152,7 @@ class Landing extends React.Component {
                         id="landingSignBtn"
                         style={signStyles}
                         variant="contained"
-                        color="primary"
-                      >
+                        color="primary">
                         Sign Up
                       </Button>
                     </Link>
