@@ -19,7 +19,6 @@ import io from 'socket.io-client';
 import decorator from './utils/decorator';
 import Messages from './components/Messages';
 
-
 const socket = io(
   { host: '/', port: '' },
   {
