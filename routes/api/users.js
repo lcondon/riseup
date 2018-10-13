@@ -61,4 +61,8 @@ router.route('/logout').post(function(req, res) {
   res.redirect('/');
 });
 
+router.route('/match').post(function(req, res) {
+  db.User.find(responses[0], !req.body.data).then;
+});
+
 module.exports = router;

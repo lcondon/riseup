@@ -117,21 +117,20 @@ class Landing extends React.Component {
                 </Grid>
                 <Grid item xs={12} sm={10}>
                   <p className={classes.body}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                    libero metus, posuere quis odio sed, molestie ornare urna.
-                    Curabitur pulvinar vulputate augue ac blandit. Nulla dictum
-                    eu neque ac consectetur. Sed ut nisl ut lacus tincidunt
-                    bibendum eu ut velit. Donec eu leo ligula. Nullam posuere
-                    lobortis laoreet. Morbi maximus ultricies lorem, quis
-                    maximus ligula tincidunt in. Pellentesque habitant morbi
-                    tristique senectus et netus et malesuada fames ac turpis
-                    egestas. Maecenas condimentum, lacus nec egestas
-                    scelerisque, massa ligula ultrices mi, ac ullamcorper ante
-                    nisi at leo. Integer condimentum metus odio, vitae maximus
-                    nulla lobortis a. Quisque iaculis et nunc id pretium.
-                    Curabitur facilisis iaculis dapibus. Pellentesque dignissim
-                    velit ac lectus euismod, eu placerat est ultrices. Etiam ut
-                    mi feugiat, cursus.
+                    riseUp is a political application that seeks to match users
+                    with differing political opinions for meaningful discussions
+                    about today's issues.
+                  </p>
+                  <p className={classes.body}>
+                    While the Associated Press believes "Americans are more
+                    divided than ever," riseUp hopes to become a platform to
+                    bridge that gap. We seek to create connections that allow
+                    users to engage and debate issues in a productive manner.
+                  </p>
+                  <p className={classes.body}>
+                    Users will have the ability to comment on current political
+                    topics and significant historical events as well as message
+                    other users one-on-one for further discussions.
                   </p>
                 </Grid>
                 <Grid container justify="center" spacing={8}>
