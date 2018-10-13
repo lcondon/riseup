@@ -85,6 +85,7 @@ class TextFields extends React.Component {
       .then(response => {
         console.log(response);
         if (response.data._id) {
+          API.logInUser(this.props.user.email, this.props.user.password);
           this.props.actions.addUser(response.data);
           this.props.actions.logIn(true);
           this.props.history.push('/survey');
