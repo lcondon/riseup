@@ -9,16 +9,7 @@ import Divider from '@material-ui/core/Divider';
 import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
 import API from '../../utils/API';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
-
-const mapStateToProps = state => ({
-  ...state
-});
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -94,7 +85,8 @@ class TextFields extends React.Component {
       .then(response => {
         console.log(response);
         if (response.data._id) {
-          this.props.addUser(response.data);
+          this.props.actions.addUser(response.data);
+          this.props.actions.logIn(true);
           this.props.history.push('/survey');
         } else {
           console.log('no go');
@@ -201,9 +193,5 @@ TextFields.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(TextFields);
+  withWidth()
+)(decorator(TextFields));

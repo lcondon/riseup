@@ -11,19 +11,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withWidth } from '@material-ui/core';
 import Hidden from '@material-ui/core/Hidden';
-import AlertDialog from '../Alert';
+import AlertDialog from './ProfileAlert';
 import compose from 'recompose/compose';
-import { connect } from 'react-redux';
-import { dropUser } from '../../actions/dropUser';
 import API from '../../utils/API';
-
-const mapStateToProps = state => {
-  return { user: state.user.info, loggedIn: state.user.loggedIn };
-};
-
-const mapDispatchToProps = dispatch => ({
-  dropUser: user => dispatch(dropUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -82,11 +73,12 @@ class Profile extends React.Component {
   };
 
   handleDelete = id => {
-    this.props.dropUser(true);
     console.log(this.props.user);
     API.deleteUser(id).then(results => {
+      this.props.actions.dropUser();
+      this.props.actions.logOut(false);
       console.log(results);
-      window.location.href = '/';
+      this.props.history.push(`/`);
     });
   };
 
@@ -180,9 +172,5 @@ Profile.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(Profile);
+  withWidth()
+)(decorator(Profile));

@@ -39,7 +39,7 @@ router
             text: body.response.docs[0].snippet,
             url: body.response.docs[0].web_url,
             image:
-              `http://nytimes.com/${
+              `https://nytimes.com/${
                 body.response.docs[0].multimedia[17].url
               }` || null,
             date: moment().format()

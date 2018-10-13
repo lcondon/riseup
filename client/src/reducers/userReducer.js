@@ -1,22 +1,20 @@
-let initial = {
-  loggedIn: false,
-  info: {}
-};
-
-export default (state = initial, action) => {
+export const userReducer = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_USER':
-      return {
-        ...state,
-        loggedIn: true,
-        info: action.payload
-      };
+      return Object.assign({}, state, action.user);
     case 'DROP_USER':
-      return {
-        ...state,
-        loggedIn: false,
-        info: {}
-      };
+      return Object.assign({}, state, action.user);
+    default:
+      return state;
+  }
+};
+
+export const logInReducer = (state = false, action) => {
+  switch (action.type) {
+    case 'LOG_IN':
+      return true;
+    case 'LOG_OUT':
+      return false;
     default:
       return state;
   }

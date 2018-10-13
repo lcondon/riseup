@@ -14,19 +14,10 @@ import compose from 'recompose/compose';
 import Divider from '@material-ui/core/Divider';
 import * as Scroll from 'react-scroll';
 import uuidv4 from 'uuid/v4';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import SocketContext from '../../socket-context';
 import quotes from './quotes.json';
 import moment from 'moment';
-
-const mapStateToProps = state => {
-  return { user: state.user.info };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -114,44 +105,16 @@ class Messages extends React.Component {
       number: null
     };
 
-    this.updateQuote = () => {
-      const startDate = moment("10/03/2018").format("MM DD YYYY");
-      let dateDifference = moment().diff(startDate, "weeks") - 1;
-      if (dateDifference > 9){
-        var dividend = Math.floor(dateDifference/9)
-        var minuend = dividend*9
-        let newDifference = dateDifference - minuend 
-        this.setState({
-          famousQuote: quotes[newDifference],
-          number: newDifference
-        });
-      } else {
-        this.setState({
-          famousQuote: quotes[dateDifference],
-          number: dateDifference
-        });
-      }
-
-    };
-  }
-
-  componentDidMount() {
-    this.updateQuote();
-    this.props.socket.emit('GET_USERS');
-    this.props.socket.on('SEND_USERS', data => {
-      console.log(data);
-    });
-    this.scrollToBottom();
-    this.props.socket.on('RECEIVE_MESSAGE', function(data) {
+    this.props.socket.on('RECEIVE_MESSAGE', data => {
       // console.log(data)
       addMessage(data);
     });
-
     const addMessage = data => {
-      this.setState({ pastMessages: [...this.state.pastMessages, data] });
+      this.setState(prevState => ({
+        pastMessages: [...prevState.pastMessages, data]
+      }));
       console.log(this.state.pastMessages);
     };
-
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
@@ -166,21 +129,42 @@ class Messages extends React.Component {
       //If false, then find user with true
       //Match them and create roomName
     };
+  }
 
-    this.sendMessage = ev => {
-      ev.preventDefault();
-      scroll.scrollToBottom();
-      this.props.socket.emit('SEND_MESSAGE', {
-        user: this.props.user.firstName,
-        message: this.state.message
+  componentDidMount() {
+    const startDate = moment('10/03/2018').format('MM DD YYYY');
+    let dateDifference = moment().diff(startDate, 'weeks') - 1;
+    if (dateDifference > 9) {
+      var dividend = Math.floor(dateDifference / 9);
+      var minuend = dividend * 9;
+      let newDifference = dateDifference - minuend;
+      this.setState({
+        famousQuote: quotes[newDifference],
+        number: newDifference
       });
-      this.setState({ message: '' });
-    };
+    } else {
+      this.setState({
+        famousQuote: quotes[dateDifference],
+        number: dateDifference
+      });
+    }
+    this.scrollToBottom();
   }
 
   componentDidUpdate() {
     this.scrollToBottom();
   }
+
+  sendMessage = ev => {
+    ev.preventDefault();
+    scroll.scrollToBottom();
+    let message = {
+      user: this.props.user,
+      message: this.state.message
+    };
+    this.props.socket.emit('SEND_MESSAGE', message);
+    this.setState({ message: '' });
+  };
 
   scrollToBottom() {
     scroller.scrollTo('test1', {
@@ -249,7 +233,8 @@ class Messages extends React.Component {
                   {this.state.pastMessages.map(message => {
                     return (
                       <div className={classes.singleUserMessage} key={uuidv4()}>
-                        <strong> {message.user} </strong>: {message.message}
+                        <strong> {message.user.firstName} </strong>:{' '}
+                        {message.message}
                       </div>
                     );
                   })}
@@ -311,9 +296,5 @@ Messages.propTypes = {
 
 export default compose(
   withStyles(styles),
-  withWidth(),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(MessagesWithSocket);
+  withWidth()
+)(decorator(MessagesWithSocket));

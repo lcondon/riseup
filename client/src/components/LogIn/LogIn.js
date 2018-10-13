@@ -7,17 +7,8 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import API from '../../utils/API';
-import { connect } from 'react-redux';
-import { addUser } from '../../actions/addUser';
 import compose from 'recompose/compose';
-
-const mapStateToProps = state => {
-  return { user: state.user, article: state.article };
-};
-
-const mapDispatchToProps = dispatch => ({
-  addUser: user => dispatch(addUser(user))
-});
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -75,19 +66,16 @@ class TextFields extends React.Component {
   };
 
   handleSubmit = event => {
-    console.log(this.props.user);
+    console.log(this.props);
     event.preventDefault();
-    API.logInUser(this.state.email, this.state.password)
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          this.props.addUser(response.data);
-          this.props.history.push('/article');
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    API.logInUser(this.state.email, this.state.password).then(response => {
+      console.log(response);
+      if (response.status === 200) {
+        this.props.actions.addUser(response.data);
+        this.props.actions.logIn(true);
+        this.props.history.push('/article');
+      }
+    });
 
     // axios
     //   .get('/logme')
@@ -179,10 +167,4 @@ TextFields.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default compose(
-  withStyles(styles),
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
-)(TextFields);
+export default compose(withStyles(styles))(decorator(TextFields));
