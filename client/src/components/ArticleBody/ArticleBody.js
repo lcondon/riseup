@@ -69,12 +69,12 @@ class ArticleBody extends React.Component {
 
         <Divider />
         <Grid container justify="center">
-          <img
+        {this.props.article.image && <img
             src={this.props.article.image}
             alt="Article"
             justify="center"
             className={classes.image}
-          />
+          />}
         </Grid>
         <p className={classes.body} style={{ textAlign: 'center' }}>
           {this.props.article.text}
