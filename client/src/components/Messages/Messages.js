@@ -107,6 +107,7 @@ class Messages extends React.Component {
     super(props);
     this.state = {
       user: {},
+      userObject: {},
       message: '',
       pastMessages: [],
       famousQuote: {},
@@ -135,6 +136,7 @@ class Messages extends React.Component {
   }
 
   componentDidMount() {
+    this.updateQuote();
     this.props.socket.emit('GET_USERS');
     this.props.socket.on('SEND_USERS', data => {
       console.log(data);
@@ -153,6 +155,12 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
+      let userAnswer = this.props.user.responses[questionNumber]
+      if (userAnswer){
+
+      } else if (!userAnswer){
+        
+      }
       //Find username answer to questionNumber
       //If true, then find user with false
       //If false, then find user with true

@@ -18,9 +18,9 @@ const router = require('./routes');
 
 const app = express();
 
-var http = require('http');
-var server = http.createServer(app);
-var io = require('socket.io')(server);
+// var http = require('http');
+// var server = http.createServer(app);
+// var io = require('socket.io')(server);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -73,29 +73,29 @@ app.use(passport.session());
 
 app.use('/api', router);
 
-server.listen(PORT, function() {
+app.listen(4040, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-io.on('connect', function(socket) {
-  console.log(socket.id);
+// io.on('connect', function(socket) {
+//   console.log(socket.id);
 
-  socket.on('SEND_MESSAGE', function(data) {
-    io.emit('RECEIVE_MESSAGE', data);
-    console.log(data);
-  });
+//   socket.on('SEND_MESSAGE', function(data) {
+//     io.emit('RECEIVE_MESSAGE', data);
+//     console.log(data);
+//   });
 
-  socket.on('SEND_COMMENT', function(data) {
-    io.emit('RECEIVE_COMMENT', data);
-    console.log(data);
-  });
+//   socket.on('SEND_COMMENT', function(data) {
+//     io.emit('RECEIVE_COMMENT', data);
+//     console.log(data);
+//   });
 
-  socket.on('GET_USERS', function(data) {
-    db.Article.find({}).then(results => {
-      io.emit('SEND_USERS', results);
-    });
-  });
-});
+//   socket.on('GET_USERS', function(data) {
+//     db.Article.find({}).then(results => {
+//       io.emit('SEND_USERS', results);
+//     });
+//   });
+// });
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, './client/build/index.html'));

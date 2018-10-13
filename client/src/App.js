@@ -19,9 +19,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SocketContext from './socket-context';
 import io from 'socket.io-client';
 
-const socket = io(
-  { host: '/', port: '' },
-  { transports: ['websocket'] },
+const socket = io('http://localhost:3001',
   {
     secure: true,
     rejectUnauthorized: false
