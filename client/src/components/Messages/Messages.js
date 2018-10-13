@@ -123,14 +123,15 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
-      
 
-      console.log(this.props.user);
+      console.log(this.props.user._id);
+
       API.getMatch({
-        number: this.state.number
+        number: this.state.number,
+        user: this.props.user
       }).then(result => {
-        this.props.socket.emit('join', 4);
-        console.log(result);
+        console.log(result.data.room);
+        this.props.socket.emit('join', result.data.room);
       });
       //Find username answer to questionNumber
       //If true, then find user with false
@@ -227,7 +228,7 @@ class Messages extends React.Component {
             style={{ height: 'inherit' }}
             direction="row">
             <Grid item xs={3} className={classes.sideBar}>
-              <SideBar class={classes.sideBar} />
+              <SideBar user={this.state.user} class={classes.sideBar} />
             </Grid>
             <Grid
               item

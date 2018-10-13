@@ -91,14 +91,13 @@ class Archive extends React.Component {
                       titlePosition="bottom"
                       actionIcon={
                         <IconButton className={classes.icon}>
-                          <Link
-                            to={tile.url}
+                          <a
+                            href={tile.url}
                             target="_blank"
-                            rel="noreferrer noopener"
-                            className={classes.subtitle}>
+                            rel="noreferrer noopener">
                             {' '}
                             <LaunchIcon />
-                          </Link>
+                          </a>
                         </IconButton>
                       }
                       actionPosition="left"

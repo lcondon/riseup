@@ -14,7 +14,8 @@ export default {
   getMatch: function(userData) {
     console.log(userData);
     return axios.post('/api/users/match', {
-      number: userData.number
+      number: userData.number,
+      user: userData.user
     });
   },
   // Deletes the book with the given id

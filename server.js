@@ -78,24 +78,23 @@ server.listen(PORT, function() {
 });
 
 io.sockets.on('connect', function(socket) {
-//HERE IS ALL THE NEW STUFF
+  //HERE IS ALL THE NEW STUFF
 
-//socket.io for messages
+  //socket.io for messages
   let room;
 
-  socket.on('join', (roomID)=>{
+  socket.on('join', roomID => {
     console.log(roomID);
     room = `room${roomID}`;
-    socket.join(room)
-  })
+    socket.join(room);
+  });
 
   console.log(socket.id);
 
-  socket.on('SEND_MESSAGE', (data) => {
-    io.to(room).emit('RECEIVE_MESSAGE', data)
+  socket.on('SEND_MESSAGE', data => {
+    io.to(room).emit('RECEIVE_MESSAGE', data);
     console.log(data);
-});
-
+  });
 
   //NEW STUFF ENDS HERE
 

@@ -62,19 +62,26 @@ router.route('/logout').post(function(req, res) {
 });
 
 router.route('/match').post(function(req, res) {
-  console.log(req.body.number);
-  console.log(req.user);
+  console.log(req.body.user._id);
+  // console.log(req.user);
 
   let response = `check${req.body.number}`;
   db.User.find({}).then(results => {
     let matches = results.filter(
       user =>
-        user.responses[req.body.number] !== req.user.responses[req.body.number]
+        user.responses[req.body.number] !==
+        req.body.user.responses[req.body.number]
     );
-    console.log(matches);
+    // console.log(matches);
     if (matches.length > 0) {
       let index = Math.floor(Math.random() * matches.length);
-      res.json(matches[index]);
+      let roomId = req.body.user._id + matches[index]._id;
+      db.User.updateMany(
+        { _id: [req.body.user._id, matches[index]._id] },
+        {
+          $push: { conversationIds: roomId }
+        }
+      ).then(res.json({ match: matches[index], room: roomId }));
     } else {
       res.json({ error: 'no matches' });
     }
