@@ -18,6 +18,7 @@ import SocketContext from '../../socket-context';
 import quotes from './quotes.json';
 import moment from 'moment';
 import decorator from '../../utils/decorator';
+import API from '../../utils/API';
 
 const styles = theme => ({
   root: {
@@ -122,11 +123,18 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
+      console.log(this.props.user);
+      API.getMatch({
+        number: this.state.number
+      }).then(result => {
+        console.log(result);
+      });
       //Find username answer to questionNumber
       //If true, then find user with false
       //If false, then find user with true
       //Match them and create roomName
     };
+    this.matchUser = this.matchUser.bind(this);
   }
 
   componentDidMount() {

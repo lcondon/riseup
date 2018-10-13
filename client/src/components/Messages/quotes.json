@@ -1,53 +1,52 @@
 [
-    {
-      "number": 1,
-      "author": "Mike Pence",
-      "quote": "If Planned Parenthood wants to be involved in providing counseling services and HIV testing, they ought not be in the business of providing abortions."
-    },
-    {
-        "number": 2,
-        "author": "Nancy Reagan",
-        "quote": "I believe that more people would be alive today if there were a death penalty."
-      },
-      {
-        "number": 3,
-        "author": "Barack Obama",
-        "quote": "In the wealthiest nation on Earth, no one should go broke just because they get sick."
-      },
-      {
-        "number": 4,
-        "author": "Ludwig von Mises",
-        "quote": "The Welfare State is merely a method for transforming the market economy step by step into socialism."
-      },
-      {
-        "number": 5,
-        "author": "Mitt Romney",
-        "quote": "You balance the budget by restraining the growth of government and encouraging the growth of the private sector."
-      },
-      {
-        "number": 6,
-        "author": "Al Gore",
-        "quote": "People need to stop financing denial of climate change."
-      },
-      {
-        "number": 7,
-        "author": "Thomas Jefferson",
-        "quote": "Our liberty depends on the freedom of the press, and that cannot be limited without being lost."
-      },
-      {
-        "number": 8,
-        "author": "Carly Fiorina",
-        "quote": "I do not agree that the court can or should redefine marriage."
-      },
-      {
-        "number": 9,
-        "author": "John F. Kennedy",
-        "quote": "Everywhere immigrants have enriched and strengthened the fabric of American life."
-      },
-      {
-        "number": 10,
-        "author": "Joe Lieberman",
-        "quote": "The stronger our gun control laws are, the fewer acts of violence."
-      }
-  ]
-
+  {
+    "number": 1,
+    "author": "Mike Pence",
+    "quote": "If Planned Parenthood wants to be involved in providing counseling services and HIV testing, they ought not be in the business of providing abortions."
+  },
+  {
+    "number": 2,
+    "author": "Nancy Reagan",
+    "quote": "I believe that more people would be alive today if there were a death penalty."
+  },
+  {
+    "number": 3,
+    "author": "Barack Obama",
+    "quote": "In the wealthiest nation on Earth, no one should go broke just because they get sick."
+  },
+  {
+    "number": 4,
+    "author": "Ludwig von Mises",
+    "quote": "The Welfare State is merely a method for transforming the market economy step by step into socialism."
+  },
+  {
+    "number": 5,
+    "author": "Mitt Romney",
+    "quote": "You balance the budget by restraining the growth of government and encouraging the growth of the private sector."
+  },
+  {
+    "number": 6,
+    "author": "Al Gore",
+    "quote": "People need to stop financing denial of climate change."
+  },
+  {
+    "number": 7,
+    "author": "Thomas Jefferson",
+    "quote": "Our liberty depends on the freedom of the press, and that cannot be limited without being lost."
+  },
+  {
+    "number": 8,
+    "author": "Carly Fiorina",
+    "quote": "I do not agree that the court can or should redefine marriage."
+  },
+  {
+    "number": 9,
+    "author": "John F. Kennedy",
+    "quote": "Everywhere immigrants have enriched and strengthened the fabric of American life."
+  },
+  {
+    "number": 10,
+    "author": "Joe Lieberman",
+    "quote": "The stronger our gun control laws are, the fewer acts of violence."
+  }
+]

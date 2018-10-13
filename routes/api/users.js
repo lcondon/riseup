@@ -62,7 +62,23 @@ router.route('/logout').post(function(req, res) {
 });
 
 router.route('/match').post(function(req, res) {
-  db.User.find(responses[0], !req.body.data).then;
+  console.log(req.body.number);
+  console.log(req.user);
+
+  let response = `check${req.body.number}`;
+  db.User.find({}).then(results => {
+    let matches = results.filter(
+      user =>
+        user.responses[req.body.number] !== req.user.responses[req.body.number]
+    );
+    console.log(matches);
+    if (matches.length > 0) {
+      let index = Math.floor(Math.random() * matches.length);
+      res.json(matches[index]);
+    } else {
+      res.json({ error: 'no matches' });
+    }
+  });
 });
 
 module.exports = router;

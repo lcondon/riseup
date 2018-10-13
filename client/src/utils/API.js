@@ -1,4 +1,5 @@
 import axios from 'axios';
+// import { func } from 'prop-types';
 
 export default {
   // Gets all books
@@ -8,6 +9,13 @@ export default {
   // Gets the book with the given id
   getUser: function() {
     return axios.get('/api/users/loggedin');
+  },
+
+  getMatch: function(userData) {
+    console.log(userData);
+    return axios.post('/api/users/match', {
+      number: userData.number
+    });
   },
   // Deletes the book with the given id
   updateUser: function(id, responses) {
