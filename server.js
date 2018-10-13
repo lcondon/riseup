@@ -78,13 +78,35 @@ server.listen(PORT, function() {
 });
 
 io.sockets.on('connect', function(socket) {
+//HERE IS ALL THE NEW STUFF
+
+//socket.io for messages
+  let room;
+
+  socket.on('join', (roomID)=>{
+    console.log(roomID);
+    room = `room${roomID}`;
+    socket.join(room)
+  })
+
   console.log(socket.id);
 
-  socket.on('SEND_MESSAGE', function(data) {
-    io.emit('RECEIVE_MESSAGE', data);
+  socket.on('SEND_MESSAGE', (data) => {
+    io.to(room).emit('RECEIVE_MESSAGE', data)
     console.log(data);
-  });
+});
 
+
+  //NEW STUFF ENDS HERE
+
+  // console.log(socket.id);
+
+  // socket.on('SEND_MESSAGE', function(data) {
+  //   io.emit('RECEIVE_MESSAGE', data);
+  //   console.log(data);
+  // });
+
+  //SOCKET.IO for articles
   socket.on('SEND_COMMENT', function(data) {
     db.Article.findByIdAndUpdate(data.articleId, {
       $push: { comments: data.info }

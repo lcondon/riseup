@@ -122,6 +122,7 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
+      this.props.socket.emit('join', 4);
       //Find username answer to questionNumber
       //If true, then find user with false
       //If false, then find user with true
