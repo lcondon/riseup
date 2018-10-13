@@ -77,12 +77,14 @@ class Survey extends Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    API.updateUser(this.props.user._id, this.state).then(results => {
-      console.log(results);
-      this.props.actions.addUser(results.data);
-      this.props.actions.logIn(true);
-      this.props.history.push('/messages');
-    });
+    API.updateUser(this.props.user._id, Object.values(this.state)).then(
+      results => {
+        console.log(results);
+        this.props.actions.addUser(results.data);
+        this.props.actions.logIn(true);
+        this.props.history.push('/messages');
+      }
+    );
   };
 
   render() {
