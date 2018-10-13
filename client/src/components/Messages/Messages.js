@@ -123,10 +123,13 @@ class Messages extends React.Component {
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
+      
+
       console.log(this.props.user);
       API.getMatch({
         number: this.state.number
       }).then(result => {
+        this.props.socket.emit('join', 4);
         console.log(result);
       });
       //Find username answer to questionNumber
