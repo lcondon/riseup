@@ -82,18 +82,31 @@ io.sockets.on('connect', function(socket) {
 
   //socket.io for messages
   let room;
+  let roomId;
 
   socket.on('join', roomID => {
     console.log(roomID);
     room = `room${roomID}`;
+    roomId = roomID;
     socket.join(room);
+  });
+
+  socket.on('leave', roomID => {
+    console.log(roomID);
+    socket.leave(room);
   });
 
   console.log(socket.id);
 
   socket.on('SEND_MESSAGE', data => {
+    console.log('data' + data);
+    console.log('room' + room);
+    db.Message.findByIdAndUpdate(roomId, {
+      $push: { messages: data.message }
+    }).then(results => {
+      console.log(results);
+    });
     io.to(room).emit('RECEIVE_MESSAGE', data);
-    console.log(data);
   });
 
   //NEW STUFF ENDS HERE
@@ -114,12 +127,6 @@ io.sockets.on('connect', function(socket) {
     });
     io.emit('RECEIVE_COMMENT', data);
     console.log(data);
-  });
-
-  socket.on('GET_USERS', function(data) {
-    db.Article.find({}).then(results => {
-      io.emit('SEND_USERS', results);
-    });
   });
 });
 

@@ -6,8 +6,7 @@ const userSchema = new Schema({
   lastName: { type: String, required: true },
   email: String,
   password: { type: String, required: true },
-  responses: { type: Object },
-  conversationIds: { type: Array }
+  responses: { type: Object }
 });
 
 const User = mongoose.model('User', userSchema);

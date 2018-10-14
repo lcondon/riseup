@@ -3,11 +3,14 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import SideBar from '../SideBar';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Hidden from '@material-ui/core/Hidden';
+import { Avatar } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Button from '@material-ui/core/Button';
-import Hidden from '@material-ui/core/Hidden';
 import withWidth from '@material-ui/core/withWidth';
 import SendIcon from '@material-ui/icons/Send';
 import compose from 'recompose/compose';
@@ -73,6 +76,13 @@ const styles = theme => ({
     overflowY: 'scroll',
     overflowX: 'hidden'
   },
+  textBody: {
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
+  listBody: {
+    overflowY: 'hidden'
+  },
   singleUserMessage: {
     marginBottom: 10,
     fontFamily: 'Montserrat'
@@ -98,32 +108,27 @@ class Messages extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: {},
       message: '',
       pastMessages: [],
+      conversations: [],
       famousQuote: {},
+      currentConversation: '',
       number: null
     };
-
-    this.props.socket.emit('GET_USERS');
-    this.props.socket.on('SEND_USERS', data => {
-      console.log(data);
-    });
-
     this.props.socket.on('RECEIVE_MESSAGE', data => {
-      // console.log(data)
       addMessage(data);
     });
+
     const addMessage = data => {
       this.setState(prevState => ({
         pastMessages: [...prevState.pastMessages, data]
       }));
       console.log(this.state.pastMessages);
     };
+
     this.matchUser = () => {
       let questionNumber = this.state.number;
       console.log(questionNumber);
-
       console.log(this.props.user._id);
 
       API.getMatch({
@@ -131,17 +136,20 @@ class Messages extends React.Component {
         user: this.props.user
       }).then(result => {
         console.log(result.data.room);
-        this.props.socket.emit('join', result.data.room);
+        if (result.data.room) {
+          this.props.socket.emit('join', result.data.room);
+          this.setState({ currentConversation: result.data.room });
+        }
       });
-      //Find username answer to questionNumber
-      //If true, then find user with false
-      //If false, then find user with true
-      //Match them and create roomName
     };
     this.matchUser = this.matchUser.bind(this);
   }
 
   componentDidMount() {
+    API.getConversations(this.props.user._id).then(results => {
+      console.log(results.data);
+      this.setState({ conversations: results.data });
+    });
     const startDate = moment('10/03/2018').format('MM DD YYYY');
     let dateDifference = moment().diff(startDate, 'weeks') - 1;
     if (dateDifference > 9) {
@@ -169,11 +177,20 @@ class Messages extends React.Component {
     ev.preventDefault();
     scroll.scrollToBottom();
     let message = {
-      user: this.props.user,
+      user: this.props.user.firstName,
       message: this.state.message
     };
     this.props.socket.emit('SEND_MESSAGE', message);
     this.setState({ message: '' });
+  };
+
+  handleLeave = room => {
+    this.props.socket.emit('leave');
+    this.handleJoin(room);
+  };
+
+  handleJoin = room => {
+    this.props.socket.emit('join', room._id);
   };
 
   scrollToBottom() {
@@ -228,7 +245,24 @@ class Messages extends React.Component {
             style={{ height: 'inherit' }}
             direction="row">
             <Grid item xs={3} className={classes.sideBar}>
-              <SideBar user={this.state.user} class={classes.sideBar} />
+              <div className={classes.listBody}>
+                {this.state.conversations.map(conversation => {
+                  return (
+                    <ListItem
+                      key={conversation._id}
+                      onClick={this.handleLeave(conversation)}
+                      button>
+                      <Avatar className={classes.textBody}>
+                        {conversation.userIds[0].firstName ===
+                        this.props.user.firstName
+                          ? conversation.userIds[1].firstName.charAt(0)
+                          : conversation.userIds[0].firstName.charAt(0)}
+                      </Avatar>
+                      <Divider />
+                    </ListItem>
+                  );
+                })}
+              </div>
             </Grid>
             <Grid
               item
@@ -243,8 +277,7 @@ class Messages extends React.Component {
                   {this.state.pastMessages.map(message => {
                     return (
                       <div className={classes.singleUserMessage} key={uuidv4()}>
-                        <strong> {message.user.firstName} </strong>:{' '}
-                        {message.message}
+                        <strong> {message.user} </strong>: {message.message}
                       </div>
                     );
                   })}

@@ -18,6 +18,15 @@ export default {
       user: userData.user
     });
   },
+
+  getConversations: function(userData) {
+    return axios.get(`/api/messages/${userData}`);
+  },
+
+  sendMessage: function(data) {
+    console.log(data);
+    return axios.post(`/api/messages/${data.room}`, { message: data.message });
+  },
   // Deletes the book with the given id
   updateUser: function(id, responses) {
     return axios.put('/api/users', {
