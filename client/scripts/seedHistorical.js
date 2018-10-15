@@ -3,6 +3,22 @@ const db = require("../models");
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/riseUp");
 
+
+// To add more
+// {
+//   title: '',
+//   date: '',
+// day: 3,
+// month: month-1,
+//   text:
+//    '',
+//   url:
+//     '',
+//   comments: { type: Array }
+// },
+
+
+
 const historicalSeed = [
   {
     title: "Emancipation Proclamation goes into effect",
@@ -213,63 +229,6 @@ const historicalSeed = [
       'https://www.history.com/this-day-in-history/president-bill-clinton-signs-the-digital-millennium-copyright-act-into-law',
     comments: { type: Array }
   },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-  {
-    title: '',
-    date: '',
-    text:
-     '',
-    url:
-      '',
-    comments: { type: Array }
-  },
-
-
-
   {
     title: "Barack Obama elected as America’s first black president",
     date: "11/04/2008",
