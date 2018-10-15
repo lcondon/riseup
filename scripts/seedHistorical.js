@@ -134,7 +134,7 @@ const historicalSeed = [
   {
     title: 'U.S. takes possession of Alaska',
     date: '10/18/1867',
-    day: 18,
+    day: 15,
     month: 9,
     text:
       'On this day in 1867, the U.S. formally takes possession of Alaska after purchasing the territory from Russia for $7.2 million, or less than two cents an acre. The Alaska purchase comprised 586,412 square miles, about twice the size of Texas, and was championed by William Henry Seward, the enthusiasticly expansionist secretary of state under President Andrew Johnson.',

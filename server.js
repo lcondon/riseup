@@ -119,7 +119,7 @@ io.sockets.on('connect', function(socket) {
     }).then(results => {
       console.log(results);
     });
-    io.emit('RECEIVE_PAST_COMMENT', data);
+    io.emit('RECEIVE_PAST_COMMENT', data.info);
     console.log(data);
   });
 });

@@ -7,6 +7,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import PersonIcon from '@material-ui/icons/Person';
 import ArticleIcon from '@material-ui/icons/ViewCompact';
 import ArchiveIcon from '@material-ui/icons/Archive';
+import HistoryIcon from '@material-ui/icons/CalendarToday';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 
@@ -36,6 +37,14 @@ export const mailFolderListItems = (
         <ListItemText primary="Past Articles" />
       </ListItem>
     </Link>
+    <Link style={{ textDecoration: 'none' }} to="/history">
+      <ListItem button>
+        <ListItemIcon>
+          <HistoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="This Day in History" />
+      </ListItem>
+    </Link>
   </div>
 );
 
@@ -63,6 +72,14 @@ export const userFolderListItems = (
           <ArchiveIcon />
         </ListItemIcon>
         <ListItemText primary="Past Articles" />
+      </ListItem>
+    </Link>
+    <Link style={{ textDecoration: 'none' }} to="/history">
+      <ListItem button>
+        <ListItemIcon>
+          <HistoryIcon />
+        </ListItemIcon>
+        <ListItemText primary="This Day in History" />
       </ListItem>
     </Link>
     <Link style={{ textDecoration: 'none' }} to="/messages">

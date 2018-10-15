@@ -14,6 +14,8 @@ import decorator from '../../utils/decorator';
 import { Link } from 'react-router-dom';
 import API from '../../utils/API';
 import Divider from '@material-ui/core/Divider';
+import Avatar from '@material-ui/core/Avatar';
+import uuidv4 from 'uuid';
 
 const styles = theme => ({
   root: {
@@ -85,12 +87,13 @@ class Historical extends React.Component {
     };
 
     this.props.socket.on('RECEIVE_PAST_COMMENT', function(data) {
+      console.log(data);
       addComment(data);
     });
 
     const addComment = data => {
       console.log(data);
-      this.setState({ pastComments: [data.info, ...this.state.pastComments] });
+      this.setState({ pastComments: [data, ...this.state.pastComments] });
       console.log(this.state.pastComments);
     };
 
@@ -129,7 +132,7 @@ class Historical extends React.Component {
         <div className={classes.wrapper}>
           <Paper className={classes.paper}>
             <h1 style={{ textAlign: 'center' }} className={classes.title}>
-              Article of the Day:
+              This Day in History:
             </h1>
 
             <a
@@ -187,6 +190,31 @@ class Historical extends React.Component {
               </Grid>
             </Grid>
           </Paper>
+          <div className="articleComments">
+            {this.state.pastComments.map(comment => {
+              return (
+                <Paper className={classes.paper} key={uuidv4()}>
+                  <Grid
+                    alignItems="center"
+                    container
+                    wrap="nowrap"
+                    spacing={16}>
+                    <Grid item>
+                      <Avatar className={classes.body}>
+                        {comment.userInitial}
+                      </Avatar>
+                    </Grid>
+                    <Grid item xs>
+                      <p className={classes.body}>{comment.comment}</p>
+                      <p className={classes.commentAuthor}>
+                        {comment.user} on {comment.time}
+                      </p>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
