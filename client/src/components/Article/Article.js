@@ -11,7 +11,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import SendIcon from '@material-ui/icons/CallMade';
 import compose from 'recompose/compose';
 import SocketContext from '../../socket-context';
-import uuidv4 from 'uuid/v4';
 import moment from 'moment';
 import decorator from '../../utils/decorator';
 import Dialog from '@material-ui/core/Dialog';
@@ -21,6 +20,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
 import API from '../../utils/API';
+import uuidv4 from 'uuid';
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -134,7 +134,6 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
-    console.log(uuidv4());
     API.getArticle().then(result => {
       console.log(result);
       if (result.data.error) {

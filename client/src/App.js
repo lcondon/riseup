@@ -18,6 +18,7 @@ import SocketContext from './socket-context';
 import io from 'socket.io-client';
 import decorator from './utils/decorator';
 import Messages from './components/Messages';
+import Historical from './components/Historical/Historical';
 
 const socket = io(
   { host: '/', port: '' },
@@ -66,6 +67,7 @@ class App extends React.Component {
                 <Route path="/messages" component={Messages} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/archive" component={Archive} />
+                <Route exact path="/history" component={Historical} />
                 <Route component={NotFound} />
               </Switch>
             </SocketContext.Provider>

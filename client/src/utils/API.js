@@ -20,6 +20,10 @@ export default {
     });
   },
 
+  getHistoricalArticle: function(date) {
+    return axios.get('/api/articles/historical');
+  },
+
   getConversations: function(userData) {
     return axios.get(`/api/messages/${userData}`);
   },

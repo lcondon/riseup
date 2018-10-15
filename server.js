@@ -89,12 +89,6 @@ io.sockets.on('connect', function(socket) {
     socket.join(room);
   });
 
-  socket.on('leave', roomID => {
-    console.log('socket.rom' + socket.room);
-    console.log(roomID);
-    socket.leave(room);
-  });
-
   console.log(socket.id);
 
   socket.on('SEND_MESSAGE', data => {
@@ -108,15 +102,6 @@ io.sockets.on('connect', function(socket) {
     io.to(room).emit('RECEIVE_MESSAGE', data);
   });
 
-  //NEW STUFF ENDS HERE
-
-  // console.log(socket.id);
-
-  // socket.on('SEND_MESSAGE', function(data) {
-  //   io.emit('RECEIVE_MESSAGE', data);
-  //   console.log(data);
-  // });
-
   //SOCKET.IO for articles
   socket.on('SEND_COMMENT', function(data) {
     db.Article.findByIdAndUpdate(data.articleId, {
@@ -125,6 +110,16 @@ io.sockets.on('connect', function(socket) {
       console.log(results);
     });
     io.emit('RECEIVE_COMMENT', data);
+    console.log(data);
+  });
+
+  socket.on('SEND_PAST_COMMENT', function(data) {
+    db.Historical.findByIdAndUpdate(data.articleId, {
+      $push: { comments: data.info }
+    }).then(results => {
+      console.log(results);
+    });
+    io.emit('RECEIVE_PAST_COMMENT', data);
     console.log(data);
   });
 });
