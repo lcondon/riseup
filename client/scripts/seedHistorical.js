@@ -5,6 +5,15 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/riseUp");
 
 const historicalSeed = [
   {
+    title: "Emancipation Proclamation goes into effect",
+    date: "01/01/1863",
+    text:
+      "During the American Civil War, President Abraham Lincoln issues the Emancipation Proclamation, calling on the Union army to liberate all slaves in states still in rebellion as “an act of justice, warranted by the Constitution, upon military necessity.” These three million slaves were declared to be “then, thenceforward, and forever free.” The proclamation exempted the border slave states that remained in the Union at the start of the Civil War and all or parts of three Confederate states controlled by the Union army.",
+    url:
+      "https://www.history.com/this-day-in-history/emancipation-proclamation-goes-into-effect",
+    comments: { type: Array }
+  },
+  {
     title: "Supreme Court legalizes abortion",
     date: "01/22/1973",
     text:
@@ -163,19 +172,104 @@ const historicalSeed = [
     title: "U.N. formally established",
     date: "10/24/1945",
     text:
-      'Less than two months after the end of World War II, the United Nations is formally established with the ratification of the United Nations Charter by the five permanent members of the Security Council and a majority of other signatories.',
-    url:
-      "https://www.history.com/this-day-in-history/u-n-formally-established",
+      "Less than two months after the end of World War II, the United Nations is formally established with the ratification of the United Nations Charter by the five permanent members of the Security Council and a majority of other signatories.",
+    url: "https://www.history.com/this-day-in-history/u-n-formally-established",
     comments: { type: Array }
   },
   {
     title: "Cabinet member guilty in Teapot Dome scandal",
     date: "10/25/1929",
     text:
-      'During the Teapot Dome scandal, Albert B. Fall, who served as secretary of the interior in President Warren G. Harding’s cabinet, is found guilty of accepting a bribe while in office. Fall was the first individual to be convicted of a crime committed while a presidential cabinet member.',
-    url: "https://www.history.com/this-day-in-history/cabinet-member-guilty-in-teapot-dome-scandal",
+      "During the Teapot Dome scandal, Albert B. Fall, who served as secretary of the interior in President Warren G. Harding’s cabinet, is found guilty of accepting a bribe while in office. Fall was the first individual to be convicted of a crime committed while a presidential cabinet member.",
+    url:
+      "https://www.history.com/this-day-in-history/cabinet-member-guilty-in-teapot-dome-scandal",
     comments: { type: Array }
   },
+
+  {
+    title: 'George W. Bush signs the Patriot Act',
+    date: '10/26/2001',
+    text:
+     'On this day in 2001, President George W. Bush signs the Patriot Act, an anti-terrorism law drawn up in response to the attacks on the Pentagon and World Trade Center on September 11, 2001.',
+    url:
+      'https://www.history.com/this-day-in-history/george-w-bush-signs-the-patriot-act',
+    comments: { type: Array }
+  },
+  {
+    title: 'The United States and Soviet Union step back from brink of nuclear war',
+    date: '10/27/1962',
+    text:
+     'Complicated and tension-filled negotiations between the United States and the Soviet Union finally result in a plan to end the two-week-old Cuban Missile Crisis. A frightening period in which nuclear holocaust seemed imminent began to come to an end.',
+    url:
+      'https://www.history.com/this-day-in-history/the-united-states-and-soviet-union-step-back-from-brink-of-nuclear-war',
+    comments: { type: Array }
+  },
+  {
+    title: 'President Bill Clinton signs the Digital Millennium Copyright Act into law',
+    date: '10/28/1998',
+    text:
+     'According to an ABC news report, it was none other than the pop icon Prince himself who happened upon a 29-second home video of a toddler cavorting to a barely audible background soundtrack of his 1984 hit “Let’s Go Crazy” and subsequently instigated a high-profile legal showdown involving YouTube, the Universal Music Group and a Pennsylvania housewife named Stephanie Lenz. Like the lawsuits that eventually shut down Napster, the case involved a piece of federal legislation that has helped establish a legal minefield surrounding the use of digital music in the age of the Internet. That legislation, called the Digital Millennium Copyright Act (DMCA), was signed into law by President Bill Clinton on this day in 1998.',
+    url:
+      'https://www.history.com/this-day-in-history/president-bill-clinton-signs-the-digital-millennium-copyright-act-into-law',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+  {
+    title: '',
+    date: '',
+    text:
+     '',
+    url:
+      '',
+    comments: { type: Array }
+  },
+
+
+
   {
     title: "Barack Obama elected as America’s first black president",
     date: "11/04/2008",
