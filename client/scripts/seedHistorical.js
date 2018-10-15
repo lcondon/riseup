@@ -134,12 +134,12 @@ const historicalSeed = [
     comments: { type: Array }
   },
   {
-    title: "Guggenheim Museum opens in New York City",
-    date: "10/21/1959",
+    title: "100,000 people march on the Pentagon",
+    date: "10/21/1967",
     text:
-      "On this day in 1959, on New York City’s Fifth Avenue, thousands of people line up outside a bizarrely shaped white concrete building that resembled a giant upside-down cupcake. It was opening day at the new Guggenheim Museum, home to one of the world’s top collections of contemporary art.",
+      "Demonstrators including radicals, liberals, black nationalists, hippies, professors, women’s groups, and war veterans march on the Pentagon.",
     url:
-      "https://www.history.com/this-day-in-history/guggenheim-museum-opens-in-new-york-city",
+      "https://www.history.com/this-day-in-history/100000-people-march-on-the-pentagon",
     comments: { type: Array }
   },
   {
@@ -151,29 +151,29 @@ const historicalSeed = [
     comments: { type: Array }
   },
   {
-    title: "Hostage crisis in Moscow theater",
-    date: "10/23/2002",
+    title: "An abortion-performing doctor is murdered",
+    date: "10/23/1998",
     text:
-      "On October 23, 2002, about 50 Chechen rebels storm a Moscow theater, taking up to 700 people hostage during a sold-out performance of a popular musical.",
+      "Doctor Barnett Slepian is shot to death inside his home in Amherst, New York, by an anti-abortion radical, marking the fifth straight year that a doctor who was willing to perform abortions in upstate New York and Canada had been the victim of a sniper attack. Slepian and his family had just returned from religious services at their synagogue when a bullet shattered the kitchen window and struck him in the back. Each of the five attacks, the first four of which did not result in fatal wounds, occurred in late October or early November. It is believed that the dates were intentionally picked to center around Canada’s Remembrance Day (November 11).",
     url:
-      "https://www.history.com/this-day-in-history/hostage-crisis-in-moscow-theater",
+      "https://www.history.com/this-day-in-history/an-abortion-performing-doctor-is-murdered",
     comments: { type: Array }
   },
   {
-    title: "First barrel ride down Niagara Falls",
-    date: "10/24/1901",
+    title: "U.N. formally established",
+    date: "10/24/1945",
     text:
-      "On this day in 1901, a 63-year-old schoolteacher named Annie Edson Taylor becomes the first person to take the plunge over Niagara Falls in a barrel.",
+      'Less than two months after the end of World War II, the United Nations is formally established with the ratification of the United Nations Charter by the five permanent members of the Security Council and a majority of other signatories.',
     url:
-      "https://www.history.com/this-day-in-history/first-barrel-ride-down-niagara-falls",
+      "https://www.history.com/this-day-in-history/u-n-formally-established",
     comments: { type: Array }
   },
   {
-    title: "Pablo Picasso born",
-    date: "10/25/1881",
+    title: "Cabinet member guilty in Teapot Dome scandal",
+    date: "10/25/1929",
     text:
-      "Pablo Picasso, one of the greatest and most influential artists of the 20th century, is born in Malaga, Spain.",
-    url: "https://www.history.com/this-day-in-history/pablo-picasso-born",
+      'During the Teapot Dome scandal, Albert B. Fall, who served as secretary of the interior in President Warren G. Harding’s cabinet, is found guilty of accepting a bribe while in office. Fall was the first individual to be convicted of a crime committed while a presidential cabinet member.',
+    url: "https://www.history.com/this-day-in-history/cabinet-member-guilty-in-teapot-dome-scandal",
     comments: { type: Array }
   },
   {
