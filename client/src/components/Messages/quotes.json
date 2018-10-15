@@ -2,51 +2,61 @@
   {
     "number": 1,
     "author": "Mike Pence",
-    "quote": "If Planned Parenthood wants to be involved in providing counseling services and HIV testing, they ought not be in the business of providing abortions."
+    "quote": "If Planned Parenthood wants to be involved in providing counseling services and HIV testing, they ought not be in the business of providing abortions.",
+    "topic": "Women's Health"
   },
   {
     "number": 2,
     "author": "Nancy Reagan",
-    "quote": "I believe that more people would be alive today if there were a death penalty."
+    "quote": "I believe that more people would be alive today if there were a death penalty.",
+    "topic": "Death Penalty"
   },
   {
     "number": 3,
     "author": "Barack Obama",
-    "quote": "In the wealthiest nation on Earth, no one should go broke just because they get sick."
+    "quote": "In the wealthiest nation on Earth, no one should go broke just because they get sick.",
+    "topic": "Healthcare"
   },
   {
     "number": 4,
     "author": "Ludwig von Mises",
-    "quote": "The Welfare State is merely a method for transforming the market economy step by step into socialism."
+    "quote": "The Welfare State is merely a method for transforming the market economy step by step into socialism.",
+    "topic": "Social Welfare"
   },
   {
     "number": 5,
     "author": "Mitt Romney",
-    "quote": "You balance the budget by restraining the growth of government and encouraging the growth of the private sector."
+    "quote": "You balance the budget by restraining the growth of government and encouraging the growth of the private sector.",
+    "topic": "Economy"
   },
   {
     "number": 6,
     "author": "Al Gore",
-    "quote": "People need to stop financing denial of climate change."
+    "quote": "People need to stop financing denial of climate change.",
+    "topic": "Environmental Issues"
   },
   {
     "number": 7,
     "author": "Thomas Jefferson",
-    "quote": "Our liberty depends on the freedom of the press, and that cannot be limited without being lost."
+    "quote": "Our liberty depends on the freedom of the press, and that cannot be limited without being lost.",
+    "topic": "Censorship"
   },
   {
     "number": 8,
     "author": "Carly Fiorina",
-    "quote": "I do not agree that the court can or should redefine marriage."
+    "quote": "I do not agree that the court can or should redefine marriage.",
+    "topic": "Gay Marriage"
   },
   {
     "number": 9,
     "author": "John F. Kennedy",
-    "quote": "Everywhere immigrants have enriched and strengthened the fabric of American life."
+    "quote": "Everywhere immigrants have enriched and strengthened the fabric of American life.",
+    "topic": "Immigration"
   },
   {
     "number": 10,
     "author": "Joe Lieberman",
-    "quote": "The stronger our gun control laws are, the fewer acts of violence."
+    "quote": "The stronger our gun control laws are, the fewer acts of violence.",
+    "topic": "Gun Control"
   }
 ]

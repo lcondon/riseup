@@ -78,13 +78,11 @@ server.listen(PORT, function() {
 });
 
 io.sockets.on('connect', function(socket) {
-  //HERE IS ALL THE NEW STUFF
-
-  //socket.io for messages
   let room;
   let roomId;
 
   socket.on('join', roomID => {
+    socket.leaveAll();
     console.log(roomID);
     room = `room${roomID}`;
     roomId = roomID;
@@ -92,6 +90,7 @@ io.sockets.on('connect', function(socket) {
   });
 
   socket.on('leave', roomID => {
+    console.log('socket.rom' + socket.room);
     console.log(roomID);
     socket.leave(room);
   });
@@ -102,7 +101,7 @@ io.sockets.on('connect', function(socket) {
     console.log('data' + data);
     console.log('room' + room);
     db.Message.findByIdAndUpdate(roomId, {
-      $push: { messages: data.message }
+      $push: { messages: { message: data.message, user: data.user } }
     }).then(results => {
       console.log(results);
     });

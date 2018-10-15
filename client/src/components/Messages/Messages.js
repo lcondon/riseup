@@ -133,16 +133,30 @@ class Messages extends React.Component {
 
       API.getMatch({
         number: this.state.number,
-        user: this.props.user
+        user: this.props.user,
+        topic: this.state.famousQuote.topic
       }).then(result => {
         console.log(result.data.room);
         if (result.data.room) {
           this.props.socket.emit('join', result.data.room);
-          this.setState({ currentConversation: result.data.room });
+          API.getConversations(this.props.user._id).then(results => {
+            console.log(results.data);
+            this.setState({ conversations: results.data });
+          });
         }
       });
     };
     this.matchUser = this.matchUser.bind(this);
+    this.changeRoom = room => {
+      console.log(room);
+      this.props.socket.emit('join', room);
+      for (let i = 0; i < this.state.conversations.length; i++) {
+        if (this.state.conversations[i]._id === room) {
+          this.setState({ pastMessages: this.state.conversations[i].messages });
+        }
+      }
+    };
+    this.changeRoom = this.changeRoom.bind(this);
   }
 
   componentDidMount() {
@@ -182,15 +196,6 @@ class Messages extends React.Component {
     };
     this.props.socket.emit('SEND_MESSAGE', message);
     this.setState({ message: '' });
-  };
-
-  handleLeave = room => {
-    this.props.socket.emit('leave');
-    this.handleJoin(room);
-  };
-
-  handleJoin = room => {
-    this.props.socket.emit('join', room._id);
   };
 
   scrollToBottom() {
@@ -250,7 +255,10 @@ class Messages extends React.Component {
                   return (
                     <ListItem
                       key={conversation._id}
-                      onClick={this.handleLeave(conversation)}
+                      onClick={ev => {
+                        ev.preventDefault();
+                        this.changeRoom(conversation._id);
+                      }}
                       button>
                       <Avatar className={classes.textBody}>
                         {conversation.userIds[0].firstName ===

@@ -15,7 +15,8 @@ export default {
     console.log(userData);
     return axios.post('/api/users/match', {
       number: userData.number,
-      user: userData.user
+      user: userData.user,
+      topic: userData.topic
     });
   },
 
