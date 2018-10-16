@@ -229,7 +229,7 @@ class Article extends React.Component {
             aria-labelledby="alert-dialog-slide-title"
             aria-describedby="alert-dialog-slide-description">
             {/* <DialogTitle> */}
-            <h2 className={classes.alertTitle}>Woops</h2>
+            <h2 className={classes.alertTitle}>Whoops</h2>
             {/* </DialogTitle> */}
             <DialogContent>
               <DialogContentText

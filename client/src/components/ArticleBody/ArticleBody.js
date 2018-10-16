@@ -21,7 +21,11 @@ const styles = theme => ({
   image: {
     marginLeft: 'auto',
     marginRight: 'auto',
-    marginTop: 25
+    marginTop: 25,
+    [theme.breakpoints.down('md')]: {
+      width: '80%',
+      height: '80%'
+    }
   },
   paper: {
     margin: theme.spacing.unit * 2,
@@ -69,12 +73,14 @@ class ArticleBody extends React.Component {
 
         <Divider />
         <Grid container justify="center">
-        {this.props.article.image && <img
-            src={this.props.article.image}
-            alt="Article"
-            justify="center"
-            className={classes.image}
-          />}
+          {this.props.article.image && (
+            <img
+              src={this.props.article.image}
+              alt="Article"
+              justify="center"
+              className={classes.image}
+            />
+          )}
         </Grid>
         <p className={classes.body} style={{ textAlign: 'center' }}>
           {this.props.article.text}

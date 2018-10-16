@@ -9,6 +9,7 @@ import { withWidth } from '@material-ui/core';
 import compose from 'recompose/compose';
 import { Link } from 'react-router-dom';
 import anime from 'animejs';
+import decorator from '../../utils/decorator';
 
 const styles = theme => ({
   root: {
@@ -133,30 +134,32 @@ class Landing extends React.Component {
                     other users one-on-one for further discussions.
                   </p>
                 </Grid>
-                <Grid container justify="center" spacing={8}>
-                  <Grid item xs={12} sm={5}>
-                    <Link to="/login" className={classes.link}>
-                      <Button
-                        id="landingLogBtn"
-                        style={logStyles}
-                        variant="contained"
-                        color="secondary">
-                        Login
-                      </Button>
-                    </Link>
+                {this.props.loggedIn ? null : (
+                  <Grid container justify="center" spacing={8}>
+                    <Grid item xs={12} sm={5}>
+                      <Link to="/login" className={classes.link}>
+                        <Button
+                          id="landingLogBtn"
+                          style={logStyles}
+                          variant="contained"
+                          color="secondary">
+                          Login
+                        </Button>
+                      </Link>
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                      <Link to="/signup" className={classes.link}>
+                        <Button
+                          id="landingSignBtn"
+                          style={signStyles}
+                          variant="contained"
+                          color="primary">
+                          Sign Up
+                        </Button>
+                      </Link>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} sm={5}>
-                    <Link to="/signup" className={classes.link}>
-                      <Button
-                        id="landingSignBtn"
-                        style={signStyles}
-                        variant="contained"
-                        color="primary">
-                        Sign Up
-                      </Button>
-                    </Link>
-                  </Grid>
-                </Grid>
+                )}
               </Grid>
             </Paper>
           </div>
@@ -173,4 +176,4 @@ Landing.propTypes = {
 export default compose(
   withStyles(styles),
   withWidth()
-)(Landing);
+)(decorator(Landing));

@@ -16,6 +16,15 @@ import API from '../../utils/API';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
 import uuidv4 from 'uuid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import Slide from '@material-ui/core/Slide';
+
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
 
 const styles = theme => ({
   root: {
@@ -29,6 +38,11 @@ const styles = theme => ({
     maxWidth: 1000,
     marginLeft: 'auto',
     marginRight: 'auto'
+  },
+  image: {
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: 25
   },
   paper: {
     margin: theme.spacing.unit * 2,
@@ -56,6 +70,8 @@ const styles = theme => ({
     fontFamily: 'Montserrat'
   },
   textField: {
+    // marginLeft: theme.spacing.unit * 2,
+    // marginRight: theme.spacing.unit,
     width: '100%',
     fontFamily: 'Montserrat',
     flexBasis: 200
@@ -215,6 +231,39 @@ class Historical extends React.Component {
               );
             })}
           </div>
+        </div>
+        <div>
+          <Dialog
+            open={this.state.open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description">
+            {/* <DialogTitle> */}
+            <h2 className={classes.alertTitle}>Whoops</h2>
+            {/* </DialogTitle> */}
+            <DialogContent>
+              <DialogContentText
+                id="alert-dialog-slide-description"
+                className={classes.body}>
+                You must be logged in to comment.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => this.handleClose}
+                className={classes.button}
+                color="primary">
+                Cancel
+              </Button>
+              <Link style={{ textDecoration: 'none' }} to="/login">
+                <Button className={classes.button} color="primary">
+                  Ok
+                </Button>
+              </Link>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
     );
