@@ -251,12 +251,6 @@ class Historical extends React.Component {
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button
-                onClick={() => this.handleClose}
-                className={classes.button}
-                color="primary">
-                Cancel
-              </Button>
               <Link style={{ textDecoration: 'none' }} to="/login">
                 <Button className={classes.button} color="primary">
                   Ok

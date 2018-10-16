@@ -244,7 +244,7 @@ class Survey extends Component {
               </Grid>
               <Grid item xs>
                 <p className={classes.text}>
-                  Government budgets should always be cut regardless of which
+                  Government budgets should always be balanced regardless of which
                   programs have to be cut.
                 </p>
               </Grid>
