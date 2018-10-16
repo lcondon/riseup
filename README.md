@@ -5,13 +5,15 @@ This is the third project for the University of Richmond Coding Bootcamp.
 For this three-week project, we were required to build and deploy a full stack application to Heroku. The application needed to use two new technologies and have a MVC folder structure. 
 
 Click on the following link to preview the completed assignment:
-Coming Soon! 
+http://rise-up-2018.herokuapp.com/ 
 
 # Team Members
 * [Lucas Condon](https://github.com/lcondon)
 * [Kate Gibbs](https://github.com/gibbsk12)
 
 Click here to see the status of our project and our future development goals:
+https://tinyurl.com/riseup2018
+
 
 # Built With 
 * HTML5
