@@ -79,7 +79,6 @@ class Survey extends Component {
 
     API.updateUser(this.props.user._id, Object.values(this.state)).then(
       results => {
-        console.log(results);
         this.props.actions.addUser(results.data);
         this.props.actions.logIn(true);
         this.props.history.push('/messages');
@@ -244,8 +243,8 @@ class Survey extends Component {
               </Grid>
               <Grid item xs>
                 <p className={classes.text}>
-                  Government budgets should always be balanced regardless of which
-                  programs have to be cut.
+                  Government budgets should always be balanced regardless of
+                  which programs have to be cut.
                 </p>
               </Grid>
               <Grid item xs={16}>

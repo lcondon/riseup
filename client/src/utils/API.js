@@ -12,7 +12,6 @@ export default {
   },
 
   getMatch: function(userData) {
-    console.log(userData);
     return axios.post('/api/users/match', {
       number: userData.number,
       user: userData.user,
@@ -29,7 +28,6 @@ export default {
   },
 
   sendMessage: function(data) {
-    console.log(data);
     return axios.post(`/api/messages/${data.room}`, { message: data.message });
   },
   // Deletes the book with the given id

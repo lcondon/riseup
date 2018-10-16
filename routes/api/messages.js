@@ -8,7 +8,6 @@ router
     db.Message.find({ userIds: req.params.id })
       .populate('userIds')
       .exec((err, user) => {
-        console.log(user);
         res.json(user);
       });
   })

@@ -107,9 +107,7 @@ class Article extends React.Component {
     });
 
     const addComment = data => {
-      console.log(data);
       this.setState({ pastComments: [data.info, ...this.state.pastComments] });
-      console.log(this.state.pastComments);
     };
 
     this.postComment = ev => {
@@ -134,9 +132,7 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match);
     API.getArticle().then(result => {
-      console.log(result);
       if (result.data.error) {
         API.postArticle().then(result2 => {
           this.setState({ article: result2.data });

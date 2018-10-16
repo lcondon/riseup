@@ -85,7 +85,6 @@ class PastArticle extends React.Component {
 
   componentDidMount() {
     API.getPastArticle(this.props.match.params.id).then(result => {
-      console.log(result);
       this.setState({ article: result.data });
       this.setState({ pastComments: result.data.comments.reverse() });
     });

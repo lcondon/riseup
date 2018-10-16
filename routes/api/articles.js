@@ -53,11 +53,7 @@ router
     );
   })
   .delete(function(req, res) {
-    console.log(1);
-    console.log(req.body.id);
-    console.log(2);
     db.User.findByIdAndDelete(req.body.id).then(function(results) {
-      console.log(results);
       res.json(results);
     });
   });
@@ -69,11 +65,8 @@ router.route('/archive').get(function(req, res) {
 });
 
 router.route('/historical').get((req, res) => {
-  console.log(moment().date());
-  console.log(moment().month());
   db.Historical.find({ day: moment().date(), month: moment().month() }).then(
     result => {
-      console.log(result);
       res.json(result);
     }
   );

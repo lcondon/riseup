@@ -103,14 +103,11 @@ class Historical extends React.Component {
     };
 
     this.props.socket.on('RECEIVE_PAST_COMMENT', function(data) {
-      console.log(data);
       addComment(data);
     });
 
     const addComment = data => {
-      console.log(data);
       this.setState({ pastComments: [data, ...this.state.pastComments] });
-      console.log(this.state.pastComments);
     };
 
     this.postComment = ev => {
@@ -136,7 +133,6 @@ class Historical extends React.Component {
 
   componentDidMount() {
     API.getHistoricalArticle().then(result => {
-      console.log(result);
       this.setState({ article: result.data[0] });
       this.setState({ pastComments: result.data[0].comments.reverse() });
     });

@@ -73,11 +73,9 @@ class Profile extends React.Component {
   };
 
   handleDelete = id => {
-    console.log(this.props.user);
     API.deleteUser(id).then(results => {
       this.props.actions.dropUser();
       this.props.actions.logOut(false);
-      console.log(results);
       this.props.history.push(`/`);
     });
   };

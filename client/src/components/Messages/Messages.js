@@ -121,24 +121,19 @@ class Messages extends React.Component {
       this.setState(prevState => ({
         pastMessages: [...prevState.pastMessages, data]
       }));
-      console.log(this.state.pastMessages);
     };
 
     this.matchUser = () => {
       let questionNumber = this.state.number;
-      console.log(questionNumber);
-      console.log(this.props.user._id);
 
       API.getMatch({
         number: this.state.number,
         user: this.props.user,
         topic: this.state.famousQuote.topic
       }).then(result => {
-        console.log(result.data.room);
         if (result.data.room) {
           this.props.socket.emit('join', result.data.room);
           API.getConversations(this.props.user._id).then(results => {
-            console.log(results.data);
             this.setState({ conversations: results.data });
           });
         }
@@ -146,10 +141,8 @@ class Messages extends React.Component {
     };
     this.matchUser = this.matchUser.bind(this);
     this.changeRoom = room => {
-      console.log(room);
       this.props.socket.emit('join', room);
       API.getConversations(this.props.user._id).then(results => {
-        console.log(results.data);
         this.setState({ conversations: results.data });
         for (let i = 0; i < this.state.conversations.length; i++) {
           if (this.state.conversations[i]._id === room) {
@@ -165,7 +158,6 @@ class Messages extends React.Component {
 
   componentDidMount() {
     API.getConversations(this.props.user._id).then(results => {
-      console.log(results.data);
       this.setState({ conversations: results.data });
     });
     const startDate = moment('10/03/2018').format('MM DD YYYY');

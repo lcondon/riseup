@@ -65,7 +65,6 @@ class Archive extends React.Component {
 
   componentDidMount() {
     API.getArchive().then(results => {
-      console.log(results);
       this.setState(prevState => ({
         pastArticles: prevState.pastArticles.concat(results.data)
       }));
