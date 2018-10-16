@@ -150,11 +150,17 @@ class Messages extends React.Component {
     this.changeRoom = room => {
       console.log(room);
       this.props.socket.emit('join', room);
-      for (let i = 0; i < this.state.conversations.length; i++) {
-        if (this.state.conversations[i]._id === room) {
-          this.setState({ pastMessages: this.state.conversations[i].messages });
+      API.getConversations(this.props.user._id).then(results => {
+        console.log(results.data);
+        this.setState({ conversations: results.data });
+        for (let i = 0; i < this.state.conversations.length; i++) {
+          if (this.state.conversations[i]._id === room) {
+            this.setState({
+              pastMessages: this.state.conversations[i].messages
+            });
+          }
         }
-      }
+      });
     };
     this.changeRoom = this.changeRoom.bind(this);
   }

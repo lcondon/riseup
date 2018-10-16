@@ -19,6 +19,7 @@ import io from 'socket.io-client';
 import decorator from './utils/decorator';
 import Messages from './components/Messages';
 import Historical from './components/Historical/Historical';
+import PastArticle from './components/PastArticle/PastArticle';
 
 const socket = io(
   { host: '/', port: '' },
@@ -63,6 +64,7 @@ class App extends React.Component {
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/login" component={LogIn} />
                 <Route exact path="/article" component={Article} />
+                <Route path="/article/past/:id" component={PastArticle} />
                 <Route exact path="/survey" component={Survey} />
                 <Route path="/messages" component={Messages} />
                 <Route exact path="/profile" component={Profile} />

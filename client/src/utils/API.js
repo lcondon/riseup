@@ -51,6 +51,10 @@ export default {
     return axios.delete('/api/users', { data: { id: id } });
   },
 
+  getPastArticle: function(articleId) {
+    return axios.get(`/api/articles/${articleId}`);
+  },
+
   getArticle: function() {
     return axios.get('/api/articles');
   },

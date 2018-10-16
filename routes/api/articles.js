@@ -79,4 +79,10 @@ router.route('/historical').get((req, res) => {
   );
 });
 
+router.route('/:id').get((req, res) => {
+  db.Article.findById(req.params.id).then(result => {
+    res.json(result);
+  });
+});
+
 module.exports = router;

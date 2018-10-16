@@ -134,6 +134,7 @@ class Article extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props.match);
     API.getArticle().then(result => {
       console.log(result);
       if (result.data.error) {
