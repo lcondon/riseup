@@ -132,9 +132,42 @@ const historicalSeed = [
     comments: []
   },
   {
+    title: 'Thomas confirmed to the Supreme Court',
+    date: '10/15/1991',
+    day: 15,
+    month: 9,
+    text:
+      'After a bitter confirmation hearing, the U.S. Senate votes 52 to 48 to confirm Clarence Thomas to the U.S. Supreme Court.',
+    url:
+      'https://www.history.com/this-day-in-history/thomas-confirmed-to-the-supreme-court',
+    comments: []
+  },
+  {
+    title: 'John Brown’s raid on Harpers Ferry',
+    date: '9/16/1859',
+    day: 16,
+    month: 9,
+    text:
+      'Abolitionist John Brown leads a small group on a raid against a federal armory in Harpers Ferry, Virginia (now West Virginia), in an attempt to start an armed slave revolt and destroy the institution of slavery.',
+    url:
+      'https://www.history.com/this-day-in-history/john-browns-raid-on-harpers-ferry',
+    comments: []
+  },
+  {
+    title: 'Ford explains his pardon of Nixon to Congress',
+    date: '9/17/1974',
+    day: 17,
+    month: 9,
+    text:
+      'On this day in 1974, President Gerald Ford explains to Congress why he had chosen to pardon his predecessor, Richard Nixon, rather than allow Congress to pursue legal action against the former president.',
+    url:
+      'https://www.history.com/this-day-in-history/ford-explains-his-pardon-of-nixon-to-congress',
+    comments: []
+  },
+  {
     title: 'U.S. takes possession of Alaska',
     date: '10/18/1867',
-    day: 15,
+    day: 18,
     month: 9,
     text:
       'On this day in 1867, the U.S. formally takes possession of Alaska after purchasing the territory from Russia for $7.2 million, or less than two cents an acre. The Alaska purchase comprised 586,412 square miles, about twice the size of Texas, and was championed by William Henry Seward, the enthusiasticly expansionist secretary of state under President Andrew Johnson.',
