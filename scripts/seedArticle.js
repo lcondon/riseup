@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
 const db = require('../models');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/riseUp');
+mongoose.connect(
+  'mongodb://heroku_2wjqhlb3:tbtgrbnactm957rsv1t5agthjq@ds129393.mlab.com:29393/heroku_2wjqhlb3'
+);
 
 const articleSeed = [
   {

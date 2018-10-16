@@ -70,40 +70,45 @@ router.route('/match').post(function(req, res) {
         user.responses[req.body.number] !==
         req.body.user.responses[req.body.number]
     );
-    // console.log(matches);
+    console.log(matches);
     //
     if (matches.length > 0) {
-      let index = Math.floor(Math.random() * matches.length);
-      db.Message.findOne({
-        userIds: { $all: [req.body.user._id, matches[index]._id] }
-      })
-        .then(result => {
-          console.log('result' + result);
-
-          if (!result) {
-            db.Message.create({
-              userIds: [req.body.user._id, matches[index]._id],
-              messages: [
-                {
-                  user: 'riseUP',
-                  message: `${req.body.user.firstName} and ${
-                    matches[index].firstName
-                  }, we thought you two should meet to discuss your views on ${
-                    req.body.topic
-                  }!`
-                }
-              ]
-            }).then(newMessage => {
-              console.log(newMessage);
-              res.json({ room: newMessage._id });
-            });
-          } else {
-            res.json({ room: result._id });
-          }
+      let i = 0;
+      const createMatch = () => {
+        let index = Math.floor(Math.random() * matches.length);
+        db.Message.findOne({
+          userIds: { $all: [req.body.user._id, matches[i]._id] }
         })
-        .catch(err => {
-          console.log('err' + err);
-        });
+          .then(result => {
+            console.log('result' + result);
+
+            if (!result) {
+              db.Message.create({
+                userIds: [req.body.user._id, matches[i]._id],
+                messages: [
+                  {
+                    user: 'riseUP',
+                    message: `${req.body.user.firstName} and ${
+                      matches[i].firstName
+                    }, we thought you two should meet to discuss your views on ${
+                      req.body.topic
+                    }!`
+                  }
+                ]
+              }).then(newMessage => {
+                console.log(newMessage);
+                res.json({ room: newMessage._id });
+              });
+            } else {
+              i++;
+              createMatch();
+            }
+          })
+          .catch(err => {
+            console.log('err' + err);
+          });
+      };
+      createMatch();
     } else {
       res.json({ error: 'no matches' });
     }
