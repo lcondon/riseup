@@ -25,6 +25,10 @@ const styles = theme => ({
     [theme.breakpoints.down('md')]: {
       width: '80%',
       height: '80%'
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '90%',
+      height: '90%'
     }
   },
   paper: {

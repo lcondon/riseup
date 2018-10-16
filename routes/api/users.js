@@ -11,10 +11,14 @@ router
       email: req.body.email,
       password: req.body.password,
       responses: []
-    }).then(function(results) {
-      console.log(results);
-      res.json(results);
-    });
+    })
+      .then(function(results) {
+        console.log(results);
+        res.json(results);
+      })
+      .catch(err => {
+        res.json({ err: err });
+      });
   })
   .put(function(req, res) {
     console.log(req.body);
