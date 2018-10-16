@@ -90,7 +90,7 @@ router.route('/match').post(function(req, res) {
               }).then(newMessage => {
                 res.json({ room: newMessage._id });
               });
-            } else if (i < matches.length - 1) {
+            } else if (result && i < matches.length - 1) {
               i++;
               createMatch();
             } else {
