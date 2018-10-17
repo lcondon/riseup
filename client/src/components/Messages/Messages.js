@@ -237,7 +237,7 @@ class Messages extends React.Component {
               variant="contained"
               onClick={ev => {
                 ev.preventDefault();
-                this.matchUser;
+                this.matchUser();
               }}
               color="secondary">
               Match Me

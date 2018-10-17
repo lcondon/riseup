@@ -66,7 +66,7 @@ class App extends React.Component {
                 <Route exact path="/article" component={Article} />
                 <Route path="/article/past/:id" component={PastArticle} />
                 <Route exact path="/survey" component={Survey} />
-                <Route path="/messages" component={Messages} />
+                <Route exact path="/messages" component={Messages} />
                 <Route exact path="/profile" component={Profile} />
                 <Route exact path="/archive" component={Archive} />
                 <Route exact path="/history" component={Historical} />
