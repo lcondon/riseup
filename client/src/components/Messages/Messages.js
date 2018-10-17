@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
-import Hidden from '@material-ui/core/Hidden';
 import { Avatar } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
@@ -128,8 +127,6 @@ class Messages extends React.Component {
     };
 
     this.matchUser = () => {
-      let questionNumber = this.state.number;
-
       API.getMatch({
         number: this.state.number,
         user: this.props.user,
