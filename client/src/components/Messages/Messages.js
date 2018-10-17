@@ -44,7 +44,11 @@ const styles = theme => ({
   },
   paper: {
     margin: theme.spacing.unit * 2,
-    padding: theme.spacing.unit * 4
+    padding: theme.spacing.unit * 4,
+    [theme.breakpoints.down('xs')]: {
+      margin: 0,
+      marginBottom: theme.spacing.unit * 2
+    }
   },
   button: {
     fontFamily: 'Montserrat'
@@ -213,32 +217,30 @@ class Messages extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Hidden xsDown>
-          <Paper className={classes.paper}>
-            <h1 style={{ textAlign: 'center' }} className={classes.title}>
-              Messages
-            </h1>
-            <Divider />
-            <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
-              {this.state.famousQuote.quote}
-            </h2>
-            <p className={classes.quoteAuthor}>
-              --
-              {this.state.famousQuote.author}
-            </p>
-            <p>{match.params.id}</p>
-            <Grid container justify="center">
-              <Button
-                className={classes.button}
-                id="submitCommentBtn"
-                variant="contained"
-                onClick={this.matchUser}
-                color="secondary">
-                Match Me
-              </Button>
-            </Grid>
-          </Paper>
-        </Hidden>
+        <Paper className={classes.paper}>
+          <h1 style={{ textAlign: 'center' }} className={classes.title}>
+            Messages
+          </h1>
+          <Divider />
+          <h2 style={{ textAlign: 'center' }} className={classes.subtitle}>
+            {this.state.famousQuote.quote}
+          </h2>
+          <p className={classes.quoteAuthor}>
+            --
+            {this.state.famousQuote.author}
+          </p>
+          <p>{match.params.id}</p>
+          <Grid container justify="center">
+            <Button
+              className={classes.button}
+              id="submitCommentBtn"
+              variant="contained"
+              onClick={this.matchUser}
+              color="secondary">
+              Match Me
+            </Button>
+          </Grid>
+        </Paper>
         <Paper className={classes.messagePaper}>
           <Grid
             container
