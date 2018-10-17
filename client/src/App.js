@@ -26,7 +26,7 @@ const socket = io(
   {
     secure: true,
     rememberUpgrade: true,
-    rejectUnauthorized: false
+    rejectUnauthorized: true
   }
 );
 
