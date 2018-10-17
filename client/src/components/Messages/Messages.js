@@ -235,7 +235,10 @@ class Messages extends React.Component {
               className={classes.button}
               id="submitCommentBtn"
               variant="contained"
-              onClick={this.matchUser}
+              onClick={ev => {
+                ev.preventDefault();
+                this.matchUser;
+              }}
               color="secondary">
               Match Me
             </Button>
