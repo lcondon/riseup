@@ -37,14 +37,14 @@ export const mailFolderListItems = (
         <ListItemText primary="Past Articles" />
       </ListItem>
     </Link>
-    <Link style={{ textDecoration: 'none' }} to="/history">
+    {/* <Link style={{ textDecoration: 'none' }} to="/history">
       <ListItem button>
         <ListItemIcon>
           <HistoryIcon />
         </ListItemIcon>
         <ListItemText primary="This Day in History" />
       </ListItem>
-    </Link>
+    </Link> */}
   </div>
 );
 
@@ -74,14 +74,14 @@ export const userFolderListItems = (
         <ListItemText primary="Past Articles" />
       </ListItem>
     </Link>
-    <Link style={{ textDecoration: 'none' }} to="/history">
+    {/* <Link style={{ textDecoration: 'none' }} to="/history">
       <ListItem button>
         <ListItemIcon>
           <HistoryIcon />
         </ListItemIcon>
         <ListItemText primary="This Day in History" />
       </ListItem>
-    </Link>
+    </Link> */}
     <Link style={{ textDecoration: 'none' }} to="/messages">
       <ListItem button>
         <ListItemIcon>
