@@ -52,12 +52,16 @@ class App extends React.Component {
     socket.connect();
   }
 
+  componentWillUnmount() {
+    socket.disconnect();
+  }
+
   render() {
     return (
       <Router>
-        <div>
-          <MuiThemeProvider theme={theme}>
-            <SocketContext.Provider value={socket}>
+        <SocketContext.Provider value={socket}>
+          <div>
+            <MuiThemeProvider theme={theme}>
               <NavBar />
               <Switch>
                 <Route exact path="/" component={Landing} />
@@ -72,9 +76,9 @@ class App extends React.Component {
                 <Route exact path="/history" component={Historical} />
                 <Route component={NotFound} />
               </Switch>
-            </SocketContext.Provider>
-          </MuiThemeProvider>
-        </div>
+            </MuiThemeProvider>
+          </div>
+        </SocketContext.Provider>
       </Router>
     );
   }

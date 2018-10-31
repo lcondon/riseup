@@ -40,16 +40,26 @@ if (process.env.NODE_ENV === 'production') {
     next();
   });
 } else {
-  app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    res.header('Access-Control-Allow-Credentials', true);
-    next();
-  });
+  // app.use(function(req, res, next) {
+  //   res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  //   res.header(
+  //     'Access-Control-Allow-Headers',
+  //     'Origin, X-Requested-With, Content-Type, Accept'
+  //   );
+  //   res.header('Access-Control-Allow-Credentials', true);
+  //   next();
+  // });
 }
+
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Credentials', true);
+  next();
+});
 
 app.use(
   session({
@@ -77,24 +87,47 @@ server.listen(PORT, function() {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-io.on('connect', function(socket) {
+io.sockets.on('connect', function(socket) {
   let room;
   let roomId;
 
-  socket.on('join', roomID => {
+  socket.on('join', data => {
     socket.leaveAll();
-    room = `room${roomID}`;
-    roomId = roomID;
+    room = `room${data.room}`;
+    roomId = data.room;
     socket.join(room);
+    db.Message.find({ userIds: data.user })
+      .populate('userIds')
+      .exec((err, messages) => {
+        // res.json(messages);
+        socket.emit('RECEIVE_ALL_MESSAGES', messages);
+      });
   });
 
   console.log(socket.id);
+
+  socket.on('connect', () => console.log('connect'));
+
+  socket.on('GET_CONVERSATION', id => {
+    db.Message.findById(id).then(convo => {
+      socket.emit('RECEIVE_CONVERSATION', convo);
+    });
+  });
+
+  socket.on('GET_ALL_MESSAGES', userId => {
+    db.Message.find({ userIds: userId })
+      .populate('userIds')
+      .exec((err, messages) => {
+        // res.json(messages);
+        socket.emit('RECEIVE_ALL_MESSAGES', messages);
+      });
+  });
 
   socket.on('SEND_MESSAGE', data => {
     db.Message.findByIdAndUpdate(roomId, {
       $push: { messages: { message: data.message, user: data.user } }
     }).then(results => {
-      // console.log(results);
+      console.log(results);
     });
     io.to(room).emit('RECEIVE_MESSAGE', data);
   });
@@ -117,6 +150,8 @@ io.on('connect', function(socket) {
     });
     io.emit('RECEIVE_PAST_COMMENT', data.info);
   });
+
+  socket.on('disconnect', () => console.log('disconnect'));
 });
 
 app.get('*', (req, res) => {

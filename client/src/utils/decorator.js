@@ -18,14 +18,22 @@ const decorator = ComponentToDecorate => {
     }
   }
 
-  return connect(
-    state => ({
+  const mapStateToProps = state => {
+    return {
       user: state.user,
       loggedIn: state.loggedIn
-    }),
-    dispatch => ({
+    };
+  };
+
+  const mapDispatchToProps = dispatch => {
+    return {
       userActions: bindActionCreators(actions, dispatch)
-    })
+    };
+  };
+
+  return connect(
+    mapStateToProps,
+    mapDispatchToProps
   )(ComponentDecorated);
 };
 

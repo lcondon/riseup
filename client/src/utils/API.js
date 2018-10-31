@@ -12,7 +12,7 @@ export default {
   },
 
   getMatch: function(userData) {
-    return axios.post('/api/users/match', {
+    return axios.post('/api/messages', {
       number: userData.number,
       user: userData.user,
       topic: userData.topic
