@@ -84,7 +84,9 @@ class Archive extends React.Component {
                 className={classes.gridList}>
                 {this.state.pastArticles.map(tile => (
                   <GridListTile key={tile.image} cols={1} rows={1}>
-                    <img src={tile.image} alt={tile.title} />
+                    {tile.image ? (
+                      <img src={tile.image} alt={tile.title} />
+                    ) : null}
                     <GridListTileBar
                       title={tile.title}
                       titlePosition="bottom"
