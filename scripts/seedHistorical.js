@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const db = require('../models');
 
 mongoose.connect(
-  'mongodb://heroku_2wjqhlb3:tbtgrbnactm957rsv1t5agthjq@ds129393.mlab.com:29393/heroku_2wjqhlb3'
+  'mongodb://lc:lc1234@ds145312.mlab.com:45312/heroku_k9x3ngkc'
 );
 
 const historicalSeed = [

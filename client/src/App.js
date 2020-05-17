@@ -22,7 +22,7 @@ import Historical from './components/Historical/Historical';
 import PastArticle from './components/PastArticle/PastArticle';
 
 const socket = io(
-  { host: '/', port: '' },
+  { host: '/' },
   {
     secure: true,
     rememberUpgrade: true,

@@ -5,7 +5,7 @@ const moment = require('moment');
 
 router
   .route('/')
-  .get(function(req, res) {
+  .get(function (req, res) {
     db.Article.find({})
       .then(results => {
         if (
@@ -19,17 +19,17 @@ router
       })
       .catch(error => res.json({ error: 'not found' }));
   })
-  .post(function(req, res) {
+  .post(function (req, res) {
     request.get(
       {
         url: 'http://api.nytimes.com/svc/search/v2/articlesearch.json',
         qs: {
-          'api-key': 'b9f91d369ff59547cd47b931d8cbc56b:0:74623931',
+          'api-key': 'rCaQtVHGxEGA2o2IIRCn06IsaCMK4JOq',
           q: 'politics',
           sort: 'newest'
         }
       },
-      function(err, response, body) {
+      function (err, response, body) {
         if (err) {
           res.json('error');
         } else {
@@ -41,8 +41,8 @@ router
             url: body.response.docs[0].web_url,
             image: body.response.docs[0].multimedia[17]
               ? `https://nytimes.com/${
-                  body.response.docs[0].multimedia[17].url
-                }`
+              body.response.docs[0].multimedia[17].url
+              }`
               : null,
             date: moment().format()
           }).then(result => {
@@ -52,14 +52,14 @@ router
       }
     );
   })
-  .delete(function(req, res) {
-    db.User.findByIdAndDelete(req.body.id).then(function(results) {
+  .delete(function (req, res) {
+    db.User.findByIdAndDelete(req.body.id).then(function (results) {
       res.json(results);
     });
   });
 
-router.route('/archive').get(function(req, res) {
-  db.Article.find({}).then(function(results) {
+router.route('/archive').get(function (req, res) {
+  db.Article.find({}).then(function (results) {
     res.json(results);
   });
 });
