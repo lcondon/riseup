@@ -7,7 +7,7 @@
     "@material-ui/icons": "^3.0.1",
     "animejs": "^2.2.0",
     "axios": "^0.18.0",
-    "merge": ">=1.2.1",
+    "merge": ">=2.1.1",
     "moment": "^2.22.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.1.0",
